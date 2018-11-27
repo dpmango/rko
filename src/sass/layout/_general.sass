@@ -28,7 +28,7 @@ body, html
 
 ::selection
   color: white
-  background: $colorPrimary
+  background: $colorRed
 
 .body-lock
   height: 100%
@@ -51,12 +51,13 @@ body, html
     flex-direction: column
 
 .container
-  max-width: 1200px
+  // 1280 + paddings
+  max-width: 1400px
   width: 100%
   margin-left: auto
   margin-right: auto
-  padding-left: 40px
-  padding-right: 40px
+  padding-left: 60px
+  padding-right: 60px
 
 +r($sm)
   .container

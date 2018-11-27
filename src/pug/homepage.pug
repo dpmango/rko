@@ -1,8 +1,57 @@
 ---
-title: Homepage title
+title: Главная
 bodyClass: homepage
 ---
 extends shared/_layout
+
 block content
   
+  // add empty preloader block on top to hide preloader in DEV mode
+  // block preloader
   
+  // HOME
+  .home
+    .home__wrapper
+      // background
+      .home__bg(data-animation="scale" data-duration="3000" data-delay="300")
+        img(src='img/background_1.jpg' srcset='img/background_1@2x.jpg 2x')
+      
+      // content
+      .home__content
+        .container
+          .home__content-wrapper
+            .home__logo(data-animation="fade" data-duration="500" data-delay="2600")
+              img(src='img/rko-logo.png' srcset='img/rko-logo@2x.png 2x')
+            .home__title(data-animation="fade-up" data-duration="500" data-delay="2000") Величие <br> России
+            .home__description(data-animation="fade-up" data-duration="400" data-delay="2200") Невероятные открытия и люди: 7<br/> удивительных фактов о космосе
+            .home__cta(data-animation="fade" data-duration="500" data-delay="3000")
+              .home__cta-title Перетащите, чтобы продолжить
+              .home__cta-drag
+      
+      // links collection
+      .home__links.links(data-animation="fade" data-duration="500" data-delay="3200")
+        .container
+          .links__grid
+            .links__col
+              a(href="#") 
+                span Космический тест: это правда или выдумка?
+            .links__col
+              a(href="#") 
+                span Тест: возьмут ли вас в космонавты (хотя бы чисто теоретически)?
+            .links__col
+              a(href="#") 
+                span Тест: помните ли вы советские фильмы о космосе?
+            .links__col
+              a(href="#") 
+                span Тест: какая космическая профессия вам подойдет 
+            .links__col
+              a(href="#") 
+                span Тест: как звучит космос?
+      
+      // bg lines        
+      .bg-lines
+        .bg-lines__line.bg-lines__line--first
+        .bg-lines__line.bg-lines__line--second
+        .bg-lines__line.bg-lines__line--third
+        .bg-lines__line.bg-lines__line--fourth
+        .bg-lines__line.bg-lines__line--fifth

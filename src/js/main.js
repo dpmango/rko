@@ -1,3 +1,5 @@
+// TODO - move to index as "critical style"
+
 // preloader function
 var preloader = document.querySelector('.preloader')
 preloader.classList.add('start-anim')
@@ -11,6 +13,7 @@ setTimeout(function(){
   preloader.parentNode.removeChild(preloader);
 }, 7000)
 
+
 $(document).ready(function(){
 
   //////////
@@ -20,6 +23,7 @@ $(document).ready(function(){
   var _window = $(window);
   var _document = $(document);
   var lastScroll = 0;
+  var loadCounter = 0;
 
   ////////////
   // LIST OF FUNCTIONS
@@ -30,34 +34,31 @@ $(document).ready(function(){
   initHeaderScroll();
 
   // triggered when PJAX DONE
-  function pageReady(){
+  // The new container has been loaded and injected in the wrapper.
+  function pageReady(fromPjax){
     updateHeaderActiveClass();
     closeMobileMenu();
 
-    initSliders();
-    initPopups();
-    initMasks();
-    initSelectric();
-    initScrollMonitor();
-    initValidations();
+    initPerfectScrollbar();
+    initTeleport();
+    initLazyLoad();
 
-    // AVAILABLE in _components folder
-    // copy paste in main.js and initialize here
-    // revealFooter();
-    // initPerfectScrollbar();
-    // initCountDown();
-    // initLazyLoad();
-    // initTeleport();
-    // parseSvg();
+    initScrollMonitor();
+  }
+
+  // The transition has just finished and the old Container has been removed from the DOM.
+  function pageCompleated(fromPjax){
+    runAnimations();
   }
 
   // scroll/resize listener
   // _window.on('resize', throttle(revealFooter, 100));
   _window.on('resize', debounce(setBreakpoint, 200))
 
+
   // this is a master function which should have all functionality
   pageReady();
-
+  pageCompleated();
 
   // some plugins work best with onload triggers
   _window.on('load', function(){
@@ -193,6 +194,19 @@ $(document).ready(function(){
   * PAGE SPECIFIC *
   ***************/
 
+  function runAnimations(){
+    if ( loadCounter === 0 ){
+      setTimeout(animateHome, 7000) // first load - reserve time for preloader
+    } else {
+      setTimeout(animateHome, 500)
+    }
+
+  }
+
+  function animateHome(){
+    $('.home').find('[data-animation]').attr('data-animated', '')
+  }
+
   _document
     .on('click', '[js-inner-page-btn]', function(){
 
@@ -204,143 +218,128 @@ $(document).ready(function(){
   **********/
 
 
-  //////////
-  // SLIDERS
-  //////////
-  function initSliders(){
+  ////////////
+  // SCROLLBAR
+  ////////////
+  function initPerfectScrollbar(){
+    if ( $('[js-scrollbar]').length > 0 ){
+      $('[js-scrollbar]').each(function(i, scrollbar){
+        var ps;
 
-    // EXAMPLE SWIPER
-    new Swiper('[js-slider]', {
-      wrapperClass: "swiper-wrapper",
-      slideClass: "example-slide",
-      direction: 'horizontal',
-      loop: false,
-      watchOverflow: true,
-      setWrapperSize: false,
-      spaceBetween: 0,
-      slidesPerView: 'auto',
-      // loop: true,
-      normalizeSlideIndex: true,
-      // centeredSlides: true,
-      freeMode: true,
-      // effect: 'fade',
-      autoplay: {
-        delay: 5000,
-      },
-      navigation: {
-        nextEl: '.example-next',
-        prevEl: '.example-prev',
-      },
-      breakpoints: {
-        // when window width is <= 992px
-        992: {
-          autoHeight: true
+        function initPS(){
+          ps = new PerfectScrollbar(scrollbar, {
+            // wheelSpeed: 2,
+            // wheelPropagation: true,
+            minScrollbarLength: 20
+          });
         }
+
+        initPS();
+
+        // toggle init destroy
+        function checkMedia(){
+          if ( $(scrollbar).data('disable-on') ){
+
+            if ( mediaCondition($(scrollbar).data('disable-on')) ){
+              if ( $(scrollbar).is('.ps') ){
+                ps.destroy();
+                ps = null;
+              }
+            } else {
+              if ( $(scrollbar).not('.ps') ){
+                initPS();
+              }
+            }
+          }
+        }
+
+        checkMedia();
+        _window.on('resize', debounce(checkMedia, 250));
+
+      })
+    }
+  }
+
+  ////////////
+  // TELEPORT PLUGIN
+  ////////////
+  function initTeleport(){
+    $('[js-teleport]').each(function (i, val) {
+      var self = $(val)
+      var objHtml = $(val).html();
+      var target = $('[data-teleport-target=' + $(val).data('teleport-to') + ']');
+      var conditionMedia = $(val).data('teleport-condition').substring(1);
+      var conditionPosition = $(val).data('teleport-condition').substring(0, 1);
+
+      if (target && objHtml && conditionPosition) {
+
+        function teleport() {
+          var condition;
+
+          if (conditionPosition === "<") {
+            condition = _window.width() < conditionMedia;
+          } else if (conditionPosition === ">") {
+            condition = _window.width() > conditionMedia;
+          }
+
+          if (condition) {
+            target.html(objHtml)
+            self.html('')
+          } else {
+            self.html(objHtml)
+            target.html("")
+          }
+        }
+
+        teleport();
+        _window.on('resize', debounce(teleport, 100));
+
+
       }
     })
-
   }
 
   //////////
-  // MODALS
+  // LAZY LOAD
   //////////
-
-  function initPopups(){
-    // Magnific Popup
-    var startWindowScroll = 0;
-    $('[js-popup]').magnificPopup({
-      type: 'inline',
-      fixedContentPos: true,
-      fixedBgPos: true,
-      overflowY: 'auto',
-      closeBtnInside: true,
-      preloader: false,
-      midClick: true,
-      removalDelay: 300,
-      mainClass: 'popup-buble',
-      callbacks: {
-        beforeOpen: function() {
-          startWindowScroll = _window.scrollTop();
-          // $('html').addClass('mfp-helper');
-        },
-        close: function() {
-          // $('html').removeClass('mfp-helper');
-          _window.scrollTop(startWindowScroll);
-        }
+  function initLazyLoad(){
+    _document.find('[js-lazy]').Lazy({
+      threshold: 500,
+      enableThrottle: true,
+      throttle: 100,
+      scrollDirection: 'vertical',
+      effect: 'fadeIn',
+      effectTime: 350,
+      // visibleOnly: true,
+      // placeholder: "data:image/gif;base64,R0lGODlhEALAPQAPzl5uLr9Nrl8e7...",
+      onError: function(element) {
+          console.log('error loading ' + element.data('src'));
+      },
+      beforeLoad: function(element){
+        // element.attr('style', '')
       }
     });
-
-    $('[js-popup-gallery]').magnificPopup({
-  		delegate: 'a',
-  		type: 'image',
-  		tLoading: 'Загрузка #%curr%...',
-  		mainClass: 'popup-buble',
-  		gallery: {
-  			enabled: true,
-  			navigateByImgClick: true,
-  			preload: [0,1]
-  		},
-  		image: {
-  			tError: '<a href="%url%">The image #%curr%</a> could not be loaded.'
-  		}
-  	});
   }
 
-  function closeMfp(){
-    $.magnificPopup.close();
-  }
+  // wait till image is loaded
+  // could be useful for barba custom animations
+  // var targetImage = $newContainer.find('.one-member__photo').find('[js-lazy]');
+  // var targetImageLazyInstance = targetImage.Lazy({
+  //   chainable: false,
+  //   afterLoad: function(element) {
+  //     var img = new Image();
+  //     img.onload = function() {
+  //       callbackFunction();
+  //     };
+  //     img.src = element.attr('src');
+  //   }
+  // })
+  // targetImageLazyInstance.force(targetImage);
 
   ////////////
   // UI
   ////////////
 
-  // textarea autoExpand
-  _document
-    .one('focus.autoExpand', '.ui-group textarea', function(){
-        var savedValue = this.value;
-        this.value = '';
-        this.baseScrollHeight = this.scrollHeight;
-        this.value = savedValue;
-    })
-    .on('input.autoExpand', '.ui-group textarea', function(){
-        var minRows = this.getAttribute('data-min-rows')|0, rows;
-        this.rows = minRows;
-        rows = Math.ceil((this.scrollHeight - this.baseScrollHeight) / 17);
-        this.rows = minRows + rows;
-    });
-
-  // Masked input
-  function initMasks(){
-    $("[js-dateMask]").mask("99.99.99",{placeholder:"ДД.ММ.ГГ"});
-    $("input[type='tel']").mask("+7 (000) 000-0000", {placeholder: "+7 (___) ___-____"});
-  }
-
-  // selectric
-  function initSelectric(){
-    $('select').selectric({
-      maxHeight: 300,
-      arrowButtonMarkup: '<b class="button"><svg class="ico ico-select-down"><use xlink:href="img/sprite.svg#ico-select-down"></use></svg></b>',
-
-      onInit: function(element, data){
-        var $elm = $(element),
-            $wrapper = $elm.closest('.' + data.classes.wrapper);
-
-        $wrapper.find('.label').html($elm.attr('placeholder'));
-      },
-      onBeforeOpen: function(element, data){
-        var $elm = $(element),
-            $wrapper = $elm.closest('.' + data.classes.wrapper);
-
-        $wrapper.find('.label').data('value', $wrapper.find('.label').html()).html($elm.attr('placeholder'));
-      },
-      onBeforeClose: function(element, data){
-        var $elm = $(element),
-            $wrapper = $elm.closest('.' + data.classes.wrapper);
-
-        $wrapper.find('.label').html($wrapper.find('.label').data('value'));
-      }
-    });
-  }
 
   ////////////
   // SCROLLMONITOR - WOW LIKE
@@ -381,122 +380,6 @@ $(document).ready(function(){
       // }, 100));
     });
 
-  }
-
-  ////////////////
-  // FORM VALIDATIONS
-  ////////////////
-
-  // jQuery validate plugin
-  // https://jqueryvalidation.org
-  function initValidations(){
-    // GENERIC FUNCTIONS
-    var validateErrorPlacement = function(error, element) {
-      error.addClass('ui-input__validation');
-      error.appendTo(element.parent("div"));
-    }
-    var validateHighlight = function(element) {
-      $(element).addClass("has-error");
-    }
-    var validateUnhighlight = function(element) {
-      $(element).removeClass("has-error");
-    }
-    var validateSubmitHandler = function(form) {
-      $(form).addClass('loading');
-      $.ajax({
-        type: "POST",
-        url: $(form).attr('action'),
-        data: $(form).serialize(),
-        success: function(response) {
-          $(form).removeClass('loading');
-          var data = $.parseJSON(response);
-          if (data.status == 'success') {
-            // do something I can't test
-          } else {
-              $(form).find('[data-error]').html(data.message).show();
-          }
-        }
-      });
-    }
-
-    var validatePhone = {
-      required: true,
-      normalizer: function(value) {
-          var PHONE_MASK = '+X (XXX) XXX-XXXX';
-          if (!value || value === PHONE_MASK) {
-              return value;
-          } else {
-              return value.replace(/[^\d]/g, '');
-          }
-      },
-      minlength: 11,
-      digits: true
-    }
-
-    /////////////////////
-    // REGISTRATION FORM
-    ////////////////////
-    $(".js-registration-form").validate({
-      errorPlacement: validateErrorPlacement,
-      highlight: validateHighlight,
-      unhighlight: validateUnhighlight,
-      submitHandler: validateSubmitHandler,
-      rules: {
-        last_name: "required",
-        first_name: "required",
-        email: {
-          required: true,
-          email: true
-        },
-        password: {
-          required: true,
-          minlength: 6,
-        }
-        // phone: validatePhone
-      },
-      messages: {
-        last_name: "Заполните это поле",
-        first_name: "Заполните это поле",
-        email: {
-            required: "Заполните это поле",
-            email: "Email содержит неправильный формат"
-        },
-        password: {
-            required: "Заполните это поле",
-            email: "Пароль мимимум 6 символов"
-        },
-        // phone: {
-        //     required: "Заполните это поле",
-        //     minlength: "Введите корректный телефон"
-        // }
-      }
-    });
-
-    // when multiple forms share functionality
-
-    // var subscriptionValidationObject = {
-    //   errorPlacement: validateErrorPlacement,
-    //   highlight: validateHighlight,
-    //   unhighlight: validateUnhighlight,
-    //   submitHandler: validateSubmitHandler,
-    //   rules: {
-    //     email: {
-    //       required: true,
-    //       email: true
-    //     }
-    //   },
-    //   messages: {
-    //     email: {
-    //       required: "Fill this field",
-    //       email: "Email is invalid"
-    //     }
-    //   }
-    // }
-
-    // call/init
-    // $("[js-subscription-validation]").validate(subscriptionValidationObject);
-    // $("[js-subscription-validation-footer]").validate(subscriptionValidationObject);
-    // $("[js-subscription-validation-menu]").validate(subscriptionValidationObject);
   }
 
   //////////
@@ -568,9 +451,18 @@ $(document).ready(function(){
   Barba.Prefetch.init();
   Barba.Pjax.start();
 
+  // The new container has been loaded and injected in the wrapper.
   Barba.Dispatcher.on('newPageReady', function(currentStatus, oldStatus, container, newPageRawHTML) {
-    pageReady();
+    pageReady(true);
   });
+
+  // The transition has just finished and the old Container has been removed from the DOM.
+  Barba.Dispatcher.on('transitionCompleted', function(currentStatus, oldStatus) {
+    loadCounter++
+    pageCompleated(true);
+  });
+
+  loadCounter
 
   // some plugins get bindings onNewPage only that way
   function triggerBody(){

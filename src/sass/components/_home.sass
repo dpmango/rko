@@ -1,0 +1,70 @@
+.home
+  width: 100%
+  &__wrapper
+    position: relative
+    z-index: 1
+    min-height: 100vh
+    width: 100%
+    overflow: hidden
+    display: flex
+    flex-direction: column
+  &__bg
+    position: absolute 0
+    z-index: 1
+    font-size: 0
+    img
+      object-fit: cover
+      width: 100%
+      height: 100%
+
+  &__content
+    position: relative
+    z-index: 2
+    flex: 1 1 auto
+    display: flex
+    flex-direction: column
+    padding: 90px 0
+    .container
+      flex: 1 1 auto
+      display: flex
+      flex-direction: column
+
+  &__content-wrapper
+    margin-top: auto
+    margin-bottom: auto
+
+  &__title
+    font-size: 120px
+    text-transform: uppercase
+    line-height: .92
+    font-weight: 600
+    margin-top: 25px
+
+  &__logo
+    max-width: 100%
+
+  &__description
+    font-size: 25px
+    font-weight: 500
+    margin-top: 20px
+    line-height: 1.4
+
+  &__cta
+    margin-top: 80px
+
+  &__cta-title
+    color: $colorGray
+    font-size: 13px
+    font-weight: 500
+    text-transform: uppercase
+
+  &__cta-drag
+    margin-top: 15px
+
+  &__links
+    position: absolute
+    left: 0
+    right: 0
+    z-index: 2
+    min-height: 90px
+    bottom: 0
