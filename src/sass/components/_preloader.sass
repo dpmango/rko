@@ -1,0 +1,85 @@
+.preloader
+  background: #191919
+  color: white
+  position: fixed 0
+  z-index: 999
+  display: flex
+  flex-direction: column
+  &__wrapper
+    position: relative
+    flex: 1 1 auto
+
+  &__content
+    position: absolute
+    top: 50%
+    left: 50%
+    transform: translate3d(-50%,-50%,0)
+    width: 250px
+    display: flex
+    flex-direction: column
+  &__image
+    flex: 1 1 auto
+    position: relative
+    font-size: 0
+    transition: opacity 1s $easeBoth
+
+  &__logo-wrapper
+    position: absolute
+    z-index: 1
+    display: flex
+    flex-direction: column
+    top: 50%
+    left: 50%
+    transform: translate(-50%,-50%)
+    opacity: 0
+    transition: opacity 1s $easeDefault
+  &__logo
+    position: relative
+    flex: 1 1 auto
+    svg
+      // max-width: 100%
+    &::after
+      display: block
+      content: ' '
+      position: absolute 0
+      width: 100%
+      opacity: 1
+      background: #191919
+      transform: translate3d(0,0,0)
+      transition: transform 5s 1s ease-in, opacity 1s $easeBoth
+
+  &__spinner
+    position: relative
+    z-index: 2
+    // margin-top: -7%
+    opacity: 0
+    transform: rotate(0deg)
+    transition: opacity .5s $easeDefault
+    svg
+      // max-width: 100%
+
+  &.start-anim
+    .preloader
+      &__spinner
+        opacity: 1
+        animation: spinLoader 6s ease-in
+        animation-fill-mode: forwards
+      &__logo-wrapper
+        opacity: 1
+      &__logo
+        &::after
+          opacity: .9
+          transform: translate3d(100%,0,0)
+
+  &.end-anim
+    .preloader
+      &__image
+        opacity: 0
+
+@keyframes spinLoader
+  from
+    transform: rotate(0deg)
+  to
+    // 360 + 180 + 180
+    // transform: rotate(720deg)
+    transform: rotate(540deg)

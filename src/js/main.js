@@ -1,3 +1,16 @@
+// preloader function
+var preloader = document.querySelector('.preloader')
+preloader.classList.add('start-anim')
+setTimeout(function(){
+  // + page ready trigger ?
+  preloader.classList.add('end-anim')
+}, 5500)
+
+setTimeout(function(){
+  // + page ready trigger ?
+  preloader.parentNode.removeChild(preloader);
+}, 7000)
+
 $(document).ready(function(){
 
   //////////
