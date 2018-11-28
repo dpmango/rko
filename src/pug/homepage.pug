@@ -27,7 +27,13 @@ block content
             .home__cta(data-animation="fade" data-duration="500" data-delay="3000")
               .home__cta-title Перетащите, чтобы продолжить
               .home__cta-drag
-      
+                .pillswitch(js-draggable)
+                  .pillswitch__ghost.pillswitch__ghost--left
+                  .pillswitch__ghost.pillswitch__ghost--right
+                  .pillswitch__track
+                  .pillswitch__control
+                    .pillswitch__control-dot
+
       // links collection
       .home__links.links(data-animation="fade" data-duration="500" data-delay="3200")
         .container

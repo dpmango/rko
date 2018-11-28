@@ -51,6 +51,7 @@
 
   &__cta
     margin-top: 80px
+    margin-bottom: 40px
 
   &__cta-title
     color: $colorGray
@@ -59,7 +60,13 @@
     text-transform: uppercase
 
   &__cta-drag
-    margin-top: 15px
+    // hide draggable bugging pill controls
+    position: relative
+    z-index: 1
+    overflow: hidden
+    // shaddow offset
+    margin: -25px -40px -40px
+    padding: 40px
 
   &__links
     position: absolute

@@ -1,5 +1,8 @@
 // TODO - move to index as "critical style"
 
+// var preloaderTime = 7000
+var preloaderTime = 500
+
 // preloader function
 var preloader = document.querySelector('.preloader')
 preloader.classList.add('start-anim')
@@ -11,7 +14,7 @@ setTimeout(function(){
 setTimeout(function(){
   // + page ready trigger ?
   preloader.parentNode.removeChild(preloader);
-}, 7000)
+}, preloaderTime)
 
 
 $(document).ready(function(){
@@ -196,7 +199,7 @@ $(document).ready(function(){
 
   function runAnimations(){
     if ( loadCounter === 0 ){
-      setTimeout(animateHome, 7000) // first load - reserve time for preloader
+      setTimeout(animateHome, preloaderTime) // first load - reserve time for preloader
     } else {
       setTimeout(animateHome, 500)
     }
@@ -492,9 +495,95 @@ $(document).ready(function(){
     }
   }
 
+  ////////////
+  // DRAGGABLE
+  ////////////
+
+  // initialization function
+  function initPullSwitch(){
+
+    var isToggled = false;
+    var initialMousePosition, containerRect, dragRect, dragThreshold
+
+
+    var toggleClass = 'is-on';
+    var containers = document.querySelectorAll('[js-draggable]');
+
+    if (containers.length === 0) {
+      return false;
+    }
+
+    var draggable = new Draggable.Draggable(containers, {
+      draggable: '.pillswitch__control',
+      delay: 0
+    });
+
+    // --- Draggable events --- //
+    draggable.on('drag:start', function (evt) {
+      initialMousePosition = {
+        x: evt.sensorEvent.clientX,
+        y: evt.sensorEvent.clientY
+      };
+    });
+
+    draggable.on('mirror:created', function (evt) {
+      containerRect = evt.sourceContainer.getBoundingClientRect();
+      dragRect = evt.source.getBoundingClientRect();
+
+      var containerRectQuarter = containerRect.width / 2; // should move at least half of the way
+      dragThreshold = isToggled ? containerRectQuarter * -1 : containerRectQuarter;
+
+    });
+
+    draggable.on('mirror:move', function (evt) {
+      evt.cancel();
+
+      // offset is an move diff
+      var offsetX = calcOffset(evt.sensorEvent.clientX - initialMousePosition.x);
+      var offsetY = calcOffset(initialMousePosition.y - evt.sensorEvent.clientY);
+      // var offsetValue = offsetX > offsetY ? offsetX : offsetY;
+      var offsetValue = offsetX
+      var mirrorCoords = {
+        top: dragRect.top - offsetValue,
+        left: dragRect.left + offsetValue
+      };
+
+      translateMirrorX(evt.mirror, mirrorCoords, containerRect);
+
+      if (isToggled && offsetValue < dragThreshold) {
+        evt.sourceContainer.classList.remove(toggleClass);
+        isToggled = false;
+      } else if (!isToggled && offsetValue > dragThreshold) {
+        evt.sourceContainer.classList.add(toggleClass);
+        isToggled = true;
+      }
+    });
+  }
+
+  initPullSwitch();
+
 });
 
 
 // HELPERS and PROTOTYPE FUNCTIONS
 
-// i.e. linear-normalization or Number.pad
+// draggable helper functions
+function translateMirrorX(mirror, mirrorCoords, containerRect) {
+  // if (mirrorCoords.top < containerRect.top || mirrorCoords.left < containerRect.left) {
+  //   return;
+  // }
+  if (mirrorCoords.left < containerRect.left || mirrorCoords.left > (containerRect.left + 170 - 40)) {
+    return;
+  }
+
+  requestAnimationFrame(function() {
+    // for the Y - only containerRect is used as it's single directional
+    mirror.style.transform = `translate3d(${mirrorCoords.left}px, ${containerRect.top}px, 0)`;
+  });
+}
+
+function calcOffset(offset) {
+  // console.log('offset', offset, offset * 2 * 0.5)
+  // what this func is doing multuipliing by one?
+  return offset * 2 * 0.5;
+}
