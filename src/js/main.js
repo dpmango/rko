@@ -507,7 +507,6 @@ $(document).ready(function(){
     var isToggled = false;
     var initialMousePosition, containerRect, dragRect, dragThreshold
 
-
     var toggleClass = 'is-on';
     var containers = document.querySelectorAll('[js-draggable]');
 
@@ -526,6 +525,7 @@ $(document).ready(function(){
         x: evt.sensorEvent.clientX,
         y: evt.sensorEvent.clientY
       };
+      console.log('drag')
     });
 
     draggable.on('mirror:created', function (evt) {
@@ -535,6 +535,7 @@ $(document).ready(function(){
       var containerRectQuarter = containerRect.width / 2; // should move at least half of the way
       dragThreshold = isToggled ? containerRectQuarter * -1 : containerRectQuarter;
 
+      console.log('mirror:created')
     });
 
     draggable.on('mirror:move', function (evt) {
@@ -583,13 +584,13 @@ function translateMirrorX(mirror, mirrorCoords, containerRect) {
   // if (mirrorCoords.top < containerRect.top || mirrorCoords.left < containerRect.left) {
   //   return;
   // }
-  if (mirrorCoords.left < containerRect.left || mirrorCoords.left > (containerRect.left + 170 - 40)) {
+  if (mirrorCoords.left < containerRect.left || mirrorCoords.left > containerRect.left + 170 - 40) {
     return;
   }
 
-  requestAnimationFrame(function() {
+  requestAnimationFrame(function () {
     // for the Y - only containerRect is used as it's single directional
-    mirror.style.transform = "translate3d("+mirrorCoords.left+"px, "+containerRect.top+"px, 0)";
+    mirror.style.transform = "translate3d(" + mirrorCoords.left + "px, " + containerRect.top + "px, 0)";
   });
 }
 
