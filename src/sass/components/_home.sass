@@ -1,37 +1,9 @@
 .home
   width: 100%
-  &__wrapper
-    position: relative
-    z-index: 1
-    min-height: 100vh
-    width: 100%
-    overflow: hidden
-    display: flex
-    flex-direction: column
+
   &__bg
-    position: absolute 0
-    z-index: 1
-    font-size: 0
-    img
-      object-fit: cover
-      width: 100%
-      height: 100%
+    // h100-bg modifier
 
-  &__content
-    position: relative
-    z-index: 2
-    flex: 1 1 auto
-    display: flex
-    flex-direction: column
-    padding: 90px 0
-    .container
-      flex: 1 1 auto
-      display: flex
-      flex-direction: column
-
-  &__content-wrapper
-    margin-top: auto
-    margin-bottom: auto
 
   &__title
     font-size: 120px
@@ -90,8 +62,6 @@
 
 @media screen and (max-width: 992px), screen and (max-height: 700px)
   .home
-    &__content
-      padding: 70px 0
     &__title
       font-size: 80px
     &__logo
@@ -106,9 +76,6 @@
 
 +r($md)
   .home
-    &__content
-      padding: 70px 0
-
     &__title
       font-size: 50px
       font-weight: 700

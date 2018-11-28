@@ -45,9 +45,9 @@ $(document).ready(function(){
     initPerfectScrollbar();
     initTeleport();
     initLazyLoad();
+    initPullSwitch();
 
     initScrollMonitor();
-    initPullSwitch();
   }
 
   // The transition has just finished and the old Container has been removed from the DOM.
@@ -200,15 +200,15 @@ $(document).ready(function(){
 
   function runAnimations(){
     if ( loadCounter === 0 ){
-      setTimeout(animateHome, preloaderTime) // first load - reserve time for preloader
+      setTimeout(animatePage, preloaderTime) // first load - reserve time for preloader
     } else {
-      setTimeout(animateHome, 500)
+      setTimeout(animatePage, 500)
     }
 
   }
 
-  function animateHome(){
-    $('.home').find('[data-animation]').attr('data-animated', '')
+  function animatePage(){
+    $('.page').find('[data-animation]').attr('data-animated', '')
   }
 
   _document
@@ -340,6 +340,82 @@ $(document).ready(function(){
   // })
   // targetImageLazyInstance.force(targetImage);
 
+
+
+  ////////////
+  // DRAGGABLE
+  ////////////
+
+  // initialization function
+  function initPullSwitch(){
+
+    var isToggled = false;
+    var initialMousePosition, containerRect, dragRect, dragThreshold
+
+    var toggleClass = 'is-on';
+    var containers = document.querySelectorAll('[js-draggable]');
+
+    if (containers.length === 0) {
+      return false;
+    }
+
+    var draggable = new Draggable.Draggable(containers, {
+      draggable: '.pillswitch__control',
+      delay: 0
+    });
+
+    // --- Draggable events --- //
+    draggable.on('drag:start', function (evt) {
+      initialMousePosition = {
+        x: evt.sensorEvent.clientX,
+        y: evt.sensorEvent.clientY
+      };
+    });
+
+    draggable.on('mirror:created', function (evt) {
+      containerRect = evt.sourceContainer.getBoundingClientRect();
+      dragRect = evt.source.getBoundingClientRect();
+
+      var containerRectQuarter = containerRect.width / 2; // should move at least half of the way
+      dragThreshold = isToggled ? containerRectQuarter * -1 : containerRectQuarter;
+    });
+
+    draggable.on('mirror:move', function (evt) {
+      evt.cancel();
+
+      // offset is an move diff
+      var offsetX = calcOffset(evt.sensorEvent.clientX - initialMousePosition.x);
+      var offsetY = calcOffset(initialMousePosition.y - evt.sensorEvent.clientY);
+      // var offsetValue = offsetX > offsetY ? offsetX : offsetY;
+      var offsetValue = offsetX
+      var mirrorCoords = {
+        top: dragRect.top - offsetValue,
+        left: dragRect.left + offsetValue
+      };
+
+      translateMirrorX(evt.mirror, mirrorCoords, containerRect);
+
+      if (isToggled && offsetValue < dragThreshold) {
+        evt.sourceContainer.classList.remove(toggleClass);
+        isToggled = false;
+      } else if (!isToggled && offsetValue > dragThreshold) {
+        evt.sourceContainer.classList.add(toggleClass);
+        isToggled = true;
+      }
+    });
+
+    draggable.on('drag:stop', function (evt) {
+      if ( isToggled ){
+        $('[js-draggable-control]').addClass('start-transition-next-page');
+        setTimeout(function(){
+          Barba.Pjax.goTo('about.html');
+          // start fade
+        }, 1000)
+      }
+    });
+  }
+
+
   ////////////
   // UI
   ////////////
@@ -405,9 +481,9 @@ $(document).ready(function(){
 
       anime({
         targets: this.oldContainer,
-        opacity : .5,
+        opacity : 0,
         easing: easingSwing, // swing
-        duration: 300,
+        duration: 500,
         complete: function(anim){
           deferred.resolve();
         }
@@ -424,7 +500,7 @@ $(document).ready(function(){
 
       $el.css({
         visibility : 'visible',
-        opacity : .5
+        opacity : 0
       });
 
       anime({
@@ -438,7 +514,7 @@ $(document).ready(function(){
         targets: this.newContainer,
         opacity: 1,
         easing: easingSwing, // swing
-        duration: 300,
+        duration: 500,
         complete: function(anim) {
           triggerBody()
           _this.done();
@@ -465,8 +541,6 @@ $(document).ready(function(){
     loadCounter++
     pageCompleated(true);
   });
-
-  loadCounter
 
   // some plugins get bindings onNewPage only that way
   function triggerBody(){
@@ -495,83 +569,6 @@ $(document).ready(function(){
         $('.dev-bp-debug').remove();
       },1500)
     }
-  }
-
-  ////////////
-  // DRAGGABLE
-  ////////////
-
-  // initialization function
-  function initPullSwitch(){
-
-    var isToggled = false;
-    var initialMousePosition, containerRect, dragRect, dragThreshold
-
-    var toggleClass = 'is-on';
-    var containers = document.querySelectorAll('[js-draggable]');
-
-    if (containers.length === 0) {
-      return false;
-    }
-
-    var draggable = new Draggable.Draggable(containers, {
-      draggable: '.pillswitch__control',
-      delay: 0
-    });
-
-    // --- Draggable events --- //
-    draggable.on('drag:start', function (evt) {
-      initialMousePosition = {
-        x: evt.sensorEvent.clientX,
-        y: evt.sensorEvent.clientY
-      };
-      console.log('drag')
-    });
-
-    draggable.on('mirror:created', function (evt) {
-      containerRect = evt.sourceContainer.getBoundingClientRect();
-      dragRect = evt.source.getBoundingClientRect();
-
-      var containerRectQuarter = containerRect.width / 2; // should move at least half of the way
-      dragThreshold = isToggled ? containerRectQuarter * -1 : containerRectQuarter;
-
-      console.log('mirror:created')
-    });
-
-    draggable.on('mirror:move', function (evt) {
-      evt.cancel();
-
-      // offset is an move diff
-      var offsetX = calcOffset(evt.sensorEvent.clientX - initialMousePosition.x);
-      var offsetY = calcOffset(initialMousePosition.y - evt.sensorEvent.clientY);
-      // var offsetValue = offsetX > offsetY ? offsetX : offsetY;
-      var offsetValue = offsetX
-      var mirrorCoords = {
-        top: dragRect.top - offsetValue,
-        left: dragRect.left + offsetValue
-      };
-
-      translateMirrorX(evt.mirror, mirrorCoords, containerRect);
-
-      if (isToggled && offsetValue < dragThreshold) {
-        evt.sourceContainer.classList.remove(toggleClass);
-        isToggled = false;
-      } else if (!isToggled && offsetValue > dragThreshold) {
-        evt.sourceContainer.classList.add(toggleClass);
-        isToggled = true;
-      }
-    });
-
-    draggable.on('drag:stop', function (evt) {
-      if ( isToggled ){
-        $('[js-draggable-control]').addClass('start-transition-next-page');
-        setTimeout(function(){
-          alert('Переход на вторую страницу')
-          // start fade
-        }, 1000)
-
-      }
-    });
   }
 
 });

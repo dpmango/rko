@@ -1,0 +1,46 @@
+.article
+  position: relative
+  &__navigation
+    position: absolute
+    z-index: 99
+    top: 20px
+    left: 0
+    right: 0
+    font-size: 0
+    display: flex
+    align-items: center
+    padding-left: 20px
+    padding-right: 20px
+
+  &__back
+    cursor: pointer
+    .ico
+      font-size: 16px
+  &__close
+    margin-left: auto
+    cursor: pointer
+    .ico
+      font-size: 20px
+
+  &__title
+    &.col-5
+      max-width: 640px
+  &__paragraph
+    &.col-6
+      max-width: 760px
+
+  &__cta
+    max-width: 370px
+    margin-top: 60px
+
+  &__cta-title
+    font-size: 20px
+    font-weight: 500
+    line-height: 1.25
+    margin-bottom: 20px
+
++r($md)
+  .article
+    &__cta-titlte
+      font-size: 16px
+      margin-bottom: 15px
