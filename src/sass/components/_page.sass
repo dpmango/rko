@@ -54,3 +54,21 @@
     transform-origin: right top
   &--origin--lt
     transform-origin: left top
+
+
+.section-fixed
+  position: fixed
+  top: 0
+  left: 0
+  right: 0
+  z-index: 1
+  will-change: transform
+  backface-visibility: hidden
+  // height to be set with js
+
+.section-scrollable
+  position: relative
+  z-index: 9
+  // exact padding to be set with js
+  margin-top: 100vh
+  background: #191919

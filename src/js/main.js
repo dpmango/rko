@@ -1,7 +1,7 @@
 // TODO - move to index as "critical style"
 
-var preloaderTime = 7000
-// var preloaderTime = 500
+// var preloaderTime = 7000
+var preloaderTime = 500
 
 // preloader function
 var preloader = document.querySelector('.preloader')
@@ -27,6 +27,15 @@ $(document).ready(function(){
   var _document = $(document);
   var lastScroll = 0;
   var loadCounter = 0;
+  var wScroll = 0;
+
+  // flow sections
+  flowSections = {
+    'fixed': undefined,
+    'scroll': undefined,
+    'fixedHeight': undefined,
+    'windowHeight': undefined
+  }
 
   ////////////
   // LIST OF FUNCTIONS
@@ -34,14 +43,10 @@ $(document).ready(function(){
 
   // some functions should be called once only
   legacySupport();
-  initHeaderScroll();
 
   // triggered when PJAX DONE
   // The new container has been loaded and injected in the wrapper.
   function pageReady(fromPjax){
-    updateHeaderActiveClass();
-    closeMobileMenu();
-
     initPerfectScrollbar();
     initTeleport();
     initLazyLoad();
@@ -52,11 +57,14 @@ $(document).ready(function(){
 
   // The transition has just finished and the old Container has been removed from the DOM.
   function pageCompleated(fromPjax){
+    getFlowSections();
     runAnimations();
   }
 
   // scroll/resize listener
-  // _window.on('resize', throttle(revealFooter, 100));
+  _window.on('scroll', setWindowScroll);
+  _window.on('scroll', scrollFlowSections);
+  _window.on('resize', throttle(getFlowSections, 100));
   _window.on('resize', debounce(setBreakpoint, 200))
 
 
@@ -100,38 +108,10 @@ $(document).ready(function(){
         Barba.Pjax.goTo(dataHref);
       }
     })
-    .on('click', 'a[href^="#section"]', function() { // section scroll
-      var el = $(this).attr('href');
-      $('body, html').animate({
-          scrollTop: $(el).offset().top}, 1000);
-      return false;
-    })
 
-
-  // HEADER SCROLL
-  // add .header-static for .page or body
-  // to disable sticky header
-  function initHeaderScroll(){
-    _window.on('scroll', throttle(function(e) {
-      var vScroll = _window.scrollTop();
-      var header = $('.header').not('.header--static');
-      var headerHeight = header.height();
-      var firstSection = _document.find('.page__content div:first-child()').height() - headerHeight;
-      var visibleWhen = Math.round(_document.height() / _window.height()) >  2.5
-
-      if (visibleWhen){
-        if ( vScroll > headerHeight ){
-          header.addClass('is-fixed');
-        } else {
-          header.removeClass('is-fixed');
-        }
-        if ( vScroll > firstSection ){
-          header.addClass('is-fixed-visible');
-        } else {
-          header.removeClass('is-fixed-visible');
-        }
-      }
-    }, 10));
+  // just store global variable with scroll distance
+  function setWindowScroll(){
+    wScroll = _window.scrollTop();
   }
 
   ////////////////////
@@ -166,38 +146,76 @@ $(document).ready(function(){
     }
   };
 
-  _document.on('click', '[js-hamburger]', function(){
-    $(this).toggleClass('is-active');
-    $('.mobile-navi').toggleClass('is-active');
-
-    blockScroll();
-  });
-
-  function closeMobileMenu(){
-    $('[js-hamburger]').removeClass('is-active');
-    $('.mobile-navi').removeClass('is-active');
-
-    blockScroll();
-  }
-
-  // SET ACTIVE CLASS IN HEADER
-  // * could be removed in production and server side rendering when header is inside barba-container
-  function updateHeaderActiveClass(){
-    $('.header__menu li').each(function(i,val){
-      if ( $(val).find('a').attr('href') == window.location.pathname.split('/').pop() ){
-        $(val).addClass('is-active');
-      } else {
-        $(val).removeClass('is-active')
-      }
-    });
-  }
-
-
-
   /***************
   * PAGE SPECIFIC *
   ***************/
+  function getFlowSections(){
+    var $fixedSection = $('[js-set-section-height]');
+    var $scrollSection = $('[js-set-scroll-padding]');
 
+    if ( $fixedSection.length > 0 && $scrollSection.length > 0 ){
+      flowSections = {
+        'fixed': $fixedSection,
+        'scroll': $scrollSection,
+        'fixedHeight': $fixedSection.outerHeight(),
+        'windowHeight': _window.height()
+      }
+
+      flowSections.scroll.css({'margin-top': flowSections.fixedHeight})
+    } else {
+      flowSections = {
+        'fixed': undefined,
+        'scroll': undefined,
+        'fixedHeight': undefined,
+        'windowHeight': undefined
+      }
+    }
+  }
+
+
+  function scrollFlowSections(e){
+    if ( flowSections.fixed !== undefined ){
+      if ( flowSections.fixedHeight > flowSections.windowHeight ){
+        var fixedBottomBrekpoint = flowSections.fixedHeight - flowSections.windowHeight
+        // when scrolled past end of the page - do nothing
+        if ( wScroll > fixedBottomBrekpoint ){
+          return
+        }
+
+        // should scroll overflowing contents first
+        flowSections.fixed.css({
+          'transform': 'translate3d(0,-'+wScroll+'px,0)'
+        })
+      } else {
+        // reset to defaults
+        flowSections.fixed.css({
+          'transform': 'translate3d(0,-'+0+'px,0)'
+        })
+      }
+    }
+  }
+
+
+  // hold button to go next page
+  var timeout_id = 0,
+      hold_time = 1000;
+
+  _document
+    .on('mousedown', '[js-hold-to-next]', function(){
+      var dataHref = $(this).data('next-page');
+      // start animating
+      $(this).addClass('is-transitioning')
+      timeout_id = setTimeout(function(){
+        Barba.Pjax.goTo(dataHref);
+      }, hold_time);
+    }).bind('mouseup mouseleave', function() {
+      $('[js-hold-to-next]').removeClass('is-transitioning')
+      clearTimeout(timeout_id);
+    });
+
+
+
+  // animations on initial load
   function runAnimations(){
     if ( loadCounter === 0 ){
       setTimeout(animatePage, preloaderTime) // first load - reserve time for preloader
@@ -205,17 +223,10 @@ $(document).ready(function(){
       setTimeout(animatePage, 500)
     }
 
+    function animatePage(){
+      $('.page').find('[data-animation]').attr('data-animated', '')
+    }
   }
-
-  function animatePage(){
-    $('.page').find('[data-animation]').attr('data-animated', '')
-  }
-
-  _document
-    .on('click', '[js-inner-page-btn]', function(){
-
-    })
-
 
   /**********
   * PLUGINS *
@@ -233,7 +244,7 @@ $(document).ready(function(){
         function initPS(){
           ps = new PerfectScrollbar(scrollbar, {
             // wheelSpeed: 2,
-            // wheelPropagation: true,
+            wheelPropagation: false,
             minScrollbarLength: 20
           });
         }

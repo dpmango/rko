@@ -9,7 +9,6 @@
     min-width: 1px
     padding-left: 10px
     padding-right: 10px
-
   a
     display: inline-block
     font-size: 13px
@@ -17,3 +16,7 @@
     line-height: 1.53
     span
       border-bottom: 2px solid rgba($colorRed, .5)
+      transition: border .3s $easeDefault
+    &:hover
+      span
+        border-color: $colorRed

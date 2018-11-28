@@ -1,0 +1,54 @@
+---
+title: О РКО
+bodyClass: homepage
+---
+extends shared/_layout
+
+block content
+
+  // ARTICLE
+  .article
+    .article__navigation(data-animation="fade" data-delay="3300")
+      a(href="about.html" js-nav-back).article__back
+        +svgMono('back')
+      a(href="homepage.html" js-nav-close).article__close
+        +svgMono('close')
+    
+    .section-fixed(js-set-section-height data-target="scrollable-container")
+      .h100-section
+        // background
+        .h100-bg(data-animation="scale" data-duration="3000" data-easing="ease-both")
+          img(src='img/background_3.jpg' srcset='img/background_3@2x.jpg 2x')
+        
+        // content
+        .h100-section__content
+          .container
+            .h100-section__content-wrapper
+              .col-4.col-right.article__title.h2-title(data-animation="fade-up" data-duration="1000" data-delay="2000") Новый скафандр «Орлан-МКС» — что изменилось спустя более полувека после выхода человека в открытый космос?
+              .col-4.col-right.article__paragraph.p-main(data-animation="fade-up" data-duration="1000" data-delay="2000") 
+                p 18 марта 1965 года человек впервые вышел в открытый космос, ознаменовав начало нового этапа в истории космонавтики. Алексей Архипович Леонов покинул корабль «Восток-2» и через 23 минуты 41 секунду вернулся обратно, став первопроходцем, благодаря которому  удалось сделать выводы о том, какие работы способен выполнять человек в открытом космосе.
+
+        // bg lines
+        .bg-lines
+          .bg-lines__line.bg-lines__line--first
+          .bg-lines__line.bg-lines__line--second
+          .bg-lines__line.bg-lines__line--third
+          .bg-lines__line.bg-lines__line--fourth
+          .bg-lines__line.bg-lines__line--fifth
+
+    // scrollable content
+    .section-scrollable(js-set-scroll-padding data-for="scrollable-container")
+      // section
+      .h100-section
+        // background
+        .h100-bg
+          img(src='img/background_3-2.jpg' srcset='img/background_3-2@2x.jpg 2x')
+        
+        // content
+        .h100-section__content
+          .container
+            .h100-section__content-wrapper
+              .col-6
+                .article__paragraph.p-main
+                  p С тех пор многое изменилось. К сожалению, мы не оправдали надежды фантастов, которые были уверены, что уже в начале XXI века люди будут гулять по Луне и Марсу как по улицам Москвы и Парижа, — создавать технологии будущего оказалось не так просто, как думали в 60-х. Тем не менее сегодня человечество совершило огромный рывок вперед. Опыт Алексея Архиповича Леонова заставил задуматься об одном из главных агрегатов, без которых невозможна работа в открытом космосе — скафандре. 
+                  p Мягкий «Беркут», в котором находился советский космонавт, раздулся сильнее, чем предполагалось, и, чтобы попасть обратно в «Восток-2», Леонову пришлось спускать воздух. После этого происшествия ученые сосредоточились на разработке полужестких скафандров, стараясь превратить их в автономные космические аппараты с системой жизнеобеспечения и бортовыми компьютерами. Одна из последних российских разработок — модель «Орлан-МКС», в программу которой заложена функция самопроверки по нескольким десяткам параметров. Проще говоря, теперь агрегат сможет самостоятельно сказать, пригоден он для выхода в космос или же нет. Также скафандр оснащен автоматической системой терморегулирования: при каждом выходе в космос он будет следить за показателями организма космонавта, автоматически корректируя температуру водяного охлаждения. Испытания «Орлан-МКС» в открытом космосе состоялись в 2017 году. Всего на МКС планируется поставить три таких скафандра - два из них уже заняли свое место на станции.

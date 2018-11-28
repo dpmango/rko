@@ -36,17 +36,39 @@
 .p-main
   p
     font-size: 18px
-    line-height: 1.944
+    line-height: 1.67
     font-style: normal
     a
       span
         border-bottom: 2px solid rgba($colorRed, .5)
-        transition: border .3s $ease
+        transition: border .3s $easeDefault
       &:hover
         span
           border-color: $colorRed
 
     & + p
+
+  &--lh2
+    p
+      line-height: 1.944
+
+.blockquote
+  font-size: 15px
+  line-height: 1.67
+  position: relative
+  margin: 0
+  &::before
+    display: inline-block
+    content: ' '
+    position: absolute
+    left: 0
+    top: 0
+    bottom: 0
+    width: 1px
+    background: white
+  p
+    margin: 0
+    transform: translateX(20px)
 
 +r($md)
   .p-main

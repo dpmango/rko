@@ -1,0 +1,82 @@
+---
+title: О РКО
+bodyClass: homepage
+---
+extends shared/_layout
+
+block content
+
+  // ARTICLE
+  .article
+    .article__navigation(data-animation="fade" data-delay="3300")
+      a(href="about.html" js-nav-back).article__back
+        +svgMono('back')
+      a(href="homepage.html" js-nav-close).article__close
+        +svgMono('close')
+    
+    .section-fixed(js-set-section-height data-target="scrollable-container")
+      .h100-section
+        // background
+        .h100-bg(data-animation="scale" data-duration="3000" data-easing="ease-both")
+          img(src='img/background_3.jpg' srcset='img/background_3@2x.jpg 2x')
+        
+        // content
+        .h100-section__content
+          .container
+            .h100-section__content-wrapper
+              .col-4.article__title.h3-title(data-animation="fade-up" data-duration="1000" data-delay="2000") 12 апреля 1961 года
+              .col-4.article__paragraph.p-main(data-animation="fade-up" data-duration="1000" data-delay="2000") 
+                p Человек впервые поднялся в космос, положив начало эре освоения неведомого доселе пространства. Над разработкой космических аппаратов и оборудования трудились лучшие умы, а смелые космонавты, рискуя собой, совершали, казалось бы, немыслимые вещи: первыми выходили в открытый космос, первыми чинили корабли в невесомости. Циолковский и Королев, Гагарин и Титов, Леонов и Терешкова - эти имена знают во всем мире. Россия продолжает дело великой державы. Сегодня мы хотим рассказать вам о важных разработках последних лет. Дать свои комментарии любезно согласились члены Русского космического общества.
+              
+              blockquote.article__blockquote.col-3.blockquote(data-animation="fade-up" data-duration="1000" data-delay="2000") 
+                p Россия продолжает покорять космос, работая над новыми проектами как самостоятельно, так и совместно с другими странами. Мы попросили членов Русского космического общества рассказать о новых технологиях и дальнейших планах по освоению космического пространства.
+              
+        // bg lines
+        .bg-lines
+          .bg-lines__line.bg-lines__line--first
+          .bg-lines__line.bg-lines__line--second
+          .bg-lines__line.bg-lines__line--third
+          .bg-lines__line.bg-lines__line--fourth
+          .bg-lines__line.bg-lines__line--fifth
+
+    // scrollable content
+    .section-scrollable(js-set-scroll-padding data-for="scrollable-container")
+      // section
+      .h100-section
+        // background
+        .h100-bg
+          img(src='img/background_3-2.jpg' srcset='img/background_3-2@2x.jpg 2x')
+        
+        // content
+        .h100-section__content
+          .container
+            .h100-section__content-wrapper
+              .col-6.col-center
+                .article__title.h2-title Российские ученые протестировали новый наноспутник — что это нам дает?
+                .article__paragraph.p-main
+                  p Более 60 лет тому назад, в 1957 году, СССР вывел на орбиту первый в мире искусственный спутник. Над созданием «Спутника-1» работали передовые ученые: Королев, Келдыш, Тихонравов и многие другие. Это был старт новой эпохи, благодаря которому в дальнейшем стало возможно появление беспроводной связи и Интернета.
+                  
+                img(src='img/sputnik.png' srcset='img/sputnik@2x.png 2x')
+            
+      // section
+      .h100-section
+        // background
+        .h100-bg
+          img(src='img/background_3-3.jpg' srcset='img/background_3-3@2x.jpg 2x')
+        
+        // content
+        .h100-section__content
+          .container
+            .h100-section__content-wrapper
+              .scroll-box
+                .scroll-box__scrollable(js-scrollbar)
+                  .h3-title Спутники сегодня
+                  .p-main
+                    p На данный момент на орбите Земли находится около 1 500 искусственных спутников, благодаря которым работают навигаторы, звучат новости и проводятся банковские операции. В основном это спутники связи, обеспечивающие ее в отдаленных районах Земли. 
+                    p Всем известно о системе ГЛОНАСС, но российские ученые не останавливаются на достигнутом. В 2018 году было объявлено о завершении летных испытаний, которые прошел новый наноспутники РКС, - он послужит основой для будущих аппаратов. ТНС-0 № 2, отличающийся от своих собратьев меньшим весом, был выведен на орбиту с МКС 17 августа 2017 года. После успешных летных испытаний он перешел в фазу штатной эксплуатации. Аппарат оснащен системами связи и ориентации, а также солнечной батареей.
+          
+          .hold-next
+            .hold-next__icon(js-hold-to-next data-next-page="section-2.html")
+              .hold-next__icon-dot
+            .hold-next__title Нажмите и держите
+            
