@@ -44,9 +44,20 @@
     cursor: pointer
     // cursor: move
     box-shadow: 0 0 40px 0 $colorRed
+    will-change: box-shadow
+    backface-visibility: hidden
+    transition: box-shadow .3s $easeDefault
+    &:hover
+      box-shadow: 0 0 0 10px rgba($colorRed, .3), 0 0 40px 0 rgba($colorRed, .4)
+
+    &.start-transition-next-page
+      // when it's on and transitioning
+      transition: box-shadow 2s ease-out
+      box-shadow: 0 0 0 23px rgba($colorRed, .3), 0 0 40px 0 $colorRed
 
     // draggable classes
     &.draggable-mirror
+      box-shadow: 0 0 0 10px rgba($colorRed, .3), 0 0 40px 0 $colorRed
 
     &.draggable-source--is-dragging
 
@@ -60,6 +71,7 @@
     .pillswitch__control
       left: auto
       right: 0
+
 
   // draggable classes
   &.draggable-container--is-dragging

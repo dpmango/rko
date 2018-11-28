@@ -3,7 +3,7 @@
 
 // defaults
 [data-animation]
-  transition-duration: 400ms
+  transition-duration: 300ms
   transition-timing-function: $easeDefault
 
 
@@ -19,12 +19,12 @@
 
 [data-animation="fade-up"]
   opacity: 0
-  transform: translate3d(0px,30px,0)
+  transform: translate3d(0px,40px,0)
   transition-property: opacity, transform
 
 [data-animation="fade-down"]
   opacity: 0
-  transform: translate3d(0px,-30px,0)
+  transform: translate3d(0px,-40px,0)
   transition-property: opacity, transform
 
 // running animation
@@ -44,6 +44,8 @@
 // easings
 [data-easing="ease-in"]
   transition-timing-function: ease-in
+[data-easing="ease-out"]
+  transition-timing-function: ease-out
 [data-easing="ease-in-out"]
   transition-timing-function: ease-in-out
 [data-easing="ease-both"]

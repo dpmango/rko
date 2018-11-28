@@ -13,29 +13,30 @@ block content
   .home
     .home__wrapper
       // background
-      .home__bg(data-animation="scale" data-duration="3000" data-delay="300")
+      .home__bg(data-animation="scale" data-duration="1600" data-easing="ease-out")
         img(src='img/background_1.jpg' srcset='img/background_1@2x.jpg 2x')
       
       // content
       .home__content
         .container
           .home__content-wrapper
-            .home__logo(data-animation="fade" data-duration="500" data-delay="2600")
+            .home__logo(data-animation="fade" data-duration="300" data-delay="2200")
               img(src='img/rko-logo.png' srcset='img/rko-logo@2x.png 2x')
-            .home__title(data-animation="fade-up" data-duration="500" data-delay="2000") Величие <br> России
-            .home__description(data-animation="fade-up" data-duration="400" data-delay="2200") Невероятные открытия и люди: 7<br/> удивительных фактов о космосе
-            .home__cta(data-animation="fade" data-duration="500" data-delay="3000")
+            .home__title(data-animation="fade-up" data-duration="500" data-delay="1100" data-easing="ease-both") Величие <br> России
+            .home__description(data-animation="fade-up" data-duration="600" data-delay="1600") Невероятные открытия и люди: 7<br/> удивительных фактов о космосе
+            .home__cta(data-animation="fade" data-delay="2600")
               .home__cta-title Перетащите, чтобы продолжить
               .home__cta-drag
+                // pill switch draggable.js
                 .pillswitch(js-draggable)
                   .pillswitch__ghost.pillswitch__ghost--left
                   .pillswitch__ghost.pillswitch__ghost--right
                   .pillswitch__track
-                  .pillswitch__control
+                  .pillswitch__control(js-draggable-control)
                     .pillswitch__control-dot
 
       // links collection
-      .home__links.links(data-animation="fade" data-duration="500" data-delay="3200")
+      .home__links.links(data-animation="fade" data-delay="2600")
         .container
           .links__grid
             .links__col

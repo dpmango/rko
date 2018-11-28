@@ -1,7 +1,7 @@
 // TODO - move to index as "critical style"
 
-// var preloaderTime = 7000
-var preloaderTime = 500
+var preloaderTime = 7000
+// var preloaderTime = 500
 
 // preloader function
 var preloader = document.querySelector('.preloader')
@@ -47,6 +47,7 @@ $(document).ready(function(){
     initLazyLoad();
 
     initScrollMonitor();
+    initPullSwitch();
   }
 
   // The transition has just finished and the old Container has been removed from the DOM.
@@ -482,8 +483,9 @@ $(document).ready(function(){
     var displayCondition = wHost.indexOf("localhost") >= 0 || wHost.indexOf("surge") >= 0
     if (displayCondition){
       var wWidth = _window.width();
+      var wHeight = _window.height();
 
-      var content = "<div class='dev-bp-debug'>"+wWidth+"</div>";
+      var content = "<div class='dev-bp-debug'>"+wWidth+" x "+ wHeight +"</div>";
 
       $('.page').append(content);
       setTimeout(function(){
@@ -558,9 +560,18 @@ $(document).ready(function(){
         isToggled = true;
       }
     });
-  }
 
-  initPullSwitch();
+    draggable.on('drag:stop', function (evt) {
+      if ( isToggled ){
+        $('[js-draggable-control]').addClass('start-transition-next-page');
+        setTimeout(function(){
+          alert('Переход на вторую страницу')
+          // start fade
+        }, 1000)
+
+      }
+    });
+  }
 
 });
 
