@@ -589,7 +589,7 @@ function translateMirrorX(mirror, mirrorCoords, containerRect) {
 
   requestAnimationFrame(function() {
     // for the Y - only containerRect is used as it's single directional
-    mirror.style.transform = `translate3d(${mirrorCoords.left}px, ${containerRect.top}px, 0)`;
+    mirror.style.transform = "translate3d("+mirrorCoords.left+"px, "+containerRect.top+"px, 0)";
   });
 }
 
