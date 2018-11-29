@@ -59,6 +59,7 @@ $(document).ready(function(){
   function pageCompleated(fromPjax){
     getFlowSections();
     runAnimations();
+    initScrollmagic();
   }
 
   // scroll/resize listener
@@ -255,6 +256,29 @@ $(document).ready(function(){
       $('.page').find('[data-animation]').attr('data-animated', '')
     }
   }
+
+  //////////////
+  // SCROLLMAGIC
+  //////////////
+  function initScrollmagic(){
+    var $magicX = $('[js-scrollmagic-x]');
+
+    if ( $magicX.length > 0 ){
+      // init controller
+      var controller = new ScrollMagic.Controller({
+        container: $magicX.get(0)
+      });
+
+      // create a scene
+      new ScrollMagic.Scene({
+      		duration: 100,	// the scene should last for a scroll distance of 100px
+      		offset: 50	// start this scene after scrolling for 50px
+      	})
+      	.addTo(controller) // assign the scene to the controller
+        .addIndicators()
+    }
+  }
+
 
   /**********
   * PLUGINS *

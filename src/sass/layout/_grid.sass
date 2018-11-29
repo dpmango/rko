@@ -53,6 +53,21 @@
 .col-10
   max-width: 1280px
 
+.row
+  display: flex
+  flex-wrap: wrap
+  margin-left: -10px
+  margin-right: -10px
+  [class*="col-"]
+    min-width: 1px
+    padding-left: 10px
+    padding-right: 10px
+  .col-6
+    flex: 0 0 60%
+    max-width: 60%
+  .col-4
+    flex: 0 0 40%
+    max-width: 40%
 
 .col-center
   margin-left: auto
