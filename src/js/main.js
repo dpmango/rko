@@ -64,6 +64,7 @@ $(document).ready(function(){
   // scroll/resize listener
   _window.on('scroll', setWindowScroll);
   _window.on('scroll', scrollFlowSections);
+  _window.on('scroll', scrollParallax);
   _window.on('resize', throttle(getFlowSections, 100));
   _window.on('resize', debounce(setBreakpoint, 200))
 
@@ -195,6 +196,33 @@ $(document).ready(function(){
     }
   }
 
+  //////////////////
+  // CUSTOM PARALLAX
+  //////////////////
+  function getParallaxSections(){
+
+  }
+
+  function scrollParallax(e){
+    // smooth scaleing up on scrolling past fixed section
+    var $fixedBg = $('[js-parallax-fixed-bg]');
+
+    if ( $fixedBg.length > 0 ){
+      var fixedBottomBrekpoint = flowSections.fixedHeight
+      // when scrolled past end of the page - do nothing
+      if ( wScroll > fixedBottomBrekpoint ){
+        return
+      }
+
+      var normalizedScale = normalize(wScroll, fixedBottomBrekpoint, 0, 1, 1.1);
+      var reverseScale = 1 + ((1 - normalizedScale) * -1)
+
+      $fixedBg.css({
+        'transition': 'transform .1s linear',
+        'transform': 'scale('+normalizedScale+')'
+      })
+    }
+  }
 
   // hold button to go next page
   var timeout_id = 0,
@@ -606,4 +634,15 @@ function calcOffset(offset) {
   // console.log('offset', offset, offset * 2 * 0.5)
   // what this func is doing multuipliing by one?
   return offset * 2 * 0.5;
+}
+
+// LINEAR NORMALIZATION
+function normalize(value, fromMin, fromMax, toMin, toMax) {
+  var pct = (value - fromMin) / (fromMax - fromMin);
+  var normalized = pct * (toMax - toMin) + toMin;
+
+  //Cap output to min/max
+  if (normalized > toMax) return toMax;
+  if (normalized < toMin) return toMin;
+  return normalized;
 }
