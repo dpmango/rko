@@ -1,0 +1,78 @@
+---
+title: Секция 5
+bodyClass: homepage
+---
+extends shared/_layout
+
+block content
+
+  // ARTICLE
+  .article
+    .article__navigation(data-animation="fade" data-delay="3300")
+      a(href="section-4.html" js-nav-back).article__back
+        +svgMono('back')
+      a(href="homepage.html" js-nav-close).article__close
+        +svgMono('close')
+    
+    // fixed section
+    .section-fixed(js-set-section-height)
+      .h100-section
+        // background
+        .h100-bg(data-animation="scale" data-duration="3000" data-easing="ease-both")
+          img(src='img/background_7.jpg' srcset='img/background_7@2x.jpg 2x')
+        
+        // content
+        .h100-section__content.content-spacer
+          .container
+            .h100-section__content-wrapper.h100-section__content-wrapper--top
+              .col-4.col-right.article__title.h2-title(data-animation="fade-up" data-duration="1000" data-delay="2000") «Экзомарс»: когда на Марсе зацветут яблони?
+              .col-4.col-right.article__paragraph.p-main(data-animation="fade-up" data-duration="1000" data-delay="2000") 
+                p Марс был главной мечтой Сергея Павловича Королева — мечтой, которую так до конца и не удалось осуществить при его жизни. Гениальный ученый верил, что однажды на Красной планете и впрямь зацветут яблони, потому изучение Марса стартовало еще в 1960 году. В его рамках к Красной планете первыми отправились советские марсоходы, при помощи которых землянам удалось получить снимки с поверхности Марса и сведения о составе его грунта.
+
+        // bg lines
+        .bg-lines
+          .bg-lines__line.bg-lines__line--first
+          .bg-lines__line.bg-lines__line--second
+          .bg-lines__line.bg-lines__line--third
+          .bg-lines__line.bg-lines__line--fourth
+          .bg-lines__line.bg-lines__line--fifth    
+    
+    // scrollable content
+    .section-scrollable(js-set-scroll-padding)
+      // section
+      .section
+        // background
+        //- .h100-bg
+        //-   img(src='img/background_4-2.jpg' srcset='img/background_4-2@2x.jpg 2x')
+        
+        // content
+        .section__content.content-spacer
+          .container
+            .col-6.col-center
+              .article__paragraph.p-main.ta-left
+                p С тех пор прошло немало лет, на Красной планете нашли воду и метан, а у человека наконец появился шанс ступить на марсианскую поверхность. Разработкой пилотируемых полетов занято несколько стран. Одна из главных программ по изучению Марса — «Экзомарс», проводимая совместно Европейским космическим агентством и Роскосмосом. Проект, направленный на поиски жизни и возможностей для нее, состоит из двух этапов. Первый, включавший отправку к Марсу посадочного модуля «Скиапарелли» и орбитального аппарата TGO, уже реализован, и, хотя модуль потерпел крушение, аппарат успешно вышел на орбиту, начав передачу данных. Реализация нового этапа запланирована на 2020 год: к Красной планете полетят посадочная платформа и тяжелый марсоход, оснащенный комплексом аппаратуры для изучения поверхности и атмосферы Марса. 
+                p В Роскосмосе не собираются ограничиваться роботами: первая экспедиция к Марсу может состояться уже в 2035 году. Для ее реализации нужно собрать больше данных о климате Красной планеты, а также разработать и построить совершенно новый космический корабль, работающий — с большой долей вероятности — на атомном двигателе.
+        
+        // image
+        .section__image
+          .container
+            img(src='img/image_7.jpg' srcset='img/image_7@2x.jpg 2x')
+
+        // content
+        .section__content.content-spacer
+          .container
+            .col-6.col-center.ta-left
+              .article__paragraph.p-main
+                p Российские ученые уже провели эксперименты, позволившие узнать, выдержит ли психика человека полеты на столь дальние расстояния. В 2011 году завершился 4-летний «Марс-500» под эгидой Роскосмоса и РАН, в ходе которого шесть добровольцев находились в условиях, максимально приближенных к пилотируемому полету на Марс и возвращению на Землю. Срок «заточения» в замкнутом комплексе составил 520 дней. Позже подобные эксперименты опробовали и в NASA. 
+                p Но Красная планета интересует не только государственные, но и частные компании. Помимо Илона Маска, грезящего о Марсе, существует проект Mars One, предполагающий колонизацию планеты. Первый пилотируемый полет в один конец в Mars One планируют уже на 2026 год. И добровольцев, мечтающих попасть в дивный новый мир, не мало.
+
+              .home__cta
+                .home__cta-title.home__cta-title--white Перетащите, чтобы продолжить
+                .home__cta-drag
+                  // pill switch draggable.js
+                  .pillswitch(js-draggable data-next-page="section-5.html")
+                    .pillswitch__ghost.pillswitch__ghost--left
+                    .pillswitch__ghost.pillswitch__ghost--right
+                    .pillswitch__track
+                    .pillswitch__control(js-draggable-control)
+                      .pillswitch__control-dot

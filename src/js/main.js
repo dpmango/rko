@@ -541,8 +541,9 @@ $(document).ready(function(){
     draggable.on('drag:stop', function (evt) {
       if ( isToggled ){
         $('[js-draggable-control]').addClass('start-transition-next-page');
+        var dataHref = $(evt.sourceContainer).data('next-page');
         setTimeout(function(){
-          Barba.Pjax.goTo('about.html');
+          Barba.Pjax.goTo(dataHref);
           // start fade
         }, 1000)
       }
