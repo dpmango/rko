@@ -12,7 +12,7 @@ PageList:
 - file: section-3.html
   ready: 50
 - file: section-4.html
-  ready: 0
+  ready: 50
 - file: section-5.html
   ready: 0
 - file: section-6.html

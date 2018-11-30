@@ -1,0 +1,61 @@
+---
+title: Секция 4
+bodyClass: homepage
+---
+extends shared/_layout
+
+block content
+
+  // ARTICLE
+  .article
+    .article__navigation(data-animation="fade" data-delay="3300")
+      a(href="section-3.html" js-nav-back).article__back
+        +svgMono('back')
+      a(href="homepage.html" js-nav-close).article__close
+        +svgMono('close')
+    
+    // fixed section
+    .section-fixed(js-set-section-height data-target="scrollable-container")
+      .h100-section
+        // background
+        .h100-bg(data-animation="scale" data-duration="3000" data-easing="ease-both")
+          img(src='img/background_6.jpg' srcset='img/background_6@2x.jpg 2x')
+        
+        
+        // content
+        .h100-section__content.content-spacer
+          .container
+            .h100-section__content-wrapper.h100-section__content-wrapper--top
+              .col-6.col-center.article__title.h2-title(data-animation="fade-up" data-duration="1000" data-delay="2000") Человек на Луне: «Роскосмос» планирует высадку в 2033 году
+
+        // bg lines
+        .bg-lines
+          .bg-lines__line.bg-lines__line--first
+          .bg-lines__line.bg-lines__line--second
+          .bg-lines__line.bg-lines__line--third
+          .bg-lines__line.bg-lines__line--fourth
+          .bg-lines__line.bg-lines__line--fifth    
+    
+    // scrollable content
+    .section-scrollable(js-set-scroll-padding data-for="scrollable-container")
+      // section
+      .section
+        // background
+        .h100-bg
+          img(src='img/background_4-2.jpg' srcset='img/background_4-2@2x.jpg 2x')
+        
+        // content
+        .section__content.content-spacer
+          .container
+            .col-6.col-center
+              .article__paragraph.p-main.ta-left
+                p 15 сентября 1968 года в небо поднялся космический корабль 7К-Л1 № 9 с необычным экипажем на борту: команда состояла из двух советских среднеазиатских черепах, дрозофилов и хрущаков. 21 сентября, после 7-дневной миссии, аппарат, названный в прессе «Зонд-5», приводнился в акватории Индийского океана. Рептилии перенесли полет совершенно спокойно и так и не поняли, что стали первыми живыми существами, совершившими облет вокруг Луны. Уже после на нее ступит Нил Армстронг, оставив знаменитый отпечаток ноги, затем последуют другие экспедиции, пока наконец Луна не будет предана забвению, а исчезновение всеобщего интереса к спутнику Земли не начнут оправдывать конспирологическими теориями. 
+                p И вот почти 40 лет спустя космические державы вновь решили вернуться на Луну — в том числе и Россия. В планах у Роскосмоса — исследование приполярных регионов, обеспечение связи для следующих лунных миссий, отработка технологий создания постоянно действующих баз и доставка на Землю образцов грунта. Все это планируется осуществить до 2025 года в рамках Российской лунной программы. Ближайшие запуски космических аппаратов будут совершены с Байконура уже в 2019-2021 годах. 
+                p Ну а к 2030 году Роскосмос планирует провести высадку человека на Луне. РКК «Энергия» уже работает над лунным взлетно-посадочным комплексом. Но говорить о колонизации рано: выше 700 км над Землей действует радиоактивное излучение, губительное для всего живого. Ученым предстоит найти способ решить эту проблему.
+                p В планах у России и добыча полезных ископаемых: ведущие научные институты страны и частные компании работают над созданием технологий, которые помогут реализовать эту задачу, — в первую очередь над испарением воды из лунного грунта при помощи холодного бурения. Разработкой роботов-рабочих занимаются на Земле, создав условия, максимально приближенные к лунным. Но, чтобы отправить роботов в космос за добычей ресурсов, необходимо сократить время передачи сигнала с 1 секунды до доли секунды: только так удастся спасти дорогостоящий аппарат, если он совершит неверный маневр и окажется в зоне риска. В дальнейших планах у российских ученых и Роскосмоса — создание автономных роботов с искусственным интеллектом. 
+
+              .hold-next.hold-next--inline.pt100
+                .hold-next__icon(js-hold-to-next data-next-page="section-5.html")
+                  .hold-next__icon-dot
+                .hold-next__title Нажмите и держите
+      
