@@ -24,6 +24,8 @@
   &__content-wrapper
     margin-top: auto
     margin-bottom: auto
+    &--top
+      margin-top: 0
 
 
 @media screen and (max-width: 992px), screen and (max-height: 700px)
@@ -78,7 +80,11 @@
 // regular section
 .section
   background: black
-  &__container
+  position: relative
+  z-index: 1
+  // display: flex
+  // flex-direction: column
+  &__content
     padding: 90px 0 50px
   &__image
     img
@@ -87,9 +93,14 @@
 
 // magic section
 .magic-section
-  padding: 260px 0
+  position: relative
+  &__holder
+    padding: 260px 0
+    background-image: linear-gradient(-180deg, #162333 0%, #000000 100%)
   &__scrollable
     display: flex
+    will-change: transform
+    backface-visibility: hidden
     .col-6
       flex: 0 0 auto
       margin-right: 150px

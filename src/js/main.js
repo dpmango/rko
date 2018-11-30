@@ -30,11 +30,19 @@ $(document).ready(function(){
   var wScroll = 0;
 
   // flow sections
-  flowSections = {
+  var flowSections = {
     'fixed': undefined,
     'scroll': undefined,
     'fixedHeight': undefined,
     'windowHeight': undefined
+  }
+
+  // scroll X section
+  var scrollX = {
+    'container': undefined,
+    'containerWidth': undefined,
+    'startPoint': undefined,
+    'endPoint': undefined
   }
 
   ////////////
@@ -59,14 +67,16 @@ $(document).ready(function(){
   function pageCompleated(fromPjax){
     getFlowSections();
     runAnimations();
-    initScrollmagic();
+    getScrollX();
   }
 
   // scroll/resize listener
   _window.on('scroll', setWindowScroll);
   _window.on('scroll', scrollFlowSections);
   _window.on('scroll', scrollParallax);
-  _window.on('resize', throttle(getFlowSections, 100));
+  _window.on('scroll', scrollScrollX);
+  _window.on('resize', debounce(getFlowSections, 100));
+  _window.on('resize', debounce(getScrollX, 100));
   _window.on('resize', debounce(setBreakpoint, 200))
 
 
@@ -216,11 +226,11 @@ $(document).ready(function(){
       }
 
       var normalizedScale = normalize(wScroll, fixedBottomBrekpoint, 0, 1, 1.1);
-      var reverseScale = 1 + ((1 - normalizedScale) * -1)
+      var reverseScale = 1 + ((normalizedScale - 1.1) * -1)
 
       $fixedBg.css({
         'transition': 'transform .1s linear',
-        'transform': 'scale('+normalizedScale+')'
+        'transform': 'scale('+reverseScale+')'
       })
     }
   }
@@ -260,24 +270,85 @@ $(document).ready(function(){
   //////////////
   // SCROLLMAGIC
   //////////////
-  function initScrollmagic(){
+  function getScrollX(){
     var $magicX = $('[js-scrollmagic-x]');
 
     if ( $magicX.length > 0 ){
       // init controller
-      var controller = new ScrollMagic.Controller({
-        container: $magicX.get(0)
-      });
+      // var controller = new ScrollMagic.Controller({
+      //   container: $magicX.get(0)
+      // });
+      //
+      // // create a scene
+      // new ScrollMagic.Scene({
+      // 		duration: 100,	// the scene should last for a scroll distance of 100px
+      // 		offset: 50	// start this scene after scrolling for 50px
+      // 	})
+      // 	.addTo(controller) // assign the scene to the controller
+      //   .addIndicators()
 
-      // create a scene
-      new ScrollMagic.Scene({
-      		duration: 100,	// the scene should last for a scroll distance of 100px
-      		offset: 50	// start this scene after scrolling for 50px
-      	})
-      	.addTo(controller) // assign the scene to the controller
-        .addIndicators()
+      var containerWidth = $magicX.width();
+      var startPoint = $magicX.offset().top + $magicX.outerHeight() - _window.height()
+      var endPoint = startPoint + containerWidth
+
+      scrollX = {
+        'container': $magicX,
+        'containerWidth': containerWidth,
+        'startPoint': startPoint,
+        'endPoint': endPoint
+      }
+
+      // set parrent height to have the scape for scrolling the page
+      var $parent = $magicX.closest('[js-scrollmagic-container]')
+      $parent.css({
+        'height': $parent.outerHeight() + containerWidth
+      })
+
+    } else {
+      scrollX = {
+        'container': undefined,
+        'containerWidth': undefined,
+        'startPoint': undefined,
+        'endPoint': undefined
+      }
+
     }
   }
+
+  // scroller function
+  function scrollScrollX(){
+    if ( scrollX.container !== undefined ){
+      if ( wScroll > scrollX.startPoint ){
+
+        var fixedBottomBrekpoint = flowSections.fixedHeight - flowSections.windowHeight
+        // when scrolled past end of the container
+        if ( wScroll > scrollX.endPoint ){
+          return
+        }
+
+        // console.log(wScroll, scrollX.startPoint, scrollX.endPoint)
+
+        // should scroll overflowing contents first
+        var moveOffset = wScroll - scrollX.startPoint
+
+        scrollX.container.css({
+          'transform': 'translate3d(-'+moveOffset+'px,0,0)'
+        })
+
+        // + block scroll position
+        // scrollX.container.closest('[js-scrollmagic-container]').css({
+        //   'transform': 'translate3d(0, '+moveOffset+'px,0)'
+        // })
+
+      } else {
+        // reset to defaults
+        scrollX.container.css({
+          'transform': 'translate3d('+0+'px,0,0)'
+        })
+      }
+    }
+  }
+
 
 
   /**********
