@@ -301,7 +301,7 @@ $(document).ready(function(){
       // set parrent height to have the scape for scrolling the page
       var $parent = $magicX.closest('[js-scrollmagic-container]')
       $parent.css({
-        'height': $parent.outerHeight() + containerWidth
+        'height': $parent.find('.magic-section__holder').outerHeight() + containerWidth
       })
 
     } else {

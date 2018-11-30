@@ -1,5 +1,5 @@
 ---
-title: О РКО
+title: Секция 2
 bodyClass: homepage
 ---
 extends shared/_layout
@@ -9,7 +9,7 @@ block content
   // ARTICLE
   .article
     .article__navigation(data-animation="fade" data-delay="3300")
-      a(href="about.html" js-nav-back).article__back
+      a(href="section-1.html" js-nav-back).article__back
         +svgMono('back')
       a(href="homepage.html" js-nav-close).article__close
         +svgMono('close')
@@ -24,7 +24,7 @@ block content
           img(src='img/background_4-1.png' srcset='img/background_4-1@2x.png 2x')
         
         // content
-        .h100-section__content
+        .h100-section__content.content-spacer
           .container
             .h100-section__content-wrapper.h100-section__content-wrapper--top
               .col-5.col-right.article__title.h2-title(data-animation="fade-up" data-duration="1000" data-delay="2000") Новый скафандр «Орлан-МКС» — что изменилось спустя более полувека после выхода человека в открытый космос?
