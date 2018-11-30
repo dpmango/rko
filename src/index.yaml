@@ -16,4 +16,4 @@ PageList:
 - file: section-5.html
   ready: 50
 - file: section-6.html
-  ready: 30
+  ready: 50
