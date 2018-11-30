@@ -55,7 +55,14 @@
 .ta-left
   text-align: left
 
-  
+.border-link
+  span
+    border-bottom: 2px solid rgba($colorRed, .5)
+    transition: border .3s $easeDefault
+  &:hover
+    span
+      border-color: $colorRed
+
 .blockquote
   font-size: 15px
   line-height: 1.67
