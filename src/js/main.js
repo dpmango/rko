@@ -1,7 +1,7 @@
 // TODO - move to index as "critical style"
 
-// var preloaderTime = 7000
-var preloaderTime = 500
+var preloaderTime = 7000
+// var preloaderTime = 500
 
 // preloader function
 var preloader = document.querySelector('.preloader')
