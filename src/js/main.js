@@ -1,7 +1,7 @@
 // TODO - move to index as "critical style"
 
-var preloaderTime = 7000
-// var preloaderTime = 500
+// var preloaderTime = 7000
+var preloaderTime = 500
 
 // preloader function
 var preloader = document.querySelector('.preloader')
@@ -17,6 +17,7 @@ setTimeout(function(){
 }, preloaderTime)
 
 
+// READY function
 $(document).ready(function(){
 
   //////////
@@ -25,6 +26,8 @@ $(document).ready(function(){
 
   var _window = $(window);
   var _document = $(document);
+  var html = document.documentElement;
+  var body = document.body;
   var lastScroll = 0;
   var loadCounter = 0;
   var wScroll = 0;
@@ -39,11 +42,25 @@ $(document).ready(function(){
 
   // scroll X section
   var scrollX = {
-    'container': undefined,
-    'containerWidth': undefined,
-    'startPoint': undefined,
-    'endPoint': undefined
+    container: undefined, // jquery $ obj
+    containerWidth: undefined, // how much should be scrolled
+    parent: undefined, // jquery $ obj
+    startPoint: undefined, // when scrollX should start
+    endPoint: undefined, // when scrollX should end
+    containerOffset: 0, // stored var on animation
+    parentOffset: 0, // stored var on animation
+    parallaxEffect: 300, // in px
+    scrollRequest: 0, // used for requestAnimationFrame()
+    requestId: null // used for requestAnimationFrame()
   }
+
+  // TweenLite.set(scrollX.container, {
+  //   rotation: 0.01, force3D: true
+  // });
+  //
+  // TweenLite.set(scrollX.parent, {
+  //   rotation: 0.01, force3D: true
+  // });
 
   ////////////
   // LIST OF FUNCTIONS
@@ -67,27 +84,36 @@ $(document).ready(function(){
   function pageCompleated(fromPjax){
     getFlowSections();
     runAnimations();
-    getScrollX();
+    if(fromPjax){
+      getScrollX();
+    }
   }
+
+  // TODO - not always triggered
+  window.addEventListener("load", onLoad)
+
+  function onLoad(){
+    getScrollX();
+    transformScrollX();
+    window.focus();
+    _window.on('resize', debounce(getScrollX, 100));
+    _window.on('scroll', scrollScrollX);
+  }
+
 
   // scroll/resize listener
   _window.on('scroll', setWindowScroll);
   _window.on('scroll', scrollFlowSections);
   _window.on('scroll', scrollParallax);
-  _window.on('scroll', scrollScrollX);
+  // _window.on('scroll', scrollScrollX);
   _window.on('resize', debounce(getFlowSections, 100));
-  _window.on('resize', debounce(getScrollX, 100));
+  // _window.on('resize', debounce(getScrollX, 100));
   _window.on('resize', debounce(setBreakpoint, 200))
 
 
   // this is a master function which should have all functionality
   pageReady();
   pageCompleated();
-
-  // some plugins work best with onload triggers
-  _window.on('load', function(){
-    // your functions
-  })
 
 
   //////////
@@ -169,7 +195,7 @@ $(document).ready(function(){
       flowSections = {
         'fixed': $fixedSection,
         'scroll': $scrollSection,
-        'fixedHeight': $fixedSection.outerHeight(),
+        'fixedHeight': Math.round($fixedSection.outerHeight()),
         'windowHeight': _window.height()
       }
 
@@ -274,42 +300,61 @@ $(document).ready(function(){
     var $magicX = $('[js-scrollmagic-x]');
 
     if ( $magicX.length > 0 ){
-      // init controller
-      // var controller = new ScrollMagic.Controller({
-      //   container: $magicX.get(0)
-      // });
-      //
-      // // create a scene
-      // new ScrollMagic.Scene({
-      // 		duration: 100,	// the scene should last for a scroll distance of 100px
-      // 		offset: 50	// start this scene after scrolling for 50px
-      // 	})
-      // 	.addTo(controller) // assign the scene to the controller
-      //   .addIndicators()
+      var $parent = $magicX.closest('[js-scrollmagic-container]');
+      // TODO - test on width (container 1400 diff with _window.width() )
+      var containerWidth = _window.outerWidth() * -1 // all contents minus window width
+      $magicX.find('.col-6').each(function(i, col){
+        containerWidth += $(col).outerWidth(true);
+      })
+      var startPoint = Math.round($magicX.offset().top + $magicX.outerHeight() - _window.height()) - scrollX.parentOffset
+      var endPoint =  Math.round(startPoint + containerWidth)
 
-      var containerWidth = $magicX.width();
-      var startPoint = $magicX.offset().top + $magicX.outerHeight() - _window.height()
-      var endPoint = startPoint + containerWidth
-
+      console.log(startPoint, $magicX.offset().top, $magicX.outerHeight())
       scrollX = {
-        'container': $magicX,
-        'containerWidth': containerWidth,
-        'startPoint': startPoint,
-        'endPoint': endPoint
+        container: $magicX,
+        containerWidth: containerWidth,
+        parent: $parent,
+        startPoint: startPoint,
+        endPoint: endPoint,
+        containerOffset: scrollX.containerOffset,
+        parentOffset: scrollX.parentOffset,
+        parallaxEffect: 300,
+        scrollRequest: 0,
+        requestId: null
       }
 
+      TweenLite.set(scrollX.container, {
+        rotation: 0.01, force3D: true
+      });
+
+      TweenLite.set(scrollX.parent, {
+        rotation: 0.01, force3D: true
+      });
+
       // set parrent height to have the scape for scrolling the page
-      var $parent = $magicX.closest('[js-scrollmagic-container]')
-      $parent.css({
-        'height': $parent.find('.magic-section__holder').outerHeight() + containerWidth
+      // required to have calc on childs as repeating resize will trigger bigger values
+      var sectionsHeights = 0
+      $parent.children().each(function(i, section){
+        sectionsHeights += $(section).outerHeight()
+      })
+
+      // create space for native scrolling
+      $parent.closest('.page').css({
+        'height': sectionsHeights + containerWidth - scrollX.parallaxEffect
       })
 
     } else {
       scrollX = {
-        'container': undefined,
-        'containerWidth': undefined,
-        'startPoint': undefined,
-        'endPoint': undefined
+        container: undefined,
+        containerWidth: undefined,
+        parent: undefined,
+        startPoint: undefined,
+        endPoint: undefined,
+        containerOffset: 0,
+        parentOffset: 0,
+        parallaxEffect: 300,
+        scrollRequest: 0,
+        requestId: null
       }
 
     }
@@ -318,35 +363,61 @@ $(document).ready(function(){
   // scroller function
   function scrollScrollX(){
     if ( scrollX.container !== undefined ){
-      if ( wScroll > scrollX.startPoint ){
-
-        var fixedBottomBrekpoint = flowSections.fixedHeight - flowSections.windowHeight
-        // when scrolled past end of the container
-        if ( wScroll > scrollX.endPoint ){
-          return
-        }
-
-        // console.log(wScroll, scrollX.startPoint, scrollX.endPoint)
-
-        // should scroll overflowing contents first
-        var moveOffset = wScroll - scrollX.startPoint
-
-        scrollX.container.css({
-          'transform': 'translate3d(-'+moveOffset+'px,0,0)'
-        })
-
-        // + block scroll position
-        // scrollX.container.closest('[js-scrollmagic-container]').css({
-        //   'transform': 'translate3d(0, '+moveOffset+'px,0)'
-        // })
-
-      } else {
-        // reset to defaults
-        scrollX.container.css({
-          'transform': 'translate3d('+0+'px,0,0)'
-        })
+      scrollX.scrollRequest++;
+      if (!scrollX.requestId) {
+        scrollX.requestId = requestAnimationFrame(transformScrollX);
       }
     }
+  }
+
+  function transformScrollX(){
+    var scrollY = window.pageYOffset || html.scrollTop || body.scrollTop || 0
+    // var scrollY = wScroll
+
+    if ( scrollY > scrollX.startPoint ){
+
+      // when scrolled past end of the container
+      if ( scrollY > scrollX.endPoint ){
+        scrollX.scrollRequest = 0;
+        // return
+      } else {
+        var containerOffset = scrollY - scrollX.startPoint
+        var normalizedParallaxOffset = normalize(scrollY, scrollX.startPoint, scrollX.endPoint, 0, scrollX.parallaxEffect)
+        var parentOffset = containerOffset - normalizedParallaxOffset // parallax effect
+
+        console.log(normalizedParallaxOffset)
+
+        // store globally to adjust resizes
+        scrollX.containerOffset = containerOffset
+        scrollX.parentOffset = parentOffset
+
+        TweenLite.set(scrollX.container, {
+          x: -containerOffset
+        });
+
+        TweenLite.set(scrollX.parent, {
+          y: parentOffset
+        });
+
+        // scrollX.container.css({
+        //   'transform': 'translate3d(-'+moveOffset+'px,0,0)'
+        // })
+        // scrollX.parent.css({
+        //   'transform': 'translate3d(0, '+moveOffset+'px,0)'
+        // })
+      }
+
+    } else {
+      // reset to defaults
+      scrollX.container.css({'transform': 'translate3d(0,0,0)'})
+      scrollX.parent.css({'transform': 'translate3d(0,0,0)'})
+
+      scrollX.scrollRequest = 0;
+      // scrollX.requestId = null
+    }
+
+    scrollX.requestId = scrollX.scrollRequest > 0 ? requestAnimationFrame(transformScrollX) : null;
+
   }
 
 
@@ -742,3 +813,10 @@ function normalize(value, fromMin, fromMax, toMin, toMax) {
   if (normalized < toMin) return toMin;
   return normalized;
 }
+
+// width with margin
+// jQuery.fn.extend({
+//   widthWithMargin: function() {
+//     return this.outerWidth() + parseInt(this.css('margin-right'), 10) + parseInt(this.css('margin-left'), 10)
+//   }
+// });

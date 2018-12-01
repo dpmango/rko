@@ -16,8 +16,11 @@ gulp.task('javascript:vendor', function() {
       path.resolve('bower_components', 'jquery-lazy/jquery.lazy.min.js'),
       path.resolve('bower_components', 'animejs/anime.min.js'),
       path.resolve('node_modules', 'perfect-scrollbar/dist/perfect-scrollbar.min.js'),
-      path.resolve('bower_components', 'scrollmagic/scrollmagic/minified/ScrollMagic.min.js'),
-      path.resolve('bower_components', 'scrollmagic/scrollmagic/minified/plugins/debug.addIndicators.min.js'),
+      path.resolve('node_modules', 'gsap/src/minified/TweenMax.min.js'),
+      // path.resolve('node_modules', 'gsap/src/minified/jquery.gsap.min.js'),
+      // path.resolve('node_modules', 'gsap/src/minified/TweenLite.min.js'),
+      // path.resolve('bower_components', 'scrollmagic/scrollmagic/minified/ScrollMagic.min.js'),
+      // path.resolve('bower_components', 'scrollmagic/scrollmagic/minified/plugins/debug.addIndicators.min.js'),
       config.src.js + '/vendor/**/*.js'
      ])
     .pipe(plumber({ errorHandler: config.errorHandler }))
