@@ -8,7 +8,7 @@ block content
 
   // ARTICLE
   .article
-    .article__navigation(data-animation="fade" data-delay="3300")
+    .article__navigation(data-animation="fade" data-delay="3300" data-animation-out="fade")
       a(href="homepage.html" js-nav-back).article__back
         +svgMono('back')
       a(href="homepage.html" js-nav-close).article__close
@@ -18,22 +18,15 @@ block content
       // background
       .h100-bg.h100-bg--origin-rb(data-animation="scale" data-duration="3000" data-easing="ease-both")
         img(src='img/background_2.jpg' srcset='img/background_2@2x.jpg 2x')
-      
+              
       // content
       .h100-section__content
         .container
           .h100-section__content-wrapper
-            .col-5.article__title.h2-title(data-animation="fade-up" data-duration="1000" data-delay="2000") Что такое русское космическое общество?
-            .col-6.article__paragraph.p-main.p-main--lh2(data-animation="fade-up" data-duration="1000" data-delay="2000") 
+            .col-5.article__title.h2-title(data-animation="fade-up" data-duration="1000" data-delay="2000" data-duration-out="2000") Что такое русское космическое общество?
+            .col-6.article__paragraph.p-main.p-main--lh2(data-animation="fade-up" data-duration="1000" data-delay="2000" data-duration-out="2000") 
               p Русское Космическое Общество — это собрание людей, объединившихся в особый период развития человеческой цивилизации вокруг общей цели — сохранения и развития жизни как космопланетарного явления, а также содействия переходу цивилизации на путь её космической истории. Для осмысления и правильного применения законов эволюции жизни на Земле и в Космосе. Для распространения научного и философского наследия школы Русского Космизма и космонавтики. Присоединяйтесь к нам, продолжим этот путь вместе: <a href="http://cosmatica.org" target="_blank"><span>www.cosmatica.org</span></a>
-            .article__cta(data-animation="fade" data-delay="3000")
+            .article__cta(data-animation="fade" data-delay="3000" data-duration-out="2000")
               .article__cta-title Предлагаем ознакомиться с нашей статьей о космосе
-              a.btn.btn-primary(href="section-1.html") Читать статью
+              a.btn.btn-primary(data-next-page="section-1.html" js-click-to-next) Читать статью
                 
-      // bg lines
-      .bg-lines
-        .bg-lines__line.bg-lines__line--first
-        .bg-lines__line.bg-lines__line--second
-        .bg-lines__line.bg-lines__line--third
-        .bg-lines__line.bg-lines__line--fourth
-        .bg-lines__line.bg-lines__line--fifth

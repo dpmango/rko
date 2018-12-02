@@ -31,3 +31,8 @@ button
     will-change: box-shadow, transform
     &:hover
       box-shadow: 0 0 0 10px rgba($colorRed, .1), 0 10px 40px 0 rgba($colorRed, .4)
+
+  &.is-transitioning
+    transform-origin: center center
+    transform: scale(.8)
+    transition-timing-function: $easeBoth

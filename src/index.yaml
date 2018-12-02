@@ -2,7 +2,7 @@ ProjectTitle: RKO
 
 PageList:
 - file: homepage.html
-  ready: 70
+  ready: 80
 - file: about.html
   ready: 70
 - file: section-1.html

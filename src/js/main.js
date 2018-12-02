@@ -54,14 +54,6 @@ $(document).ready(function(){
     requestId: null // used for requestAnimationFrame()
   }
 
-  // TweenLite.set(scrollX.container, {
-  //   rotation: 0.01, force3D: true
-  // });
-  //
-  // TweenLite.set(scrollX.parent, {
-  //   rotation: 0.01, force3D: true
-  // });
-
   ////////////
   // LIST OF FUNCTIONS
   ////////////
@@ -138,23 +130,13 @@ $(document).ready(function(){
     .on('click', '[href="#"]', function(e) {
       e.preventDefault();
     })
-    .on('click', '[js-link]', function(e){
-      var dataHref = $(this).data('href');
-      if (dataHref && dataHref !== "#"){
-        e.preventDefault();
-        e.stopPropagation();
-        Barba.Pjax.goTo(dataHref);
-      }
-    })
 
   // just store global variable with scroll distance
   function setWindowScroll(){
     wScroll = _window.scrollTop();
   }
 
-  ////////////////////
-  // HAMBURGER TOGGLER
-  ////////////////////
+
   // disable / enable scroll by setting negative margin to page-content eq. to prev. scroll
   // this methods helps to prevent page-jumping on setting body height to 100%
   function disableScroll() {
@@ -163,7 +145,6 @@ $(document).ready(function(){
       'margin-top': '-' + lastScroll + 'px'
     });
     $('body').addClass('body-lock');
-    $('.footer').addClass('is-hidden'); // if you use revealFooter()
   }
 
   function enableScroll() {
@@ -171,7 +152,6 @@ $(document).ready(function(){
       'margin-top': '-' + 0 + 'px'
     });
     $('body').removeClass('body-lock');
-    $('.footer').removeClass('is-hidden'); // if you use revealFooter()
     _window.scrollTop(lastScroll)
     lastScroll = 0;
   }
@@ -183,6 +163,78 @@ $(document).ready(function(){
       enableScroll();
     }
   };
+
+  //////////////
+  // animations on initial load
+  /////////////
+  function runAnimations(){
+    if ( loadCounter === 0 ){
+      setTimeout(function(){
+        animatePageIn(enablePageInteractions)
+      }, preloaderTime) // first load - reserve time for preloader
+    } else {
+      setTimeout(function() {
+        animatePageIn(enablePageInteractions)
+      }, 500)
+    }
+  }
+
+  function animatePageIn(cb){
+    var animations = $('.page').find('[data-animation]')
+    animations.attr('data-animated', '');
+    disablePageInteractions();
+
+    if (cb !== undefined) {
+      var timeout = longestAnimation(animations)
+      setTimeout(cb, timeout)
+    }
+  }
+
+  function animatePageOut(cb){
+    var animations = $('.page').find('[data-animation]')
+    animations.attr('data-animated-out', '')
+    disablePageInteractions();
+
+    if (cb !== undefined) {
+      var timeout = longestAnimation(animations)
+      setTimeout(cb, timeout)
+    }
+  }
+
+  function longestAnimation(arr){
+    var longest = 0
+    arr.each(function(i, el){
+      var $el = $(el);
+
+      // duration either in or out
+      var duration = $el.data('duration') || 300 // default
+      if ( $el.data('duration-out') !== undefined ){
+        duration = $el.data('duration-out')
+      }
+
+      // delay either in or out
+      var delay = $el.data('delay') || 0
+      if ( $el.data('animated-out') !== undefined ){
+        delay = 0
+      }
+
+      var sum = duration + delay
+      if ( sum > longest ){
+        longest = sum
+      }
+    })
+    return longest
+  }
+
+  // TODO - disable scroll
+  function disablePageInteractions(){
+    $('body').addClass('page-is-changing');
+  }
+
+  function enablePageInteractions(){
+    $('body').removeClass('page-is-changing');
+  }
+
 
   /***************
   * PAGE SPECIFIC *
@@ -278,20 +330,17 @@ $(document).ready(function(){
       clearTimeout(timeout_id);
     });
 
+  _document
+    .on('click', '[js-click-to-next]', function(){
+      var $btn = $(this);
+      var dataHref = $btn.data('next-page');
+      $btn.addClass('is-transitioning')
+      setTimeout(function(){
+        Barba.Pjax.goTo(dataHref);
+        $btn.removeClass('is-transitioning'); // reset button state
+      }, 300);
+    })
 
-
-  // animations on initial load
-  function runAnimations(){
-    if ( loadCounter === 0 ){
-      setTimeout(animatePage, preloaderTime) // first load - reserve time for preloader
-    } else {
-      setTimeout(animatePage, 500)
-    }
-
-    function animatePage(){
-      $('.page').find('[data-animation]').attr('data-animated', '')
-    }
-  }
 
   //////////////
   // SCROLLMAGIC
@@ -371,6 +420,7 @@ $(document).ready(function(){
   }
 
   function transformScrollX(){
+    if ( scrollX.container === undefined ) return
     var scrollY = window.pageYOffset || html.scrollTop || body.scrollTop || 0
     // var scrollY = wScroll
 
@@ -671,8 +721,6 @@ $(document).ready(function(){
   //////////
   // BARBA PJAX
   //////////
-  var easingSwing = [.02, .01, .47, 1]; // default jQuery easing for anime.js
-
   Barba.Pjax.Dom.containerClass = "page";
 
   var FadeTransition = Barba.BaseTransition.extend({
@@ -685,15 +733,11 @@ $(document).ready(function(){
     fadeOut: function() {
       var deferred = Barba.Utils.deferred();
 
-      anime({
-        targets: this.oldContainer,
-        opacity : 0,
-        easing: easingSwing, // swing
-        duration: 500,
-        complete: function(anim){
-          deferred.resolve();
-        }
-      })
+      // to be controled with css animations
+      animatePageOut(function(){
+        enablePageInteractions();
+        deferred.resolve();
+      });
 
       return deferred.promise
     },
@@ -704,28 +748,9 @@ $(document).ready(function(){
 
       $(this.oldContainer).hide();
 
-      $el.css({
-        visibility : 'visible',
-        opacity : 0
-      });
+      _window.scrollTop(0);
+      _this.done();
 
-      anime({
-        targets: "html, body",
-        scrollTop: 1,
-        easing: easingSwing, // swing
-        duration: 150
-      });
-
-      anime({
-        targets: this.newContainer,
-        opacity: 1,
-        easing: easingSwing, // swing
-        duration: 500,
-        complete: function(anim) {
-          triggerBody()
-          _this.done();
-        }
-      });
     }
   });
 
@@ -747,13 +772,6 @@ $(document).ready(function(){
     loadCounter++
     pageCompleated(true);
   });
-
-  // some plugins get bindings onNewPage only that way
-  function triggerBody(){
-    _window.scrollTop(0);
-    $(window).scroll();
-    $(window).resize();
-  }
 
   //////////
   // DEVELOPMENT HELPER
@@ -813,10 +831,3 @@ function normalize(value, fromMin, fromMax, toMin, toMax) {
   if (normalized < toMin) return toMin;
   return normalized;
 }
-
-// width with margin
-// jQuery.fn.extend({
-//   widthWithMargin: function() {
-//     return this.outerWidth() + parseInt(this.css('margin-right'), 10) + parseInt(this.css('margin-left'), 10)
-//   }
-// });

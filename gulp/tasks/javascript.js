@@ -14,7 +14,7 @@ gulp.task('javascript:vendor', function() {
       path.resolve('bower_components', 'scrollMonitor/scrollMonitor.js'),
       path.resolve('bower_components', 'barba.js/dist/barba.min.js'),
       path.resolve('bower_components', 'jquery-lazy/jquery.lazy.min.js'),
-      path.resolve('bower_components', 'animejs/anime.min.js'),
+      // path.resolve('bower_components', 'animejs/anime.min.js'),
       path.resolve('node_modules', 'perfect-scrollbar/dist/perfect-scrollbar.min.js'),
       path.resolve('node_modules', 'gsap/src/minified/TweenMax.min.js'),
       // path.resolve('node_modules', 'gsap/src/minified/jquery.gsap.min.js'),
