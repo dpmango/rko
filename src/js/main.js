@@ -28,6 +28,7 @@ $(document).ready(function(){
   var _document = $(document);
   var html = document.documentElement;
   var body = document.body;
+  var scrollEnabled = false;
   var lastScroll = 0;
   var loadCounter = 0;
   var wScroll = 0;
@@ -141,28 +142,22 @@ $(document).ready(function(){
   // this methods helps to prevent page-jumping on setting body height to 100%
   function disableScroll() {
     lastScroll = _window.scrollTop();
-    $('.page__content').css({
+    $('.page').css({
       'margin-top': '-' + lastScroll + 'px'
     });
+    scrollEnabled = false
     $('body').addClass('body-lock');
   }
 
   function enableScroll() {
-    $('.page__content').css({
+    $('.page').css({
       'margin-top': '-' + 0 + 'px'
     });
     $('body').removeClass('body-lock');
     _window.scrollTop(lastScroll)
+    scrollEnabled = true
     lastScroll = 0;
   }
-
-  function blockScroll() {
-    if ($('[js-hamburger]').is('.is-active')) {
-      disableScroll();
-    } else {
-      enableScroll();
-    }
-  };
 
   //////////////
   // animations on initial load
@@ -229,10 +224,12 @@ $(document).ready(function(){
   // TODO - disable scroll
   function disablePageInteractions(){
     $('body').addClass('page-is-changing');
+    disableScroll();
   }
 
   function enablePageInteractions(){
     $('body').removeClass('page-is-changing');
+    enableScroll();
   }
 
 
@@ -293,6 +290,8 @@ $(document).ready(function(){
   }
 
   function scrollParallax(e){
+    if ( !scrollEnabled ) return
+    
     // smooth scaleing up on scrolling past fixed section
     var $fixedBg = $('[js-parallax-fixed-bg]');
 
