@@ -69,61 +69,10 @@ gulp.task('sprite:svg:mono', function() {
 });
 
 
-// preserve colors on icons
-gulp.task('sprite:svg:color', function() {
-  return gulp
-    .src(config.src.iconsSvgColor + '/**/*.svg')
-    .pipe(plumber({
-      errorHandler: config.errorHandler
-    }))
-    .pipe(svgmin({
-        js2svg: {
-            pretty: true
-        },
-        plugins: [{
-          removeDesc: true
-        }, {
-          cleanupIDs: true
-        }, {
-          mergePaths: false
-        }, {
-          removeDimensions: false
-        }, {
-          removeAttrs: false
-        }]
-    }))
-    .pipe(rename({ prefix: 'ico-color-' }))
-    .pipe(svgStore({ inlineSvg: false }))
-    .pipe(through2.obj(function(file, encoding, cb) {
-        var $ = cheerio.load(file.contents.toString(), {xmlMode: true});
-        var data = $('svg > symbol').map(function() {
-            var $this  = $(this);
-            var size = $this.attr('viewBox').split(' ').splice(2);
-            var name   = $this.attr('id');
-            var ratio  = size[0] / size[1]; // symbol width / symbol height
-            return {
-                name: name,
-                ratio: +ratio.toFixed(2)
-            };
-        }).get();
-        this.push(file);
-        gulp.src(__dirname + '/_sprite-svg-color.scss')
-            .pipe(consolidate('lodash', {
-                symbols: data
-            }))
-            .pipe(gulp.dest(config.src.sassGen));
-        cb();
-    }))
-    .pipe(rename({ basename: 'sprite-color' }))
-    .pipe(gulp.dest(config.dest.img));
-});
-
 gulp.task('sprite:svg', [
-  'sprite:svg:mono',
-  'sprite:svg:color',
+  'sprite:svg:mono'
 ]);
 
 gulp.task('sprite:svg:watch', function() {
   gulp.watch(config.src.iconsSvgMono + '/**/*.svg', ['sprite:svg:mono']);
-  gulp.watch(config.src.iconsSvgColor + '/**/*.svg', ['sprite:svg:color']);
 });
