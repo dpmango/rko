@@ -8,3 +8,19 @@
             include ../../svg-inline/logo.svg
         .preloader__spinner
           include ../../svg-inline/preloader.svg
+
+// preloader js
+script.
+  window.preloaderTime = 7000;
+  var preloader = document.querySelector('.preloader');
+  setTimeout(function(){
+    preloader.classList.add('start-anim');
+  }, 100)
+  
+  setTimeout(function(){
+    preloader.classList.add('end-anim');
+  }, 5500)
+  
+  setTimeout(function(){
+    preloader.parentNode.removeChild(preloader);
+  }, window.preloaderTime);

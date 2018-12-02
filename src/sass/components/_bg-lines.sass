@@ -1,6 +1,9 @@
 .bg-lines
+  position: relative
+  z-index: 2
   pointer-events: none
   user-select: none
+  will-change: opacity
   &__line
     position: fixed
     top: 0
@@ -8,6 +11,7 @@
     background: rgba(white, .08)
     width: 1px
     z-index: 8
+    backface-visibility: hidden
     &--first
       left: 12%
     &--second

@@ -1,21 +1,6 @@
-// TODO - move to index as "critical style"
-
-// var preloaderTime = 7000
-var preloaderTime = 500
-
-// preloader function
-var preloader = document.querySelector('.preloader')
-preloader.classList.add('start-anim')
-setTimeout(function(){
-  // + page ready trigger ?
-  preloader.classList.add('end-anim')
-}, 5500)
-
-setTimeout(function(){
-  // + page ready trigger ?
-  preloader.parentNode.removeChild(preloader);
-}, preloaderTime)
-
+window.onbeforeunload = function(){
+  window.scrollTo(0,0)
+}
 
 // READY function
 $(document).ready(function(){
@@ -166,11 +151,9 @@ $(document).ready(function(){
     if ( loadCounter === 0 ){
       setTimeout(function(){
         animatePageIn(enablePageInteractions)
-      }, preloaderTime) // first load - reserve time for preloader
+      }, window.preloaderTime) // first load - reserve time for preloader
     } else {
-      setTimeout(function() {
-        animatePageIn(enablePageInteractions)
-      }, 500)
+      animatePageIn(enablePageInteractions)
     }
   }
 
@@ -221,7 +204,6 @@ $(document).ready(function(){
     return longest
   }
 
-  // TODO - disable scroll
   function disablePageInteractions(){
     $('body').addClass('page-is-changing');
     disableScroll();
@@ -233,8 +215,38 @@ $(document).ready(function(){
   }
 
 
+  // hold button to go next page
+  var timeout_id = 0,
+      hold_time = 1000;
+
+  _document
+    .on('mousedown', '[js-hold-to-next]', function(){
+      var dataHref = $(this).data('next-page');
+      // start animating
+      $(this).addClass('is-transitioning')
+      timeout_id = setTimeout(function(){
+        Barba.Pjax.goTo(dataHref);
+      }, hold_time);
+    }).bind('mouseup mouseleave', function() {
+      $('[js-hold-to-next]').removeClass('is-transitioning')
+      clearTimeout(timeout_id);
+    });
+
+  // click button animation with 300s delay
+  _document
+    .on('click', '[js-click-to-next]', function(){
+      var $btn = $(this);
+      var dataHref = $btn.data('next-page');
+      $btn.addClass('is-transitioning')
+      setTimeout(function(){
+        Barba.Pjax.goTo(dataHref);
+        $btn.removeClass('is-transitioning'); // reset button state
+      }, 300);
+    })
+
+
   /***************
-  * PAGE SPECIFIC *
+  * PARALLAX ANIMATIONS *
   ***************/
   function getFlowSections(){
     var $fixedSection = $('[js-set-section-height]');
@@ -291,7 +303,7 @@ $(document).ready(function(){
 
   function scrollParallax(e){
     if ( !scrollEnabled ) return
-    
+
     // smooth scaleing up on scrolling past fixed section
     var $fixedBg = $('[js-parallax-fixed-bg]');
 
@@ -311,34 +323,6 @@ $(document).ready(function(){
       })
     }
   }
-
-  // hold button to go next page
-  var timeout_id = 0,
-      hold_time = 1000;
-
-  _document
-    .on('mousedown', '[js-hold-to-next]', function(){
-      var dataHref = $(this).data('next-page');
-      // start animating
-      $(this).addClass('is-transitioning')
-      timeout_id = setTimeout(function(){
-        Barba.Pjax.goTo(dataHref);
-      }, hold_time);
-    }).bind('mouseup mouseleave', function() {
-      $('[js-hold-to-next]').removeClass('is-transitioning')
-      clearTimeout(timeout_id);
-    });
-
-  _document
-    .on('click', '[js-click-to-next]', function(){
-      var $btn = $(this);
-      var dataHref = $btn.data('next-page');
-      $btn.addClass('is-transitioning')
-      setTimeout(function(){
-        Barba.Pjax.goTo(dataHref);
-        $btn.removeClass('is-transitioning'); // reset button state
-      }, 300);
-    })
 
 
   //////////////
