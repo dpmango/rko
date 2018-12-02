@@ -26,6 +26,12 @@ $(document).ready(function(){
     'windowHeight': undefined
   }
 
+  var parallaxElements = {
+    container: undefined,
+    start: 0,
+    end: 0
+  }
+
   // scroll X section
   var scrollX = {
     container: undefined, // jquery $ obj
@@ -62,6 +68,7 @@ $(document).ready(function(){
     runAnimations();
     initScrollMonitor();
     if(fromPjax){
+      getParallaxSections();
       getScrollX();
     }
   }
@@ -70,6 +77,7 @@ $(document).ready(function(){
   window.addEventListener("load", onLoad)
 
   function onLoad(){
+    getParallaxSections();
     getScrollX();
     transformScrollX();
     window.focus();
@@ -84,6 +92,7 @@ $(document).ready(function(){
   _window.on('scroll', scrollParallax);
   // _window.on('scroll', scrollScrollX);
   _window.on('resize', debounce(getFlowSections, 100));
+  _window.on('resize', debounce(getParallaxSections, 100));
   // _window.on('resize', debounce(getScrollX, 100));
   _window.on('resize', debounce(setBreakpoint, 200))
 
@@ -297,7 +306,25 @@ $(document).ready(function(){
   // CUSTOM PARALLAX
   //////////////////
   function getParallaxSections(){
+    var $parallax = $('[js-parallax]');
 
+    if ( $parallax.length > 0 ){
+      var containerHeight = Math.round($parallax.outerHeight())
+      var containerTop = Math.round($parallax.offset().top)
+      var containerStart = containerTop - _window.height()
+
+      parallaxElements = {
+        container: $parallax,
+        start: containerStart,
+        end: containerStart + containerHeight
+      }
+    } else {
+      parallaxElements = {
+        container: undefined,
+        start: 0,
+        end: 0
+      }
+    }
   }
 
   function scrollParallax(e){
@@ -310,16 +337,31 @@ $(document).ready(function(){
       var fixedBottomBrekpoint = flowSections.fixedHeight
       // when scrolled past end of the page - do nothing
       if ( wScroll > fixedBottomBrekpoint ){
-        return
+        // return
+      } else {
+        var normalizedScale = normalize(wScroll, fixedBottomBrekpoint, 0, 1, 1.1);
+        var reverseScale = 1 + ((normalizedScale - 1.1) * -1)
+
+        $fixedBg.css({
+          'transition': 'transform .1s linear',
+          'transform': 'scale('+reverseScale+')'
+        })
       }
+    }
 
-      var normalizedScale = normalize(wScroll, fixedBottomBrekpoint, 0, 1, 1.1);
-      var reverseScale = 1 + ((normalizedScale - 1.1) * -1)
 
-      $fixedBg.css({
-        'transition': 'transform .1s linear',
-        'transform': 'scale('+reverseScale+')'
-      })
+    if ( parallaxElements.container !== undefined){
+      console.log(wScroll, parallaxElements)
+      if ( (wScroll > parallaxElements.start) && (wScroll < parallaxElements.end) ){
+        var parallaxOffset = normalize(wScroll, parallaxElements.start, parallaxElements.end, 0, 100);
+        var reverseOffset = ((parallaxOffset - 100) * -1)
+
+        console.log(reverseOffset)
+
+        parallaxElements.container.css({
+          'transform': 'translate3d(0,'+reverseOffset+'px,0)'
+        })
+      }
     }
   }
 
