@@ -3,6 +3,7 @@ title: Секция 2
 bodyClass: homepage
 ---
 extends shared/_layout
+include components/_pillswitch
 
 block content
 
@@ -14,7 +15,7 @@ block content
       a(href="homepage.html" js-nav-close).article__close
         +svgMono('close')
     
-    .section-fixed(js-set-section-height data-target="scrollable-container")
+    .section-fixed(js-set-section-height)
       .h100-section
         // background
         .h100-bg(data-animation="scale" data-duration="3000" data-easing="ease-both")
@@ -98,10 +99,4 @@ block content
               .home__cta
                 .home__cta-title.home__cta-title--white Перетащите, чтобы продолжить
                 .home__cta-drag
-                  // pill switch draggable.js
-                  .pillswitch(js-draggable data-next-page="section-5.html")
-                    .pillswitch__ghost.pillswitch__ghost--left
-                    .pillswitch__ghost.pillswitch__ghost--right
-                    .pillswitch__track
-                    .pillswitch__control(js-draggable-control)
-                      .pillswitch__control-dot
+                  +pillswitch("section-5.html")

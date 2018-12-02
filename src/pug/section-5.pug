@@ -3,6 +3,7 @@ title: Секция 5
 bodyClass: homepage
 ---
 extends shared/_layout
+include components/_pillswitch
 
 block content
 
@@ -62,10 +63,4 @@ block content
               .home__cta
                 .home__cta-title.home__cta-title--white Перетащите, чтобы продолжить
                 .home__cta-drag
-                  // pill switch draggable.js
-                  .pillswitch(js-draggable data-next-page="section-5.html")
-                    .pillswitch__ghost.pillswitch__ghost--left
-                    .pillswitch__ghost.pillswitch__ghost--right
-                    .pillswitch__track
-                    .pillswitch__control(js-draggable-control)
-                      .pillswitch__control-dot
+                  +pillswitch("section-6.html")

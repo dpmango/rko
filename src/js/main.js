@@ -51,17 +51,16 @@ $(document).ready(function(){
   // The new container has been loaded and injected in the wrapper.
   function pageReady(fromPjax){
     initPerfectScrollbar();
-    initTeleport();
-    initLazyLoad();
+    // initTeleport();
+    // initLazyLoad();
     initPullSwitch();
-
-    initScrollMonitor();
   }
 
   // The transition has just finished and the old Container has been removed from the DOM.
   function pageCompleated(fromPjax){
     getFlowSections();
     runAnimations();
+    initScrollMonitor();
     if(fromPjax){
       getScrollX();
     }
@@ -158,7 +157,7 @@ $(document).ready(function(){
   }
 
   function animatePageIn(cb){
-    var animations = $('.page').find('[data-animation]')
+    var animations = $('.page').find('[data-animation]:not([js-onscroll])')
     animations.attr('data-animated', '');
     disablePageInteractions();
 
@@ -169,7 +168,7 @@ $(document).ready(function(){
   }
 
   function animatePageOut(cb){
-    var animations = $('.page').find('[data-animation]')
+    var animations = $('.page').find('[data-animation]:not([js-onscroll])')
     animations.attr('data-animated-out', '')
     disablePageInteractions();
 
@@ -220,14 +219,14 @@ $(document).ready(function(){
       hold_time = 1000;
 
   _document
-    .on('mousedown', '[js-hold-to-next]', function(){
+    .on('mousedown touchstart', '[js-hold-to-next]', function(){
       var dataHref = $(this).data('next-page');
       // start animating
       $(this).addClass('is-transitioning')
       timeout_id = setTimeout(function(){
         Barba.Pjax.goTo(dataHref);
       }, hold_time);
-    }).bind('mouseup mouseleave', function() {
+    }).bind('mouseup mouseleave touchend', function() {
       $('[js-hold-to-next]').removeClass('is-transitioning')
       clearTimeout(timeout_id);
     });
@@ -417,8 +416,6 @@ $(document).ready(function(){
         var containerOffset = scrollY - scrollX.startPoint
         var normalizedParallaxOffset = normalize(scrollY, scrollX.startPoint, scrollX.endPoint, 0, scrollX.parallaxEffect)
         var parentOffset = containerOffset - normalizedParallaxOffset // parallax effect
-
-        console.log(normalizedParallaxOffset)
 
         // store globally to adjust resizes
         scrollX.containerOffset = containerOffset
@@ -656,47 +653,25 @@ $(document).ready(function(){
 
 
   ////////////
-  // UI
-  ////////////
-
-
-  ////////////
   // SCROLLMONITOR - WOW LIKE
   ////////////
   function initScrollMonitor(){
-    $('.wow').each(function(i, el){
-
-      var elWatcher = scrollMonitor.create( $(el) );
+    $('[js-onscroll]').each(function(i, el){
+      var $el = $(el);
+      var elWatcher = scrollMonitor.create($el);
 
       var delay;
       if ( $(window).width() < 768 ){
         delay = 0
       } else {
-        delay = $(el).data('animation-delay');
+        delay = $el.data('animation-delay');
       }
 
-      var animationClass = $(el).data('animation-class') || "wowFadeUp"
-
-      var animationName = $(el).data('animation-name') || "wowFade"
-
       elWatcher.enterViewport(throttle(function() {
-        $(el).addClass(animationClass);
-        $(el).css({
-          'animation-name': animationName,
-          'animation-delay': delay,
-          'visibility': 'visible'
-        });
+        $el.attr('data-animated', '');
       }, 100, {
         'leading': true
       }));
-      // elWatcher.exitViewport(throttle(function() {
-      //   $(el).removeClass(animationClass);
-      //   $(el).css({
-      //     'animation-name': 'none',
-      //     'animation-delay': 0,
-      //     'visibility': 'hidden'
-      //   });
-      // }, 100));
     });
 
   }

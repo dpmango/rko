@@ -20,17 +20,6 @@
   font-weight: 500
   line-height: 1.4
 
-+r($md)
-  // adopted from mobile 320 layout
-  // TODO - tweak size to $sm and $mobile-s
-  .h2-title
-    font-size: 24px
-
-  .h3-title
-    font-size: 20px
-
-  .h4-title
-    font-size: 18px
 
 // paragraphs
 .p-main
@@ -52,16 +41,6 @@
     p
       line-height: 1.944
 
-.ta-left
-  text-align: left
-
-.border-link
-  span
-    border-bottom: 2px solid rgba($colorRed, .5)
-    transition: border .3s $easeDefault
-  &:hover
-    span
-      border-color: $colorRed
 
 .blockquote
   font-size: 15px
@@ -81,10 +60,70 @@
     margin: 0
     transform: translateX(20px)
 
-+r($md)
+
+// text inline helpers
+.ta-left
+  text-align: left
+
+// link generic class
+.border-link
+  span
+    border-bottom: 2px solid rgba($colorRed, .5)
+    transition: border .3s $easeDefault
+  &:hover
+    span
+      border-color: $colorRed
+
+
+
+
+/* Typography responsive classes
+@media screen and (max-width: 1200px), screen and (max-height: 800px)
+  // - 17%
+  .h2-title
+    font-size: 35px
+  .h3-title
+    font-size: 26px
+  .h4-title
+    font-size: 22px
+  .p-main
+    p
+      font-size: 17px
+
+
+@media screen and (max-width: 992px), screen and (max-height: 700px)
+  // - 20%
+  .h2-title
+    font-size: 28px
+  .h3-title
+    font-size: 22px
+  .h4-title
+    font-size: 20px
   .p-main
     p
       font-size: 16px
       line-height: 1.56
+    &--lh2
+      p
+        // line-height: 1.67
+
++r($md)
+  // adopted from mobile 320 layout
+  .h2-title
+    font-size: 24px
+
+  .h3-title
+    font-size: 20px
+
+  .h4-title
+    font-size: 18px
+
+  .p-main
+    p
+      font-size: 16px
       a span
         border-width: 1px
+
+
+
+// TODO - tweak size to $sm and $mobile-s

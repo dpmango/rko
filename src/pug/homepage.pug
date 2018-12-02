@@ -3,11 +3,9 @@ title: Главная
 bodyClass: homepage
 ---
 extends shared/_layout
+include components/_pillswitch
 
 block content
-  
-  // add empty preloader block on top to hide preloader in DEV mode
-  // block preloader
   
   // HOME
   .home
@@ -27,13 +25,7 @@ block content
             .home__cta(data-animation="fade" data-delay="2600")
               .home__cta-title Перетащите, чтобы продолжить
               .home__cta-drag
-                // pill switch draggable.js
-                .pillswitch(js-draggable data-next-page="about.html")
-                  .pillswitch__ghost.pillswitch__ghost--left
-                  .pillswitch__ghost.pillswitch__ghost--right
-                  .pillswitch__track
-                  .pillswitch__control(js-draggable-control)
-                    .pillswitch__control-dot
+                +pillswitch("about.html")
 
       // links collection
       .home__links.links(data-animation="fade" data-delay="2600")

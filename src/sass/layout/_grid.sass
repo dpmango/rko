@@ -34,24 +34,38 @@
 
 .col-1
   max-width: 110px
+  width: calc(10vw - 120px)
 .col-2
   max-width: 240px
+  width: calc(20vw - 120px)
 .col-3
   max-width: 370px
+  width: calc(30vw - 120px)
 .col-4
   max-width: 500px
+  width: calc(40vw - 120px)
 .col-5
   max-width: 630px
+  width: calc(50vw - 120px)
 .col-6
   max-width: 760px
+  width: calc(60vw - 120px)
 .col-7
   max-width: 890px
+  width: calc(70vw - 120px)
 .col-8
   max-width: 1020px
+  width: calc(80vw - 120px)
 .col-9
   max-width: 1150px
+  width: calc(90vw - 120px)
 .col-10
   max-width: 1280px
+  width: calc(100vw - 120px)
+
++r($md)
+  [class*="col-"]
+    width: 100%
 
 .row
   display: flex
