@@ -355,10 +355,10 @@ $(document).ready(function(){
       if ( (wScroll > parallaxElements.start) && (wScroll < parallaxElements.end) ){
         var parallaxOffset = normalize(wScroll, parallaxElements.start, parallaxElements.end, 0, 100);
         var reverseOffset = ((parallaxOffset - 100) * -1)
-
-        console.log(reverseOffset)
+        parallaxOpacity = (parallaxOffset * 1.3 / 100)
 
         parallaxElements.container.css({
+          'opacity': parallaxOpacity,
           'transform': 'translate3d(0,'+reverseOffset+'px,0)'
         })
       }
