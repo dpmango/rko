@@ -62,7 +62,10 @@
     + .article__image
       margin-top: 40px
     &--parallax
+      margin-top: 20px
       transform: translate3d(0,100px,0)
+    &--mobile-fill
+      display: none
 
 @media screen and (max-width: 1200px), screen and (max-height: 800px)
   .article
@@ -93,8 +96,32 @@
     //   font-size: 16px
     //   margin-bottom: 15px
 
+    &__blockquote
+      display: none
 
+    &__image
+      &--parallax
+        margin-right: -15%
+        text-align: center
+        transform: translate3d(0,50px,0)
+        img
+          max-width: 380px
 
++r($sm)
+  .article
+    &__image
+      &--mobile-fill
+        display: block
+        img
+          width: 100%
+
++r(414)
+  .article
+    &__image
+      &--parallax
+        img
+          max-width: 100%
+          
 .scroll-box
   position: relative
   background: white
@@ -112,6 +139,19 @@
     // space for the scrollbar
     padding-right: 30px
 
++r($md)
+  .scroll-box
+    // padding: 30px 25px 50px
+    // margin-right: auto
++r($sm)
+  .scroll-box
+    padding: 30px 25px 50px
+    // fit to browser window
+    margin-left: -25px
+    margin-right: -25px
+    max-width: calc(100% + 50px)
+    // dirty fix
+    margin-bottom: 0px
 
 .hold-next
   position: absolute
@@ -167,3 +207,9 @@
         margin-top: 0
         margin-left: 20px
         text-align: left
+
++r($sm)
+  .hold-next
+    left: 25px
+    transform: translate(0)
+    bottom: 100px

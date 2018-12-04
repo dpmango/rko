@@ -104,6 +104,34 @@ $(document).ready(function(){
   pageReady();
   pageCompleated();
 
+  ////////////
+  // detectors
+  ///////////
+  function isMobile(){
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+  }
+
+  function msieversion() {
+    var ua = window.navigator.userAgent;
+    var msie = ua.indexOf("MSIE ");
+
+    return (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./) )
+  }
+
+  function isMoreThanMd(){
+    return _window.width() > 768
+  }
+  function isLessThanMd(){
+    return _window.width() <= 768
+  }
+
+  if ( msieversion() ){
+    $('body').addClass('is-ie');
+  }
+
+  if ( isMobile() ){
+    $('body').addClass('is-mobile');
+  }
 
   //////////
   // COMMON
@@ -263,7 +291,7 @@ $(document).ready(function(){
     var $fixedSection = $('[js-set-section-height]');
     var $scrollSection = $('[js-set-scroll-padding]');
 
-    if ( $fixedSection.length > 0 && $scrollSection.length > 0 ){
+    if ( ($fixedSection.length > 0 && $scrollSection.length > 0) && isMoreThanMd() ){
       flowSections = {
         'fixed': $fixedSection,
         'scroll': $scrollSection,
@@ -285,7 +313,7 @@ $(document).ready(function(){
 
   function scrollFlowSections(e){
     if ( flowSections.fixed !== undefined ){
-      if ( flowSections.fixedHeight > flowSections.windowHeight ){
+      if ( (flowSections.fixedHeight > flowSections.windowHeight) && isMoreThanMd()){
         var fixedBottomBrekpoint = flowSections.fixedHeight - flowSections.windowHeight
         // when scrolled past end of the page - do nothing
         if ( wScroll > fixedBottomBrekpoint ){
@@ -307,13 +335,18 @@ $(document).ready(function(){
 
   // hide fixed section to prevent end of the page visible past page end scroll
   function hideFixedSection(){
-    if ( flowSections.fixed !== undefined ){
+    if ( (flowSections.fixed !== undefined) && isMoreThanMd() ){
       if ( wScroll > flowSections.fixedHeight + 100){ // 100px just in case
         flowSections.fixed.css({ 'opacity': 0 })
       } else {
-        flowSections.fixed.css({ 'opacity': 1 })
+        resetOpacity();
       }
+    } else {
+      resetOpacity();
+    }
 
+    function resetOpacity(){
+      flowSections.fixed.css({ 'opacity': 1 })
     }
   }
 
@@ -368,9 +401,10 @@ $(document).ready(function(){
 
     if ( parallaxElements.container !== undefined){
       if ( (wScroll > parallaxElements.start) && (wScroll < parallaxElements.end) ){
-        var parallaxOffset = normalize(wScroll, parallaxElements.start, parallaxElements.end, 0, 100);
-        var reverseOffset = ((parallaxOffset - 100) * -1)
-        parallaxOpacity = (parallaxOffset * 1.3 / 100)
+        var responsiveFactor = isMoreThanMd() ? 100 : 50
+        var parallaxOffset = normalize(wScroll, parallaxElements.start, parallaxElements.end, 0, responsiveFactor);
+        var reverseOffset = ((parallaxOffset - responsiveFactor) * -1)
+        parallaxOpacity = (parallaxOffset * 1.3 / responsiveFactor)
 
         parallaxElements.container.css({
           'opacity': parallaxOpacity,
@@ -734,26 +768,34 @@ $(document).ready(function(){
 
 
   ////////////
-  // SCROLLMONITOR - WOW LIKE
+  // SCROLLMONITOR
   ////////////
   function initScrollMonitor(){
-    $('[js-onscroll]').each(function(i, el){
-      var $el = $(el);
-      var elWatcher = scrollMonitor.create($el);
+    // those sections are animated onscroll after first screen is loaded
+    // but on mobile - wait till animation is compleated
 
-      var delay;
-      if ( $(window).width() < 768 ){
-        delay = 0
-      } else {
-        delay = $el.data('animation-delay');
-      }
+    // router
+    if ( isMoreThanMd() ){
+      initListeners();
+    } else {
+      var animations = $('.page').find('[data-animation]:not([js-onscroll])')
+      var timeout = longestAnimation(animations)
+      setTimeout(initListeners, timeout)
+    }
 
-      elWatcher.enterViewport(throttle(function() {
-        $el.attr('data-animated', '');
-      }, 100, {
-        'leading': true
-      }));
-    });
+    // function with listener
+    function initListeners(){
+      $('[js-onscroll]').each(function(i, el){
+        var $el = $(el);
+        var elWatcher = scrollMonitor.create($el);
+
+        elWatcher.enterViewport(throttle(function() {
+          $el.attr('data-animated', '');
+        }, 100, {
+          'leading': true
+        }));
+      });
+    }
 
   }
 

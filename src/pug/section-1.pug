@@ -15,11 +15,23 @@ block content
         +svgMono('close')
     
     .section-fixed(js-set-section-height)
-      .h100-section
+      .h100-section.h100-section--not-mobile
         // background
-        .h100-bg(js-parallax-fixed-bg data-animation="scale" data-scale="1.3" data-duration="3000")
-          img(src='img/background_3.jpg' srcset='img/background_3@2x.jpg 2x')
-        
+        .h100-bg.bg-mobile.bg-mobile--395(js-parallax-fixed-bg data-animation="scale" data-scale="1.3" data-duration="3000")
+          picture(
+          alt=""
+          aria-label="Image description")
+            // 768 and above
+            source(
+            media="(min-width: 768px)" 
+            srcset="img/background_3.jpg 1x, img/background_3@2x.jpg 2x")
+            // less 768px
+            source(
+            media="(min-width: 0px)" 
+            srcset="img/background_3_mobile.jpg 1x, img/background_3_mobile@2x.jpg 2x")
+            // fallback
+            img(src='img/background_3.jpg')
+              
         // content
         .h100-section__content
           .container
@@ -35,13 +47,25 @@ block content
     // scrollable content
     .section-scrollable(js-set-scroll-padding)
       // section
-      .h100-section
+      .h100-section.h100-section--not-mobile
         // background
-        .h100-bg
-          img(src='img/background_3-2.jpg' srcset='img/background_3-2@2x.jpg 2x')
+        .h100-bg.h100-bg--mobile-align-top
+          picture(
+          alt=""
+          aria-label="Image description")
+            // 768 and above
+            source(
+            media="(min-width: 768px)" 
+            srcset="img/background_3-2.jpg 1x, img/background_3-2@2x.jpg 2x")
+            // less 768px
+            source(
+            media="(min-width: 0px)" 
+            srcset="img/background_3-2_mobile.jpg 1x, img/background_3-2_mobile@2x.jpg 2x")
+            // fallback
+            img(src='img/background_3-2.jpg')
         
         // content
-        .h100-section__content.content-spacer
+        .h100-section__content.content-spacer.content-spacer--not-mobile
           .container
             .h100-section__content-wrapper
               .col-6.col-center
@@ -58,11 +82,11 @@ block content
       // section
       .section
         // background
-        .h100-bg
+        .h100-bg.h100-bg--hide-mobile
           img(src='img/background_3-3.jpg' srcset='img/background_3-3@2x.jpg 2x')
         
         // content
-        .section__content
+        .section__content.section__content--no-pb-mobile
           .container
             .scroll-box
               .scroll-box__scrollable(js-scrollbar)
@@ -70,6 +94,9 @@ block content
                 .p-main
                   p На данный момент на орбите Земли находится около 1 500 искусственных спутников, благодаря которым работают навигаторы, звучат новости и проводятся банковские операции. В основном это спутники связи, обеспечивающие ее в отдаленных районах Земли. 
                   p Всем известно о системе ГЛОНАСС, но российские ученые не останавливаются на достигнутом. В 2018 году было объявлено о завершении летных испытаний, которые прошел новый наноспутники РКС, - он послужит основой для будущих аппаратов. ТНС-0 № 2, отличающийся от своих собратьев меньшим весом, был выведен на орбиту с МКС 17 августа 2017 года. После успешных летных испытаний он перешел в фазу штатной эксплуатации. Аппарат оснащен системами связи и ориентации, а также солнечной батареей.
+          
+          .article__image.article__image--mobile-fill
+            img(src='img/background_3-3-mobile.jpg' srcset='img/background_3-3-mobile@2x.jpg 2x')
           
           .hold-next
             .hold-next__icon(js-hold-to-next data-next-page="section-2.html")

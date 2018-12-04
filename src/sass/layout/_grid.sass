@@ -73,10 +73,6 @@
   width: 100%
   // width: calc(100vw - 120px)
 
-+r($md)
-  [class*="col-"]
-    width: 100%
-
 .row
   display: flex
   flex-wrap: wrap
@@ -100,3 +96,20 @@
 
 .col-right
   margin-left: auto
+
++r($md)
+  [class*="col-"]
+    width: 100%
+
+  .col-center
+    text-align: left
+
+  .row
+    margin-left: 0
+    margin-right: 0
+    display: block
+    [class*="col-"]
+      padding-left: 0
+      padding-right: 0
+    .col
+      max-width: 100%

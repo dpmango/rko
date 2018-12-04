@@ -58,3 +58,18 @@
     font-size: 13px
     text-align: left
     // line-height: 1.25s
+
+
+.is-mobile
+  .tooltip
+    > span
+      border-width: 0
+    &__box
+      display: none
+
++r($md)
+  .tooltip
+    > span
+      border-width: 0
+    &__box
+      display: none
