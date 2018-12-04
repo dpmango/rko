@@ -41,13 +41,17 @@ block content
           img(src='img/background_3-2.jpg' srcset='img/background_3-2@2x.jpg 2x')
         
         // content
-        .h100-section__content
+        .h100-section__content.content-spacer
           .container
             .h100-section__content-wrapper
               .col-6.col-center
                 .article__title.h2-title(js-onscroll data-animation="fade-up" data-duration="1000") Российские ученые протестировали новый наноспутник — что это нам дает?
                 .article__paragraph.p-main(js-onscroll data-animation="fade-up" data-duration="1000")
-                  p Более 60 лет тому назад, в 1957 году, СССР вывел на орбиту первый в мире искусственный спутник. Над созданием «Спутника-1» работали передовые ученые: Королев, Келдыш, Тихонравов и многие другие. Это был старт новой эпохи, благодаря которому в дальнейшем стало возможно появление беспроводной связи и Интернета.
+                  p Более 60 лет тому назад, в 1957 году, СССР вывел на орбиту первый в мире искусственный спутник. Над созданием «Спутника-1» работали передовые ученые: 
+                    | <span class="border-link border-link--dashed tooltip" js-tooltip-position><span>Королев</span><span class="tooltip__box"><span class="tooltip__arrow"></span><span class="tooltip__content"> <span class="person"><img src='img/korolev.jpg' alt="Королев" /> <span class="person__name">Сергей Павлович Королев</span><span class="person__description">Советский ученый, инженер-конструктор, главный организатор производства ракетно-космической техники и ракетного оружия в СССР и основоположник практической космонавтики. Одна из крупнейших фигур XX века в области космического ракетостроения и кораблестроения. Академик АН СССР.</span></span> </span></span></span>, 
+                    | <span class="border-link border-link--dashed tooltip" js-tooltip-position><span>Келдыш</span><span class="tooltip__box"><span class="tooltip__arrow"></span><span class="tooltip__content"> <span class="person"><img src='img/keldish.jpg' alt="Келдыш" /> <span class="person__name">Мстислав Всеволодович Келдыш</span><span class="person__description">Советский ученый в области прикладной математики и механики, крупный организатор советской науки, один из идеологов советской космической программы. Президент Академии наук СССР. Академик АН СССР. Трижды Герой Социалистического Труда. Лауреат Ленинской премии и двух Сталинских премий.</span></span> </span></span></span>, 
+                    | <span class="border-link border-link--dashed tooltip" js-tooltip-position><span>Тихонравов</span><span class="tooltip__box"><span class="tooltip__arrow"></span><span class="tooltip__content"> <span class="person"><img src='img/tihonravov.jpg' alt="Тихонравов" /> <span class="person__name">Михаил Клавдиевич Тихонравов</span><span class="person__description">Советский инженер, конструктор космической и ракетной техники, сподвижник С.П. Королева. Доктор технических наук, профессор, лауреат Ленинской премии, Герой Социалистического Труда, заслуженный деятель науки и техники РСФСР</span></span> </span></span></span> 
+                    | и многие другие. Это был старт новой эпохи, благодаря которому в дальнейшем стало возможно появление беспроводной связи и Интернета.
                 .article__image.article__image--parallax(js-parallax)
                   img(src='img/sputnik.png' srcset='img/sputnik@2x.png 2x')
             

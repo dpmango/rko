@@ -1,0 +1,60 @@
+.tooltip
+  position: relative
+
+  &__box
+    display: block
+    position: absolute
+    z-index: 2
+    top: 37px
+    left: 0
+    width: 375px
+    border: 0 !important
+    will-change: transform
+    opacity: 0
+    transform: translate3d(0,15px, 0)
+    pointer-events: none
+    transition: .3s $easeBoth !important
+
+  &__arrow
+    display: inline-block
+    position: absolute
+    top: -10px
+    // position to be set with js
+    left: 0
+    +arr(20,10,white,t)
+
+
+  &__content
+    display: block
+    padding: 20px 20px 30px
+    background: white
+    color: $fontColor
+
+  &:hover, &.is-active
+    .tooltip__box
+      opacity: 1
+      transform: translate3d(0,0,0)
+      pointer-events: all
+
+
+// person in tooltip
+.person
+  display: block
+  text-align: left
+  line-height: 1.45
+  img
+    width: 100%
+
+  &__name
+    display: block
+    text-align: left
+    margin: .7em 0 .5em
+    font-size: 18px
+    font-weight: 500
+    // line-height: 1.25
+
+  &__description
+    display: block
+    font-size: 13px
+    text-align: left
+    // line-height: 1.25s

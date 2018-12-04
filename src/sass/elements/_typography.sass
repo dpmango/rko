@@ -67,11 +67,15 @@
 
 // link generic class
 .border-link
-  span
+  > span
     border-bottom: 2px solid rgba($colorRed, .5)
     transition: border .3s $easeDefault
+  &--dashed
+    > span
+      border-bottom-style: dashed
+      border-color: $colorRed
   &:hover
-    span
+    > span
       border-color: $colorRed
 
 
@@ -106,6 +110,8 @@
     &--lh2
       p
         // line-height: 1.67
+  .blockquote
+    font-size: 14px
 
 +r($md)
   // adopted from mobile 320 layout

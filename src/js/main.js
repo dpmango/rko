@@ -56,6 +56,7 @@ $(document).ready(function(){
   // triggered when PJAX DONE
   // The new container has been loaded and injected in the wrapper.
   function pageReady(fromPjax){
+    setTooltipPositions();
     initPerfectScrollbar();
     // initTeleport();
     // initLazyLoad();
@@ -91,6 +92,7 @@ $(document).ready(function(){
   _window.on('scroll', scrollFlowSections);
   _window.on('scroll', scrollParallax);
   // _window.on('scroll', scrollScrollX);
+  _window.on('resize', debounce(setTooltipPositions, 100))
   _window.on('resize', debounce(getFlowSections, 100));
   _window.on('resize', debounce(getParallaxSections, 100));
   // _window.on('resize', debounce(getScrollX, 100));
@@ -351,7 +353,6 @@ $(document).ready(function(){
 
 
     if ( parallaxElements.container !== undefined){
-      console.log(wScroll, parallaxElements)
       if ( (wScroll > parallaxElements.start) && (wScroll < parallaxElements.end) ){
         var parallaxOffset = normalize(wScroll, parallaxElements.start, parallaxElements.end, 0, 100);
         var reverseOffset = ((parallaxOffset - 100) * -1)
@@ -382,7 +383,7 @@ $(document).ready(function(){
       var startPoint = Math.round($magicX.offset().top + $magicX.outerHeight() - _window.height()) - scrollX.parentOffset
       var endPoint =  Math.round(startPoint + containerWidth)
 
-      console.log(startPoint, $magicX.offset().top, $magicX.outerHeight())
+      // console.log(startPoint, $magicX.offset().top, $magicX.outerHeight())
       scrollX = {
         container: $magicX,
         containerWidth: containerWidth,
@@ -492,7 +493,31 @@ $(document).ready(function(){
 
   }
 
+  ////////////
+  // TOOLTIP POSITIONS
+  ////////////
+  function setTooltipPositions(){
+    var $tooltips = $('[js-tooltip-position]');
 
+    if ( $tooltips.length > 0 ){
+      $tooltips.each(function(i, tooltip){
+        var $tooltip = $(tooltip);
+
+        var $container = $tooltip.closest('div');
+        var containerLeft = $container.offset().left
+        var tooltipLeft = $tooltip.offset().left
+        var calcLeftBox = containerLeft - tooltipLeft // align elements to the left of container
+        var calcLeftArrow = $tooltip.position().left + ($(tooltip).width() / 2) - 5
+
+        $tooltip.find('.tooltip__box').css({
+          'left': calcLeftBox
+        })
+        $tooltip.find('.tooltip__arrow').css({
+          'left': calcLeftArrow
+        })
+      })
+    }
+  }
 
   /**********
   * PLUGINS *
