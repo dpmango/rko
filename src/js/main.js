@@ -90,6 +90,7 @@ $(document).ready(function(){
   // scroll/resize listener
   _window.on('scroll', setWindowScroll);
   _window.on('scroll', scrollFlowSections);
+  _window.on('scroll', throttle(hideFixedSection, 50));
   _window.on('scroll', scrollParallax);
   // _window.on('scroll', scrollScrollX);
   _window.on('resize', debounce(setTooltipPositions, 100))
@@ -303,6 +304,19 @@ $(document).ready(function(){
       }
     }
   }
+
+  // hide fixed section to prevent end of the page visible past page end scroll
+  function hideFixedSection(){
+    if ( flowSections.fixed !== undefined ){
+      if ( wScroll > flowSections.fixedHeight + 100){ // 100px just in case
+        flowSections.fixed.css({ 'opacity': 0 })
+      } else {
+        flowSections.fixed.css({ 'opacity': 1 })
+      }
+
+    }
+  }
+
 
   //////////////////
   // CUSTOM PARALLAX
