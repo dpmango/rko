@@ -7,6 +7,8 @@
     align-items: center
 
   &__rko-logo
+    display: inline-block
+    flex: 0 0 auto
     max-width: 240px
     font-size: 0
     img
@@ -19,7 +21,11 @@
     margin-left: 60px
     max-width: calc(370px + 60px)
 
+  &__logo-desktop-wrapper
+    margin-left: auto
+    
   &__logo
+    display: inline-block
     margin-left: auto
     font-size: 0
     img
@@ -34,3 +40,39 @@
     line-height: 1.25
     max-width: 390px
     margin-bottom: 35px
+
+@media screen and (max-width: 1200px), screen and (max-height: 800px)
+  .footer
+    &__rko-logo
+      max-width: 200px
+    &__about
+      margin-left: 40px
+    &__logo
+
++r($lg)
+  .footer
+    padding-bottom: 60px
+
++r($md)
+  .footer
+    padding-top: 50px
+    padding-bottom: 50px
+    &__top
+      display: block
+    &__rko-logo
+      max-width: 165px
+    &__about
+      margin-top: 30px
+      margin-left: 0
+      font-size: 12px
+      max-width: 300px
+    &__logo
+      margin-top: 10px
+      display: block
+      text-align: center
+
+    &__links
+      margin-top: 45px
+    &__links-title
+      font-size: 16px
+      max-width: 300px

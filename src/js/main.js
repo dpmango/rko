@@ -58,8 +58,7 @@ $(document).ready(function(){
   function pageReady(fromPjax){
     setTooltipPositions();
     initPerfectScrollbar();
-    // initTeleport();
-    // initLazyLoad();
+    initTeleport();
     initPullSwitch();
   }
 
@@ -335,14 +334,12 @@ $(document).ready(function(){
 
   // hide fixed section to prevent end of the page visible past page end scroll
   function hideFixedSection(){
-    if ( (flowSections.fixed !== undefined) && isMoreThanMd() ){
-      if ( wScroll > flowSections.fixedHeight + 100){ // 100px just in case
+    if ( flowSections.fixed !== undefined ){
+      if ( (wScroll > flowSections.fixedHeight + 100) && isMoreThanMd()){ // 100px just in case
         flowSections.fixed.css({ 'opacity': 0 })
       } else {
         resetOpacity();
       }
-    } else {
-      resetOpacity();
     }
 
     function resetOpacity(){
@@ -648,47 +645,9 @@ $(document).ready(function(){
         teleport();
         _window.on('resize', debounce(teleport, 100));
 
-
       }
     })
   }
-
-  //////////
-  // LAZY LOAD
-  //////////
-  function initLazyLoad(){
-    _document.find('[js-lazy]').Lazy({
-      threshold: 500,
-      enableThrottle: true,
-      throttle: 100,
-      scrollDirection: 'vertical',
-      effect: 'fadeIn',
-      effectTime: 350,
-      // visibleOnly: true,
-      // placeholder: "data:image/gif;base64,R0lGODlhEALAPQAPzl5uLr9Nrl8e7...",
-      onError: function(element) {
-          console.log('error loading ' + element.data('src'));
-      },
-      beforeLoad: function(element){
-        // element.attr('style', '')
-      }
-    });
-  }
-
-  // wait till image is loaded
-  // could be useful for barba custom animations
-  // var targetImage = $newContainer.find('.one-member__photo').find('[js-lazy]');
-  // var targetImageLazyInstance = targetImage.Lazy({
-  //   chainable: false,
-  //   afterLoad: function(element) {
-  //     var img = new Image();
-  //     img.onload = function() {
-  //       callbackFunction();
-  //     };
-  //     img.src = element.attr('src');
-  //   }
-  // })
-  // targetImageLazyInstance.force(targetImage);
 
 
 

@@ -6,7 +6,7 @@ PageList:
 - file: about.html
   ready: 80
 - file: section-1.html
-  ready: 60
+  ready: 80
 - file: section-2.html
   ready: 60
 - file: section-3.html
@@ -16,4 +16,4 @@ PageList:
 - file: section-5.html
   ready: 50
 - file: section-6.html
-  ready: 50
+  ready: 80

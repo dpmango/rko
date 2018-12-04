@@ -9,7 +9,7 @@ block content
 
   // ARTICLE
   .article
-    .article__navigation.article__navigation--absolute(data-animation="fade" data-delay="3300")
+    .article__navigation.article__navigation--absolute(data-animation="fade" data-delay="1300")
       a(href="section-5.html" js-nav-back).article__back
         +svgMono('back')
       a(href="homepage.html" js-nav-close).article__close
@@ -18,19 +18,31 @@ block content
     // section
     .section
       // background
-      .h100-bg(data-animation="scale" data-duration="3000" data-easing="ease-both")
-        img(src='img/background_8.jpg' srcset='img/background_8@2x.jpg 2x')
-      
+      .h100-bg.bg-mobile.bg-mobile--500(data-animation="scale" data-scale="1.4" data-duration="2000" data-easing="ease-out")
+        picture(
+        alt=""
+        aria-label="Image description")
+          // 768 and above
+          source(
+          media="(min-width: 768px)" 
+          srcset="img/background_8.jpg 1x, img/background_8@2x.jpg 2x")
+          // less 768px
+          source(
+          media="(min-width: 0px)" 
+          srcset="img/background_8_mobile.jpg 1x, img/background_8_mobile@2x.jpg 2x")
+          // fallback
+          img(src='img/background_8.jpg')
+            
       // content
       .h100-section__content.content-spacer
         .container
           .h100-section__content-wrapper.h100-section__content-wrapper--top
-            .col-6.article__title.h2-title(data-animation="fade-up" data-duration="1000" data-delay="2000") Россия готовит новый уникальный проект глобальной спутниковой системы связи
-            .col-5.article__paragraph.p-main(data-animation="fade-up" data-duration="1000" data-delay="2000") 
+            .col-6.article__title.h2-title(data-animation="fade-up" data-duration="600" data-delay="1000" data-easing="ease-both") Россия готовит новый уникальный проект глобальной спутниковой системы связи
+            .col-5.article__paragraph.p-main(data-animation="fade-up" data-duration="600" data-delay="1000" data-easing="ease-both") 
               p Новый проект глобальной системы спутниковой связи был представлен Роскосмосом еще в 2017 году и изначально назывался «Эфир», но после увеличения количества спутников в несколько раз он превратился в «Сферу». «Сфера» состоит более чем из 600 малых спутников связи, расположенных на околоземной орбите. С их помощью станет возможным предоставлять связь и Интернет, а также делать снимки Земли.
               p В отличие от ныне действующих систем новое российское изобретение расположится не на геостационарной орбите, а намного ниже, за счет чего удастся минимизировать задержки при передаче данных и добиться скоростей, близких к земным. Чтобы превзойти западные аналоги, «Сфера» будет оснащена защитой от перехвата и, что немаловажно, космического мусора. Система сможет работать в автономном режиме, даже если множество спутников, входящих в ее состав, одновременно выйдет из строя от солнечной вспышки или столкновения с другими объектами. Маршрутизаторы аппаратов позволят сигналам идти в обход поврежденных участков, если более 50% системы окажется нерабочей. Запуск первой части спутников начнется в 2022 году, а к 2028-му все они займут свое место за облаками.
 
-            .home__cta.home__cta--back(data-animation="fade" data-duration="600" data-delay="3000")
+            .home__cta.home__cta--back(data-animation="fade" data-duration="600" data-delay="2000")
               .home__cta-title.home__cta-title--white Перетащите, чтобы вернуться <br>в начало
               .home__cta-drag
                 +pillswitch("homepage.html")
@@ -43,8 +55,9 @@ block content
             img(src='img/rko-logo.png' srcset='img/rko-logo@2x.png 2x')
           .footer__about
             | Спецпроект подготовлен интернет-изданием КТО?ЧТО?ГДЕ?, совместно с <a href="https://cosmatica.org" target="_blank" class="border-link"><span>Русским Космическим Обществом</span></a>
-          a(href="http://kto-chto-gde.ru" target="_blank").footer__logo
-            img(src='img/logo.png' srcset='img/logo@2x.png 2x')
+          .footer__logo-desktop-wrapper(js-teleport data-teleport-condition="<992" data-teleport-to="footer-logo")
+            a(href="http://kto-chto-gde.ru" target="_blank").footer__logo
+              img(src='img/logo.png' srcset='img/logo@2x.png 2x')
         
         // links
         .footer__links
@@ -78,3 +91,7 @@ block content
                   .links__image
                     img(src='img/linkImage_5.jpg' srcset='img/linkImage_5@2x.jpg 2x')
                   span Тест: какая космическая профессия вам подойдет 
+        
+        // footer mobile logo
+        div(data-teleport-target="footer-logo")
+          
