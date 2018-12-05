@@ -1,6 +1,6 @@
-mixin pillswitch(page)
+mixin pillswitch(page, transition)
   // pill switch draggable.js
-  .pillswitch(js-draggable data-next-page=page)
+  .pillswitch(js-draggable data-barba-transition=transition data-next-page=page)
     .pillswitch__ghost.pillswitch__ghost--left
     .pillswitch__ghost.pillswitch__ghost--right
     .pillswitch__track

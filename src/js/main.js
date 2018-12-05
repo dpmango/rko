@@ -279,10 +279,12 @@ $(document).ready(function(){
 
   _document
     .on('mousedown touchstart', '[js-hold-to-next]', function(){
-      var dataHref = $(this).data('next-page');
+      var $btn = $(this);
+      var dataHref = $btn.data('next-page');
       // start animating
-      $(this).addClass('is-transitioning')
+      $btn.addClass('is-transitioning')
       timeout_id = setTimeout(function(){
+        Barba.Dispatcher.trigger('linkClicked', $btn);
         Barba.Pjax.goTo(dataHref);
       }, hold_time);
     }).bind('mouseup mouseleave touchend', function() {
@@ -297,6 +299,7 @@ $(document).ready(function(){
       var dataHref = $btn.data('next-page');
       $btn.addClass('is-transitioning')
       setTimeout(function(){
+        Barba.Dispatcher.trigger('linkClicked', $btn);
         Barba.Pjax.goTo(dataHref);
         $btn.removeClass('is-transitioning'); // reset button state
       }, 300);
@@ -737,10 +740,9 @@ $(document).ready(function(){
       if ( isToggled ){
         $('[js-draggable-control]').addClass('start-transition-next-page');
         var dataHref = $(evt.sourceContainer).data('next-page');
-        setTimeout(function(){
-          Barba.Pjax.goTo(dataHref);
-          // start fade
-        }, 1000)
+
+        Barba.Dispatcher.trigger('linkClicked', $(evt.sourceContainer))
+        Barba.Pjax.goTo(dataHref);
       }
     });
   }
@@ -809,6 +811,7 @@ $(document).ready(function(){
             limitX2 = 11,
             limitY2 = 11;
           $(window).mousemove(function (e) {
+            if ( $('.header-fixed').length === 0 ) return
             var offset2 = $('.header-fixed .main-logo .eye_1 .eye').offset();
             mouseX2 = Math.min(e.pageX - offset2.left, limitX2);
             mouseY2 = Math.min(e.pageY - offset2.top, limitY2);
@@ -834,6 +837,7 @@ $(document).ready(function(){
             limitX2 = 11,
             limitY2 = 11;
           $(window).mousemove(function (e) {
+            if ( $('.header-fixed').length === 0 ) return
             var offset2 = $('.header-fixed .main-logo .eye_2 .eye').offset();
             mouseX2 = Math.min(e.pageX - offset2.left, limitX2);
             mouseY2 = Math.min(e.pageY - offset2.top, limitY2);
@@ -1053,8 +1057,9 @@ $(document).ready(function(){
   // BARBA PJAX
   //////////
   Barba.Pjax.Dom.containerClass = "page";
+  var transitionInitElement
 
-  var FadeTransition = Barba.BaseTransition.extend({
+  var BackTransition = Barba.BaseTransition.extend({
     start: function() {
       Promise
         .all([this.newContainerLoading, this.fadeOut()])
@@ -1085,13 +1090,64 @@ $(document).ready(function(){
     }
   });
 
+  var FadeScreenTransition = Barba.BaseTransition.extend({
+    start: function() {
+      Promise
+        .all([this.newContainerLoading, this.fadeOut()])
+        .then(this.fadeIn.bind(this));
+    },
+
+    fadeOut: function() {
+      var deferred = Barba.Utils.deferred();
+
+      // animate both animations back and fade screen
+      animatePageOut(function(){
+        enablePageInteractions();
+      });
+
+      // fade screen
+      var $container = $(this.oldContainer)
+      TweenLite.to($container, 2, {
+        opacity: 0,
+        onComplete: function(){
+          deferred.resolve();
+        }
+      });
+
+      return deferred.promise
+    },
+
+    fadeIn: function() {
+      var _this = this;
+      var $el = $(this.newContainer);
+
+      $(this.oldContainer).hide();
+
+      _window.scrollTop(0);
+      _this.done();
+
+    }
+  });
+
   // set barba transition
   Barba.Pjax.getTransition = function() {
-    return FadeTransition;
+    if ( transitionInitElement.attr('data-barba-transition') ){
+      var transition = transitionInitElement.data('barba-transition');
+      console.log(transition)
+      if ( transition === "fade-screen" ){
+        return FadeScreenTransition
+      }
+    }
+    return BackTransition;
   };
 
   Barba.Prefetch.init();
   Barba.Pjax.start();
+
+
+  Barba.Dispatcher.on('linkClicked', function(el) {
+    transitionInitElement = el instanceof jQuery ? el : $(el)
+  });
 
   // The new container has been loaded and injected in the wrapper.
   Barba.Dispatcher.on('newPageReady', function(currentStatus, oldStatus, container, newPageRawHTML) {
