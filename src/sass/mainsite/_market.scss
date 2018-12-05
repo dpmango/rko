@@ -1,0 +1,2499 @@
+.market.product h1 {
+    font-size: 45px;
+    line-height: 60px;
+}
+
+.market-tags {
+    margin: 20px auto;
+}
+
+.market-tags ul {
+    columns: 4;
+    -webkit-columns: 4;
+    -moz-columns: 4;
+
+}
+
+.market-tags ul li {
+    list-style: none;
+    margin: 0 auto 25px auto;
+}
+
+.market-tags ul li a {
+    text-decoration: underline;
+    color: #000;
+}
+
+.market-products h2 {
+    font-size: 35px;
+    line-height: 60px;
+    margin-top: 60px;
+    margin-bottom: 30px;
+    padding: 0;
+}
+
+.market-products ul {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+}
+
+.market-products ul::after {
+    content: "";
+    -ms-flex-preferred-size: auto;
+        flex-basis: auto;
+    width: 282px;
+    height: 0;
+}
+
+.market-products ul li {
+    position: relative;
+    list-style: none;
+    width: 282px;
+    height: 393px;
+    border: 1px solid #d4d8da;
+    padding: 25px 15px 26px;
+    margin: 0 0 30px 0;
+}
+
+.market-products ul li img {
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+    max-height: 200px;
+    width: auto;
+    height: auto;
+    border-radius: 100px;
+}
+
+.market-products ul li .title {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: end;
+        -ms-flex-align: end;
+            align-items: flex-end;
+    width: 100%;
+    height: 50px;
+    margin: 20px auto 5px;
+    padding: 0 5px;
+    font-size: 18px;
+    line-height: 25px;
+    font-weight: bold;
+    font-family: "PT Serif", "Georgia", serif;
+    color: #333333;
+    text-align: center;
+    -webkit-transition: all 0.2s linear;
+    -moz-transition: all 0.2s linear;
+    -ms-transition: all 0.2s linear;
+    -o-transition: all 0.2s linear;
+    transition: all 0.2s linear;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.market-products ul li .title:hover {
+  color: #0a64b0;
+}
+
+.market-products ul li .source {
+    width: 100%;
+    text-align: center;
+    padding: 0 5px;
+    font-size: 14px;
+    line-height: 20px;
+    margin: 5px auto;
+    color: #a1a1a1;
+}
+
+.market-products ul li .price {
+    text-align: center;
+    padding: 0;
+    font-size: 20px;
+    line-height: 25px;
+    font-family: "PT Sans", "Helvetica", sans-serif;
+    color: #a1a1a1;
+    margin: 20px 0 0;
+}
+
+.market-products ul li .price span {
+    font-weight: bold;
+    color: #333333;
+}
+
+.market-products ul li .price.market-sale span::before {
+    content: "-20%";
+    position: relative;
+    top: -3px;
+    left: -4px;
+    padding: 3px 5px 2px 2px;
+    font-size: 10px;
+    line-height: 25px;
+    color: #ffffff;
+    background-color: #dd3737;
+}
+
+.market-product > a {
+    margin-bottom: 20px;
+}
+
+.market-products .market-product > a {
+  margin-bottom: 5px;
+}
+
+.market-products ul li .btn,
+.market .box-news-list .btn,
+.market-product .btn,
+.market-filter button {
+    float: right;
+    padding: 10px;
+    text-align: center;
+    border: 1px solid;
+    border-color: rgba(29, 158, 215, 1);
+    border-radius: 3px;
+    font-weight: bold;
+    font-size: 16px;
+    width: 50%;
+    margin: 20px 0 0 0;
+    color: #999;
+}
+
+.market-product .btn {
+    display: none;
+    float: left;
+    width: auto;
+    margin: 0;
+    padding: 6px 44px;
+    font-size: 12px;
+    line-height: 30px;
+    font-weight: bold;
+    color: #ffffff;
+    text-transform: uppercase;
+    background-color: #2b70b5;
+    border: 1px solid #2b70b5;
+    outline: 0;
+    border-radius: 0;
+}
+
+.market-product .btn:hover {
+    background-color: #ffffff;
+    color: #2b70b5;
+    opacity: 1;
+}
+
+.market-product .market-buttons .btn {
+    float: none;
+    width: 140px;
+}
+
+.market-buttons .product-like {
+    right: unset;
+    left: 160px;
+}
+
+.market-product .meta-right .btn {
+    display: block;
+}
+
+.market-product .meta-right .btn:hover,
+.market-product .meta-right .btn:focus {
+    opacity: 0.9;
+}
+
+.market-product .meta-right .btn:active {
+    opacity: 0.8;
+}
+
+.market-products-inline ul li {
+    height: auto;
+    margin-bottom: 0;
+    padding: 20px 14px;
+}
+
+.market-product-inline > a {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: start;
+        -ms-flex-align: start;
+            align-items: flex-start;
+    margin-bottom: 0;
+}
+
+.market-products-inline .market-product-inline > a img {
+    width: 80px;
+    height: auto;
+    margin: 0 15px 0 0;
+}
+
+.market-products-inline .market-product-inline > a .meta {
+    flex-basis: auto;
+    width: 100px;
+    flex-grow: 1;
+}
+
+div.market-product-inline > a .title {
+    margin: 0 0 5px;
+    padding: 0;
+    font-size: 16px;
+    line-height: 25px;
+    text-align: left;
+}
+
+div.market-product-inline > a .source {
+    margin: 0 0 10px;
+    padding: 0;
+    text-align: left;
+}
+
+div.market-product-inline > a .price {
+    text-align: left;
+}
+
+.market-products-inline .slick-slider .slick-track {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+}
+
+.market-filed p > a {
+    color: #2b70b5;
+    border-bottom: 1px solid #9dc1df;
+    -webkit-transition: all 0.2s linear;
+    -moz-transition: all 0.2s linear;
+    -ms-transition: all 0.2s linear;
+    -o-transition: all 0.2s linear;
+    transition: all 0.2s linear;
+}
+
+.market-filed p > a:hover,
+.market-filed p > a:focus {
+    text-decoration: none;
+    border-bottom-color: rgba(255, 255, 255, 0);
+}
+
+.market-filter button {
+    width: 100px;
+    float: left;
+    margin: 0;
+}
+
+.market-products ul li .badges {
+    position: absolute;
+    top: -1px;
+    left: -1px;
+}
+
+.market-products ul li .badges span {
+    position: relative;
+    display: inline-block;
+    padding: 0 10px;
+    font-size: 10px;
+    line-height: 30px;
+    font-weight: bold;
+    letter-spacing: 2.1px;
+    font-family: "PT Sans", "Helvetica", sans-serif;
+    text-transform: uppercase;
+    color: #ffffff;
+    background-color: #cccccc;
+    z-index: 2;
+}
+
+.market-products ul li .badges span.is_hit {
+    background-color: #dd3737;
+}
+
+.market-products ul li .badges span.is_new {
+    background-color: #fdb720;
+}
+
+.market-products ul li .badges span.is_exclusive {
+    background-color: #2b70b5;
+}
+
+.holiday-present-list__cont .market-products-inline {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+.holiday-present-list__cont ul.market-category {
+    position: static;
+    justify-content: flex-start;
+    width: auto;
+    height: 64px;
+    margin-bottom: 18px;
+    padding-right: 0;
+}
+
+.holiday-present-list__cont .market-products-inline.market-products ul.market-category .market-category__item {
+    padding: 0 27px;
+}
+
+.holiday-present-list__cont .market-products-inline .slick-arrow {
+    top: -146px;
+}
+
+.market .box-news-list {
+    margin-top: 15px;
+}
+
+.market .box-news-list ul li {
+    list-style: none;
+    margin-bottom: 20px;
+}
+
+.market .box-news-list ul li a {
+    color: #000;
+    text-decoration: underline;
+}
+
+.market .box-news-list .btn {
+    float: none;
+    margin-top: 10px;
+    width: 150px;
+    display: block;
+}
+
+.market .total {
+    margin: 20px auto;
+    display: block;
+    color: #999;
+}
+
+.market .sort {
+    float: left;
+}
+
+.market .limit {
+    float: right;
+}
+
+.market-filter .selectpicker {
+    float: left;
+    margin-right: 10px;
+    clear: none;
+}
+
+#market-slider {
+    margin-bottom: 25px;
+    padding: 0 10px;
+}
+
+.market-product .preview {
+    float: left;
+    width: 450px;
+}
+
+.market-product .preview > img {
+    max-width: 100%;
+    margin-bottom: 30px;
+}
+
+.market-product .preview .thumb {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    overflow-x: auto;
+}
+
+.market-product .preview .thumb img {
+    cursor: pointer;
+    max-width: 90px;
+    max-height: 90px;
+    border-right: 1px solid #ffffff;
+}
+
+.market-product .preview .thumb img.active {
+    position: relative;
+    opacity: 0.8;
+    border-bottom: 4px solid #2b70b5;
+}
+
+.market-product .preview .thumb img:last-child {
+    border-right: 0;
+}
+
+.market-product .price {
+    margin-bottom: 20px;
+}
+
+.market-product .price li {
+    list-style: none;
+    font-size: 20px;
+    line-height: 25px;
+    color: #a1a1a1;
+}
+
+.market-product .price li strong {
+    color: #333333;
+}
+
+/* price radio buttons form */
+
+.price__group {
+    margin-bottom: 20px;
+}
+
+.price__label {
+    position: relative;
+    display: block;
+    padding-left: 29px;
+    font-size: 20px;
+    line-height: 25px;
+    font-family: "PT Sans", "Helvetica", sans-serif;
+    color: #a1a1a1;
+}
+
+.price__label::before {
+    content: "";
+    position: absolute;
+    top: 3px;
+    left: 0;
+    width: 6px;
+    height: 6px;
+    background-color: #ffffff;
+    border: 5px solid #ffffff;
+    border-radius: 50%;
+    -webkit-box-shadow: 0 0 2px 0 #999999;
+            box-shadow: 0 0 2px 0 #999999;
+    -webkit-box-sizing: content-box;
+            box-sizing: content-box;
+}
+
+.price__input:checked ~ .price__label::before {
+    background-color: #2b70b5;
+}
+
+.price__group:only-child .price__label {
+    padding-left: 0;
+}
+
+.price__group:only-child .price__label::before {
+    display: none;
+}
+
+.price__label > strong {
+    color: #333333;
+    font-weight: bold;
+}
+
+.price__label > span {
+    margin-left: 15px;
+    color: #999999;
+}
+
+.product-like {
+    position: absolute;
+    top: 13px;
+    right: 11px;
+    width: 18px;
+    height: 16px;
+    font-size: 15px;
+    color: #cccccc;
+    cursor: pointer;
+    background-image: url("http://kto-chto-gde.ru/wp-content/themes/theme/img/icon-like.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    -webkit-transition: all 0.2s linear;
+       -moz-transition: all 0.2s linear;
+        -ms-transition: all 0.2s linear;
+         -o-transition: all 0.2s linear;
+            transition: all 0.2s linear;
+}
+
+.product-like.liked {
+    background-image: url("http://kto-chto-gde.ru/wp-content/themes/theme/img/icon-like-liked.svg");
+}
+
+.product-like:hover,
+.product-like:focus {
+    background-image: url("http://kto-chto-gde.ru/wp-content/themes/theme/img/icon-like-top-burger.svg");
+}
+
+.product-like.liked:hover,
+.product-like.liked:focus {
+    background-image: url("http://kto-chto-gde.ru/wp-content/themes/theme/img/icon-like-liked.svg");
+    opacity: 0.6;
+}
+
+.market-buttons {
+    position: relative;
+}
+
+.market-product .meta-right {
+    float: right;
+    width: 390px;
+}
+
+
+.market-filed {
+    display: block;
+    margin-bottom: 25px;
+}
+
+.market-filed label {
+    color: #333333;
+    font-size: 18px;
+    line-height: 30px;
+    font-weight: bold;
+}
+
+.market-filed p {
+    margin: 5px 0 0 0;
+    padding: 0;
+    font-weight: normal;
+    color: #333333;
+    font-size: 16px;
+    line-height: 25px;
+    font-family: inherit;
+}
+
+.market-options h3 {
+    margin-bottom: 23px;
+    padding: 0;
+    font-size: 25px;
+    line-height: 30px;
+}
+
+.market-options ul li {
+    list-style: none;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ecedee;
+    margin-bottom: 10px;
+    min-height: 30px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+}
+
+.market-options ul li:last-of-type {
+    border-bottom: 0;
+}
+
+.market-options ul li div {
+    font-size: 16px;
+    line-height: 25px;
+}
+
+.market-options ul li div:nth-child(1) {
+    width: 140px;
+    min-width: 140px;
+    color: #333333;
+}
+
+.market-options ul li div:nth-child(2) {
+    color: #999999;
+}
+
+.market-options ul li div:nth-child(3) {
+    clear: both;
+}
+
+.market-product .chart {
+    width: 200px;
+    height: auto;
+}
+
+.market-product .middle {
+    width: auto;
+    text-align: center;
+}
+
+.market.product.single-post .main-article-cont > div:nth-child(5) .middle label {
+    clear: both;
+    display: block;
+    margin-top: 0;
+    margin-bottom: 23px;
+    text-align: center;
+    font-size: 16px;
+    line-height: 20px;
+}
+
+.market-product .middle span {
+    text-align: center;
+    margin-right: 10px;
+    font-size: 16px;
+    line-height: 25px;
+    color: #999999;
+}
+
+.market-product .middle span:nth-child(3) {
+    font-weight: bold;
+    font-size: 25px;
+    line-height: 25px;
+    color: #333333;
+}
+
+.ct-series-a .ct-line,
+.ct-series-a .ct-point {
+    stroke: #2b70b5 !important;
+}
+
+.ct-series-a .ct-area {
+    fill: blue !important;
+}
+
+.market .dropdown {
+    margin: 0 10px 10px 0;
+    float: left;
+}
+
+.market-filter-clear {
+    display: block;
+    margin: 16px 0 0;
+    font-size: 14px;
+    color: #666666;
+    text-align: center;
+}
+
+.market_tag .main-article h1 {
+    padding-right: 170px;
+    padding-bottom: 0;
+    border-bottom: 0;
+}
+
+.market_tag .main-article {
+    position: relative;
+}
+
+.market_tag .main-article .main-article-cont {
+    padding-top: 21px;
+}
+
+.market_tag .market-products {
+    margin-top: -17px;
+    padding-top: 38px;
+    border-top: 3px solid #333333;
+}
+
+.market .total {
+    position: absolute;
+    top: 40px;
+    right: 0;
+    margin: 0;
+    font-size: 18px;
+    line-height: 30px;
+    font-weight: bold;
+    color: #333333;
+}
+
+.market_tag .dropdown-toggle {
+    padding: 0;
+    -webkit-box-shadow: none;
+            box-shadow: none;
+}
+
+.market_tag .dropdown-toggle::before {
+    content: "РЎРѕСЂС‚РёСЂРѕРІР°С‚СЊ: ";
+    display: inline-block;
+    margin-right: 13px;
+    font-size: 16px;
+    line-height: 30px;
+    color: #333333;
+    vertical-align: middle;
+}
+
+.market_tag .dropdown-toggle .dropdown-text {
+    font-size: 16px;
+    line-height: 30px;
+    color: #333333;
+    border-bottom: 1px dotted #232323;
+}
+
+.market_tag .dropdown-toggle .dropdown-icon {
+    margin-left: 14px;
+}
+
+.market_tag .dropdown-toggle .dropdown-icon::after {
+    content: "";
+    width: 9px;
+    height: 5px;
+    background-image: url("http://kto-chto-gde.ru/wp-content/themes/theme/img/icon-arrow-down.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 9px 5px;
+    border: 0;
+}
+
+.market .dropdown a {
+    color: #999999;
+}
+
+.market .dropdown-selected .dropdown-link {
+    font-weight: bold;
+    color: #333333;
+    background: none;
+}
+
+.market .dropdown-focused .dropdown-link,
+.market .dropdown-link:hover,
+.market .dropdown-link:focus {
+    color: #333333;
+}
+
+.market .limit label {
+    margin-right: 13px;
+    font-size: 16px;
+    line-height: 30px;
+    color: #333333;
+}
+
+.market .limit label::after {
+    content: ":";
+}
+
+.market .limit a {
+    margin-right: 9px;
+    font-size: 16px;
+    line-height: 30px;
+    color: #333333;
+    border-bottom: 1px dotted #232323;
+}
+
+.market .limit a:last-of-type {
+    margin-right: 0;
+}
+
+.market .limit a.active {
+    font-weight: bold;
+    border-bottom: 0;
+}
+
+/* additional blocks */
+
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    border: 0;
+    padding: 0;
+    white-space: nowrap;
+    -webkit-clip-path: inset(100%);
+            clip-path: inset(100%);
+    clip: rect(0 0 0 0);
+    overflow: hidden;
+}
+
+.plain-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.category-list {
+    width: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    margin: 50px auto 0;
+    padding: 0 30px;
+    border: 1px solid #d4d8da;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+}
+
+.category-list__item {
+    padding: 26px 0 18px;
+    text-align: center;
+    border-bottom: 1px solid #ecedee;
+}
+
+.category-list__item:last-of-type {
+    border-bottom: 0;
+}
+
+.category-list__link {
+    color: unset;
+    text-decoration: none;
+}
+
+.category-list__icon {
+    display: inline-block;
+    margin-bottom: 9px;
+}
+
+.category-list__name {
+    display: block;
+    font-size: 14px;
+    line-height: 30px;
+    font-weight: bold;
+    font-family: "PT Sans", "Helvetica", sans-serif;
+    text-transform: uppercase;
+}
+
+.delivery-block {
+    width: 100%;
+    margin: 50px auto 30px;
+    padding: 40px 38px;
+    text-align: center;
+    background-color: #e1ecf5;
+}
+
+.delivery-block__icon {
+    display: inline-block;
+    width: 69px;
+    margin-bottom: 32px;
+}
+
+.delivery-block__name {
+    display: block;
+    font-size: 20px;
+    line-height: 30px;
+    font-weight: bold;
+    font-family: "PT Serif", "Georgia", serif;
+    color: #333333;
+}
+
+.delivery-block__text {
+    margin-top: 7px;
+    font-size: 16px;
+    line-height: 25px;
+    font-weight: normal;
+    font-family: "PT Sans", "Helvetica", sans-serif;
+    color: #666666;
+}
+
+.delivery-block__link {
+    color: #0a64b0;
+    border-bottom: 1px solid #0a64b0;
+}
+
+.delivery-block__link:hover {
+    border-bottom-color: transparent;
+}
+
+.for-whom {
+    padding-top: 28px;
+    padding-bottom: 37px;
+    background-color: #2963a3;
+    background-image: url("http://kto-chto-gde.ru/wp-content/themes/theme/img/for-whom-bg.png");
+    background-repeat: no-repeat;
+    background-position: 0 -150px;
+    background-size: 110% auto;
+}
+
+.for-whom__headline {
+    margin-top: 0;
+    margin-bottom: 45px;
+    padding: 0 30px;
+    font-size: 25px;
+    line-height: 25px;
+    font-weight: bold;
+    font-family: "PT Serif", "Georgia", serif;
+    color: #ffffff;
+    text-align: left;
+}
+
+.for-whom__list {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    margin: 0;
+    padding: 0 10px;
+    list-style: none;
+}
+
+.for-whom__item {
+    width: 20%;
+    text-align: center;
+    border-right: 1px solid rgba(217, 165, 161, 0.2);
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+}
+
+.for-whom__item:last-child {
+    border: 0;
+}
+
+.for-whom__item > a:hover p,
+.for-whom__item > a:focus p {
+    opacity: 0.7;
+}
+
+.for-whom__item > a:active p {
+    opacity: 0.6;
+}
+
+.for-whom__icon {
+    display: inline-block;
+    width: 60px;
+    height: 60px;
+    background-color: #ffffff;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 50%;
+}
+
+.for-whom__icon--beloved {
+    background-image: url("http://kto-chto-gde.ru/wp-content/themes/theme/img/icon-bird.svg");
+    background-size: 38px auto;
+}
+
+.for-whom__icon--boss {
+    background-image: url("http://kto-chto-gde.ru/wp-content/themes/theme/img/icon-office-chair.svg");
+    background-size: 26px auto;
+}
+
+.for-whom__icon--child {
+    background-image: url("http://kto-chto-gde.ru/wp-content/themes/theme/img/icon-teddy-bear.svg");
+    background-size: 24px auto;
+}
+
+.for-whom__icon--male {
+    background-image: url("http://kto-chto-gde.ru/wp-content/themes/theme/img/icon-male.svg");
+    background-size: 23px auto;
+}
+
+.for-whom__icon--colleague {
+    background-image: url("http://kto-chto-gde.ru/wp-content/themes/theme/img/icon-briefcase.svg");
+    background-size: 27px auto;
+}
+
+.for-whom__name {
+    margin-top: 8px;
+    margin-bottom: 0;
+    padding: 0;
+    font-size: 18px;
+    line-height: 25px;
+    font-family: "PT Sans", "Helvetica", sans-serif;
+    color: #ffffff;
+    text-align: center;
+    -webkit-transition: all 0.2s linear;
+    -moz-transition: all 0.2s linear;
+    -ms-transition: all 0.2s linear;
+    -o-transition: all 0.2s linear;
+    transition: all 0.2s linear;
+}
+
+.partners {
+    padding-top: 62px;
+    padding-bottom: 90px;
+    background-color: #eeeeee;
+}
+
+.partners__headline {
+    margin-bottom: 55px;
+    padding: 0;
+    font-size: 25px;
+    line-height: 25px;
+    font-weight: bold;
+    font-family: "PT Serif", "Georgia", serif;
+    color: #333333;
+    text-align: left;
+}
+
+.partners__list {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    background-color: #ffffff;
+}
+
+.partners__item {
+    width: 25%;
+    padding: 0 35px 40px;
+    text-align: center;
+    border-right: 1px solid #eeeeee;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+}
+
+.partners__item--cta {
+    padding: 50px 60px 40px;
+}
+
+.partners__item:last-child {
+    border: 0;
+}
+
+.partners__pic {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    width: 100%;
+    height: 130px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.partners__item:nth-child(1) .partners__pic img {
+    width: 184px;
+    height: auto;
+}
+
+.partners__item:nth-child(2) .partners__pic img {
+    width: 150px;
+    height: auto;
+}
+
+.partners__item:nth-child(3) .partners__pic img {
+    width: 180px;
+    height: auto;
+}
+
+.partners__pic img {
+    max-width: 100%;
+    max-height: 75px;
+}
+
+.partners__pic--obradoval {
+    background-image: url("http://kto-chto-gde.ru/wp-content/themes/theme/img/logo-obradovalru.png");
+    background-size: 225px auto;
+}
+
+.partners__pic--bloom {
+    background-image: url("http://kto-chto-gde.ru/wp-content/themes/theme/img/logo-bloom.png");
+    background-size: 136px auto;
+}
+
+.partners__pic--euroflowers {
+    background-image: url("http://kto-chto-gde.ru/wp-content/themes/theme/img/logo-euroflowers.png");
+    background-size: 181px auto;
+}
+
+.partners__text {
+    margin: 0;
+    padding: 0;
+    font-size: 14px;
+    line-height: 20px;
+    font-family: "PT Sans", "Helvetica", sans-serif;
+    color: #666666;
+}
+
+.partners__strong {
+    display: block;
+    margin-bottom: 38px;
+    font-size: 18px;
+    line-height: 25px;
+    font-weight: bold;
+    font-family: "PT Serif", "Georgia", serif;
+    color: #333333;
+}
+
+.partners__learn {
+    display: inline-block;
+    padding: 5px 33px;
+    font-size: 12px;
+    line-height: 30px;
+    font-weight: bold;
+    font-family: "PT Sans", "Helvetica", sans-serif;
+    color: #ffffff;
+    text-transform: uppercase;
+    background-color: #2b70b5;
+    text-shadow: none;
+    -webkit-box-shadow: none;
+            box-shadow: none;
+    border-radius: 0;
+    border: 1px solid #2b70b5;
+    outline: 0;
+}
+
+.partners__learn:hover,
+.partners__learn:focus {
+    color: #2b70b5;
+    background-color: #ffffff;
+}
+
+.partners__learn:active {
+    opacity: 0.8;
+}
+
+.parameters {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: distribute;
+        justify-content: space-around;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    width: 100%;
+    margin-top: 40px;
+    padding: 25px 0 0;
+    list-style: none;
+    border-top: 1px solid #d4d8da;
+    border-bottom: 1px solid #d4d8da;
+}
+
+.parameters__item {
+    margin-bottom: 20px;
+    padding-right: 10px;
+    padding-left: 28px;
+    font-family: "PT Sans", "Helvetica", sans-serif;
+    color: #333333;
+    background-repeat: no-repeat;
+    background-position: left 6px;
+}
+
+.parameters__item--height {
+    background-image: url("http://kto-chto-gde.ru/wp-content/themes/theme/img/icon-height.svg");
+    background-size: 8px auto;
+}
+
+.parameters__item--width {
+    background-image: url("http://kto-chto-gde.ru/wp-content/themes/theme/img/icon-width.svg");
+    background-position: left 10px;
+    background-size: 17px auto;
+}
+
+.parameters__item--weight {
+    background-image: url("http://kto-chto-gde.ru/wp-content/themes/theme/img/icon-weight.svg");
+    background-size: 17px auto;
+}
+
+.parameters__item--radius {
+    background-image: url("http://kto-chto-gde.ru/wp-content/themes/theme/img/icon-radius.svg");
+    background-size: 17px auto;
+}
+
+.parameters__item--diagonal {
+    background-image: url("http://kto-chto-gde.ru/wp-content/themes/theme/img/icon-diagonal.svg");
+    background-size: 13px auto;
+}
+
+.parameters__name {
+    font-size: 18px;
+    line-height: 30px;
+    font-weight: bold;
+}
+
+.parameters__value {
+    margin-top: 9px;
+    margin-bottom: 0;
+    padding: 0;
+    font-size: 16px;
+    line-height: 25px;
+    font-weight: normal;
+}
+
+.market-filter {
+    margin-top: 50px;
+    margin-bottom: 30px;
+    padding: 20px 20px 40px;
+    font-family: "PT Sans", "Helvetica", sans-serif;
+    background-color: #eeeeee;
+}
+
+.market-filter__fieldset {
+    margin: 0 0 30px;
+    padding: 0;
+    border: 0;
+}
+
+.market-filter__legend {
+    display: block;
+    margin-bottom: 23px;
+    font-size: 14px;
+    line-height: 30px;
+    font-weight: bold;
+    color: #333333;
+    text-transform: uppercase;
+    text-align: left;
+}
+
+.market-filter__group {
+    position: relative;
+    margin-bottom: 14px;
+    margin-right: 12px;
+    padding-top: 1px;
+}
+
+.market-filter__inputs {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    width: 100%;
+}
+
+.market-filter__input-group {
+    position: relative;
+    width: 80px;
+}
+
+.market-filter__input-group > label {
+    position: absolute;
+    top: 5px;
+    left: 8px;
+    font-size: 14px;
+    line-height: 20px;
+    color: #999999;
+}
+
+.market-filter .price-from,
+.market-filter .price-to {
+    width: 100%;
+    height: 30px;
+    padding: 0 7px 0 26px;
+    font-size: 14px;
+    line-height: 30px;
+    color: #333333;
+    border: 0;
+    outline: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.market-filter #market-slider {
+    height: 5px;
+    margin-top: 50px;
+    margin-bottom: 0;
+    background-color: #dad7d7;
+    border: 0;
+    border-radius: 0;
+}
+
+.ui-slider-horizontal .ui-slider-range {
+    background-color: #0a64b0;
+    border-radius: 0;
+}
+
+#market-slider .ui-slider-handle {
+    top: -17px;
+    width: 10px;
+    height: 10px;
+    margin-left: -6px;
+    background-color: #ffffff;
+    border: 0;
+    border-radius: 0;
+}
+
+#market-slider .ui-slider-handle:hover,
+#market-slider .ui-slider-handle:focus {
+    opacity: 0.9;
+    cursor: pointer;
+}
+
+#market-slider .ui-slider-handle:active {
+    background-color: #0a64b0;
+}
+
+#market-slider .ui-slider-handle:active::after {
+    border-top-color: #0a64b0;
+}
+
+#market-slider .ui-slider-handle::after {
+    content: "";
+    display: block;
+    width: 10px;
+    height: 5px;
+    border-top: 5px solid #ffffff;
+    border-right: 5px solid transparent;
+    border-left: 5px solid transparent;
+    border-bottom: 0;
+}
+
+.market-filter__label {
+    position: relative;
+    padding-left: 28px;
+    font-size: 14px;
+    line-height: 15px;
+    color: rgba(51, 51, 51, 0.5);
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+}
+
+.market-filter__label:hover,
+.market-filter__label:focus,
+.market-filter__colour:hover,
+.market-filter__colour:focus {
+    opacity: 0.9;
+    cursor: pointer;
+}
+
+.market-filter__label:active,
+.market-filter__colour:active {
+    opacity: 0.8;
+}
+
+.market-filter__label::before {
+    content: "";
+    position: absolute;
+    top: 2px;
+    left: 0;
+    width: 15px;
+    height: 15px;
+    background-color: #ffffff;
+}
+
+.market-filter__checkbox:checked ~ .market-filter__label {
+    color: rgba(51, 51, 51, 1);
+}
+
+.market-filter__checkbox:checked ~ .market-filter__label::before {
+    background-image: url("http://kto-chto-gde.ru/wp-content/themes/theme/img/icon-checked.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 9px auto;
+}
+
+.market-filter__input {
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 5px 12px;
+    font-size: 14px;
+    line-height: 20px;
+    color: #333333;
+    border: 0;
+    outline: 0;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+}
+
+.market-filter__colours {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    width: 190px;
+}
+
+.market-filter__colour {
+    position: relative;
+    display: block;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+}
+
+.market-filter__checkbox:checked ~ .market-filter__colour::after {
+    content: "";
+    position: absolute;
+    top: -4px;
+    left: -4px;
+    width: 34px;
+    height: 34px;
+    background-color: rgba(255, 255, 255, 0);
+    border: 1px solid #005bb5;
+    border-radius: 50%;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+}
+
+.market-filter__colour--white {
+    background-color: #ffffff;
+    border: 1px solid #dbd8d8;
+}
+
+.market-filter__checkbox:checked ~ .market-filter__colour--white::after {
+    top: -5px;
+    left: -5px;
+}
+
+.market-filter__colour--green {
+    background-color: #a0b74d;
+}
+
+.market-filter__colour--blue {
+    background-color: #42aaff;
+}
+
+.market-filter__colour--pink {
+    background-color: #dd5ebd;
+}
+
+.market-filter__colour--orange {
+    background-color: #e7625d;
+}
+
+.market-filter__colour--yellow {
+    background-color: #ffa501;
+}
+
+.market-filter__colour--grey {
+    background-color: #808080;
+}
+
+.market-filter__colour--brown {
+    background-color: #c38343;
+}
+
+.market-filter__colour--violet {
+    background-color: #906585;
+}
+
+.market-filter__colour--black {
+    background-color: #000000;
+}
+
+.market .market-filter .market-filter__submit {
+    display: block;
+    float: none;
+    width: 140px;
+    margin: 40px auto 0;
+    padding: 6px 0;
+    font-size: 12px;
+    line-height: 30px;
+    font-weight: bold;
+    color: #ffffff;
+    text-transform: uppercase;
+    background-color: #2b70b5;
+    border: 0;
+    outline: 0;
+    border-radius: 0;
+}
+
+.market-filter__submit:hover,
+.market-filter__submit:focus {
+    opacity: 0.9;
+    cursor: pointer;
+}
+
+.market-filter__submit:active {
+    opacity: 0.8;
+}
+
+.market-filter__container {
+    max-height: 210px;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.market-filter__flowers {
+    max-height: 180px;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+/* .market-filter__container::-webkit-scrollbar,
+.market-filter__flowers::-webkit-scrollbar {
+  width: 5px;
+  background-color: transparent;
+}
+
+.market-filter__container::-webkit-scrollbar-thumb,
+.market-filter__flowers::-webkit-scrollbar-thumb {
+  background-color: transparent;
+  border-radius: 5px;
+}
+
+.market-filter__container:hover::-webkit-scrollbar-thumb,
+.market-filter__flowers:hover::-webkit-scrollbar-thumb {
+  background-color: #ffffff;
+} */
+
+.market-filter--reason {
+    padding: 49px 0 0;
+}
+
+.market-filter--reason .aside-nav__title {
+    margin-bottom: 35px;
+}
+
+.market-filter--reason .aside-nav-all__icon {
+    display: block;
+    top: -5px;
+    width: 26px;
+    height: 30px;
+    background-image: url("http://kto-chto-gde.ru/wp-content/themes/theme/img/icon-balloons.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+
+.market-filter--reason .aside-nav-all__icon > i {
+    display: none;
+}
+
+.market-filter--reason ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.market-filter--reason ul li {
+    min-height: 20px;
+    margin-bottom: 16px;
+}
+
+.market-filter--reason ul li:nth-of-type(4) {
+    margin-bottom: 33px;
+    padding-bottom: 33px;
+    background-position: left top;
+    border-bottom: 1px dotted #c6c6c6;
+}
+
+.market-filter--reason ul li:last-of-type {
+    margin-bottom: 0;
+}
+
+.market-filter--reason ul li a {
+    border-bottom: 1px solid #9dc1df;
+}
+
+.market-filter--reason ul li a:hover {
+  border-bottom-color: transparent;
+}
+
+.reason__pic {
+    padding-left: 30px;
+    background-repeat: no-repeat;
+    background-position: left center;
+}
+
+.reason__pic--wow {
+    background-image: url("http://kto-chto-gde.ru/wp-content/themes/theme/img/icon-star.svg");
+    background-size: 19px auto;
+}
+
+.reason__pic--birthday {
+    background-image: url("http://kto-chto-gde.ru/wp-content/themes/theme/img/icon-gift.svg");
+    background-size: 18px auto;
+}
+
+.reason__pic--wedding {
+    background-image: url("http://kto-chto-gde.ru/wp-content/themes/theme/img/icon-wedding-rings.svg");
+    background-size: 21px auto;
+}
+
+.reason__pic--sorry {
+    background-image: url("http://kto-chto-gde.ru/wp-content/themes/theme/img/icon-sad.svg");
+    background-size: 19px auto;
+}
+
+.reason__pic--new-year {
+    background-image: url("http://kto-chto-gde.ru/wp-content/themes/theme/img/icon-new-year.svg");
+    background-position: 3px center;
+    background-size: 15px auto;
+}
+
+.reason__pic--st-valentine {
+    background-image: url("http://kto-chto-gde.ru/wp-content/themes/theme/img/icon-heart.svg");
+    background-position: 2px center;
+    background-size: 18px auto;
+}
+
+.reason__pic--8-march {
+    background-image: url("http://kto-chto-gde.ru/wp-content/themes/theme/img/icon-lips.svg");
+    background-size: 23px auto;
+}
+
+.reason__pic--tatianas-day {
+    background-image: url("http://kto-chto-gde.ru/wp-content/themes/theme/img/icon-book.svg");
+    background-position: 4px center;
+    background-size: 15px auto;
+}
+
+.market .shop-logo,
+.market .shop-descr {
+    margin-top: 35px;
+}
+
+.market .shop-logo {
+    float: left;
+    margin-right: 29px;
+}
+
+.market .shop-descr p {
+    padding-top: 0;
+    font-size: 18px;
+    line-height: 30px;
+    color: #666666;
+}
+
+.market.product.single-post .main-article-cont > div:nth-child(5) {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    -webkit-box-align: start;
+        -ms-flex-align: start;
+            align-items: flex-start;
+    margin-top: 20px;
+    padding-top: 34px;
+    border-top: 3px solid #333333;
+}
+
+.market.product.single-post .main-article-cont > div:nth-child(5) > div:first-child {
+    width: 270px;
+}
+
+.market.product.single-post .main-article-cont > div:nth-child(5) > div:last-child {
+    width: 570px;
+}
+
+.market.product.single-post .main-article-cont > div:nth-child(5) label {
+    display: block;
+    margin-top: 34px;
+    margin-bottom: 25px;
+    font-size: 25px;
+    line-height: 30px;
+    color: #333333;
+}
+
+.market .market-dynamic {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  margin-top: 90px;
+  padding: 45px 32px 40px;
+  background-color: #eeeeee;
+}
+
+.market .market-dynamic > h3 {
+  position: absolute;
+  top: -90px;
+  left: 0;
+  padding: 0;
+  font-size: 25px;
+  line-height: 30px;
+}
+
+.market .slick-initialized .slick-slide {
+    margin-right: 25px;
+}
+
+.market .slick-arrow,
+.market-products-inline .slick-arrow {
+    position: absolute;
+    top: -80px;
+    width: 40px;
+    height: 40px;
+    font-size: 0;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 7px auto;
+    border: 1px solid #cdcdcd;
+    border-radius: 50%;
+    -webkit-transition: all 0.2s linear;
+    -moz-transition: all 0.2s linear;
+    -ms-transition: all 0.2s linear;
+    -o-transition: all 0.2s linear;
+    transition: all 0.2s linear;
+}
+
+.market .slick-arrow:hover,
+.market-products-inline .slick-arrow:hover,
+.market .slick-arrow:focus,
+.market-products-inline .slick-arrow:focus {
+    opacity: 0.7;
+}
+
+.market .slick-arrow.slick-prev,
+.market-products-inline .slick-arrow.slick-prev {
+    right: 50px;
+    background-image: url("http://kto-chto-gde.ru/wp-content/themes/theme/img/icon-arrow-left.svg");
+    background-position: 15px center;
+}
+
+.market .slick-arrow.slick-next,
+.market-products-inline .slick-arrow.slick-next {
+    right: 0;
+    background-image: url("http://kto-chto-gde.ru/wp-content/themes/theme/img/icon-arrow-right.svg");
+}
+
+.market .slick-arrow.slick-prev:disabled,
+.market-products-inline .slick-arrow.slick-prev:disabled {
+    background-image: url("http://kto-chto-gde.ru/wp-content/themes/theme/img/icon-arrow-left-disabled.svg");
+}
+
+.market .slick-arrow.slick-next:disabled,
+.market-products-inline .slick-arrow.slick-next:disabled {
+    background-image: url("http://kto-chto-gde.ru/wp-content/themes/theme/img/icon-arrow-right-disabled.svg");
+}
+
+/* built-in block */
+
+.market-products-inline {
+    position: relative;
+    margin: 20px 0;
+    padding: 46px 0 44px;
+    border-top: 3px solid #333333;
+    border-bottom: 3px solid #333333;
+}
+
+.main-page .market-products-inline {
+  margin-top: 60px;
+}
+
+.market-products-inline h3 {
+    margin-bottom: 35px;
+    padding: 0;
+    font-size: 25px;
+    line-height: 25px;
+    color: #333333;
+}
+
+.market-products-inline .slick-arrow {
+    top: -65px;
+}
+
+ul.market-category {
+    position: absolute;
+    top: 50px;
+    left: 150px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: start;
+        -ms-flex-pack: start;
+            justify-content: flex-start;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    width: 620px;
+    height: 25px;
+    margin-bottom: 35px;
+    overflow-y: hidden;
+}
+
+.main-page ul.market-category {
+    left: 400px;
+}
+
+.market-products-inline.market-products ul.market-category .market-category__item {
+    width: auto;
+    height: 25px;
+    padding: 0 29px;
+    margin: 0 0 10px;
+    background-repeat: no-repeat;
+    background-position: left center;
+    border: 0;
+}
+
+ul.market-category .market-category__itemвЂ”beloved {
+    padding-left: 34px;
+    background-image: url("http://kto-chto-gde.ru/wp-content/themes/theme/img/icon-bird-grey.svg");
+    background-size: 26px auto;
+}
+
+ul.market-category .market-category__itemвЂ”boss {
+    background-image: url("http://kto-chto-gde.ru/wp-content/themes/theme/img/icon-office-chair-grey.svg");
+    background-size: 16px auto;
+}
+
+ul.market-category .market-category__itemвЂ”child {
+    background-image: url("http://kto-chto-gde.ru/wp-content/themes/theme/img/icon-teddy-bear-grey.svg");
+    background-size: 16px auto;
+}
+
+ul.market-category .market-category__itemвЂ”male {
+    background-image: url("http://kto-chto-gde.ru/wp-content/themes/theme/img/icon-male-grey.svg");
+    background-size: 14px auto;
+}
+
+ul.market-category .market-category__itemвЂ”colleague {
+    background-image: url("http://kto-chto-gde.ru/wp-content/themes/theme/img/icon-briefcase-grey.svg");
+    background-size: 17px auto;
+}
+
+ul.market-category li > a {
+    line-height: 25px;
+    border-bottom: 1px solid #98bcda;
+}
+
+ul.market-category li > a:hover,
+ul.market-category li > a:focus {
+    border-bottom-color: transparent;
+}
+
+.market-products-inline.market-products ul li {
+    margin-right: 25px;
+}
+
+.market-products-inline--full ul.slick-slider {
+    width: 77%;
+}
+
+.market-products-inline--full ul.market-category {
+    position: absolute;
+    top: 45px;
+    left: auto;
+    right: 0;
+    width: 220px;
+    height: auto;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    padding: 27px 31px;
+    background-color: #f7f6f6;
+    overflow-x: hidden;
+}
+
+.market-products-inline--full ul.market-category li {
+    margin-bottom: 13px;
+    padding: 0 0 0 34px;
+}
+
+.main-article-wrap ul.market-category {
+    position: static;
+    width: 100%;
+}
+
+.main-article-wrap .market-products-inline .slick-arrow {
+    top: -127px;
+}
+
+.box-favorite {
+  float: right;
+  padding: 0;
+  width: 61px;
+  height: 60px;
+  margin: 0 0 0 -1px;
+  border-left: 1px solid #525252;
+  border-right: 1px solid #525252;
+  position: relative;
+}
+
+.market-favorites {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-image: url("http://kto-chto-gde.ru/wp-content/themes/theme/img/icon-like-top.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 20px 18px;
+}
+
+.market-favorites:hover {
+  opacity: 0.6;
+}
+
+.subnav-category-list__item.market-favorites {
+    display: none;
+}
+
+.subnav-category_bottom .subnav-category-list {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.subnav-category_bottom .subnav-category-list__item:nth-child(even) {
+    width: auto;
+}
+
+.subnav-category-list__link-icon .icon-shopping-basket {
+    display: inline-block;
+    width: 29px;
+    height: 24px;
+    background-image: url("http://kto-chto-gde.ru/wp-content/themes/theme/img/icon-shopping-basket.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+
+.market-intro {
+  padding: 37px 0 39px;
+  font-size: 18px;
+  line-height: 30px;
+}
+
+.main-article-cont #u158 > p {
+  padding-top: 0;
+}
+
+.main-article-cont .market-products > h2 {
+  margin-top: 10px;
+}
+
+.main-article-cont .market-products.slider {
+  margin-bottom: 32px;
+}
+
+.main-article-cont .market-products.slider .marker-list {
+    display: none;
+}
+
+.market_tag .fixed-button {
+    padding-top: 0;
+}
+
+/* R E S P O N S I V E */
+
+@media (max-width: 1199px) {
+    .market-products ul::after {
+        width: 31%;
+    }
+
+    .market-products ul li {
+        width: 31%;
+        height: auto;
+    }
+
+    .market-product .preview {
+        width: 50%;
+    }
+
+    .market-product .meta-right {
+        width: 40%;
+    }
+
+    .partners__pic {
+        background-size: 100% auto;
+    }
+
+    .partners__item {
+        padding: 0 18px 40px;
+    }
+
+    .partners__item--cta {
+        padding: 50px 18px 40px;
+    }
+
+    .partners__learn {
+        padding: 5px 22px;
+    }
+
+    .market.product.single-post .main-article-cont > div:nth-child(5) > div:first-child {
+        width: 35%;
+    }
+
+    .market.product.single-post .main-article-cont > div:nth-child(5) > div:last-child {
+        width: 60%;
+    }
+
+    ul.market-category {
+        position: static;
+        width: 100%;
+        padding-right: 100px;
+    }
+
+    .market-products-inline--full ul.market-category {
+        width: 190px;
+        padding: 27px 20px;
+    }
+
+    .for-whom {
+        background-size: 1000px auto;
+    }
+}
+
+@media (max-width: 1240px) and (min-width: 1024px) {
+    .subnav-category_bottom .subnav-category-list .subnav-category-list__item {
+        padding: 18px 5px 19px 5px;
+    }
+
+    .subnav-category_bottom .subnav-category-list .subnav-category-list__link {
+        font-size: 11px;
+        line-height: 14px;
+        letter-spacing: 0.7px;
+    }
+}
+
+@media (max-width: 1023px) and (min-width: 500px) {
+    .category-list {
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+            -ms-flex-direction: row;
+                flex-direction: row;
+        -webkit-box-pack: justify;
+            -ms-flex-pack: justify;
+                justify-content: space-between;
+        margin-top: 88px;
+        padding: 0;
+    }
+
+    .category-list__item {
+        width: 33.3%;
+        margin: 25px 0;
+        padding: 0;
+        border-right: 1px solid #ecedee;
+        border-bottom: 0;
+    }
+
+    .category-list__item:last-of-type {
+        border-right: 0;
+    }
+
+    .delivery-block {
+        position: relative;
+        padding-left: 190px;
+        text-align: left;
+    }
+
+    .delivery-block__icon {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 38px;
+        width: 90px;
+        height: auto;
+        margin: auto;
+    }
+
+    .market-filter {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-pack: justify;
+            -ms-flex-pack: justify;
+                justify-content: space-between;
+        -webkit-box-align: start;
+            -ms-flex-align: start;
+                align-items: flex-start;
+        -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+        margin-top: 36px;
+    }
+
+    .market-filter__fieldset {
+        width: 25%;
+        min-width: 200px;
+        padding-right: 30px;
+    }
+
+    .market .market-filter .market-filter__submit {
+        width: 200px;
+        min-width: 25%;
+        margin: 0;
+    }
+
+    .subpage-aside__cont .aside-search {
+        top: 40px;
+    }
+}
+
+@media (max-width: 759px) {
+    .box-favorite {
+        display: none;
+    }
+
+    .subnav-category-list__item.market-favorites {
+        display: block;
+        padding-left: 43px;
+        background-image: url("http://kto-chto-gde.ru/wp-content/themes/theme/img/icon-like-top-burger.svg");
+        background-repeat: no-repeat;
+        background-position: 3px center;
+        background-size: 18px auto;
+    }
+
+    .subnav-category-list__item.market-favorites:hover {
+        opacity: 1;
+    }
+
+    .subnav-category-list__link-icon .icon-shopping-basket {
+        width: 19px;
+        height: 18px;
+    }
+}
+
+@media (max-width: 760px) {
+    .market-products ul::after {
+      display: none;
+    }
+
+    .market-products ul li {
+        width: 48%;
+    }
+
+    .market-product .preview,
+    .market-product .meta-right {
+        float: none;
+        width: 100%;
+        max-width: 450px;
+    }
+
+    .market-product .preview {
+        margin: 12px auto 40px;
+    }
+
+    .market-product .meta-right {
+        margin: 0 auto;
+    }
+
+    .market-product .preview > img {
+        margin-bottom: 0;
+    }
+
+    .market-price-meta {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+            -ms-flex-align: center;
+                align-items: center;
+        -webkit-box-pack: justify;
+            -ms-flex-pack: justify;
+                justify-content: space-between;
+        width: 100%;
+        padding: 7px 20px;
+        background-color: #fdfdfd;
+        box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.4);
+        z-index: 999;
+    }
+
+    .market-product .price {
+        height: 25px;
+        margin-bottom: 0;
+        overflow-y: hidden;
+    }
+
+    .price__group {
+        margin-bottom: 0;
+    }
+
+    .market-product .price__label {
+        padding-left: 0;
+    }
+
+    .market-product .price__group span,
+    .market-product .price__label::before {
+        display: none;
+    }
+
+    .market-product .price__label {
+        display: none;
+    }
+
+    .market-product .price__input:checked ~ .price__label {
+        display: block;
+    }
+
+    .market-product .price__group:only-child .price__label {
+        display: block;
+    }
+
+    .market-buttons {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+            -ms-flex-align: center;
+                align-items: center;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: reverse;
+            -ms-flex-direction: row-reverse;
+                flex-direction: row-reverse;
+        -webkit-box-pack: justify;
+            -ms-flex-pack: justify;
+                justify-content: space-between;
+        width: 170px;
+    }
+
+    .market-buttons .product-like {
+        position: static;
+    }
+
+    .market.product.single-post .main-article-cont > div:nth-child(5) {
+        margin-top: 0;
+    }
+
+    .market .total {
+      top: 20px;
+      font-size: 16px;
+    }
+
+    .market .subpage-aside__cont .aside-search {
+        top: 40px;
+    }
+
+    .market_tag .subpage-aside__cont .aside-search {
+        top: 0;
+    }
+
+    .for-whom__name a {
+        font-size: 16px;
+    }
+
+    .partners__item {
+        width: 50%;
+    }
+
+    .partners__item:nth-child(1) {
+        border-bottom: 1px solid #eeeeee;
+    }
+
+    .partners__item:nth-child(2) {
+        border-right: 0;
+        border-bottom: 1px solid #eeeeee;
+    }
+
+    .partners__pic {
+        background-size: 136px auto;
+    }
+
+    .market.product.single-post .main-article-cont > div:nth-child(5) {
+        -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+    }
+
+    .market.product.single-post .main-article-cont > div:nth-child(5) > div:first-child {
+        width: 100%;
+    }
+
+    .market.product.single-post .main-article-cont > div:nth-child(5) > div:last-child {
+        width: 100%;
+    }
+
+    ul.market-category {
+        width: 100%;
+        padding-right: 0;
+    }
+
+    .market-products-inline .slick-arrow {
+        top: -127px;
+    }
+
+    .market.product h1 {
+      font-size: 25px;
+      line-height: 35px;
+      text-align: left;
+    }
+
+    .for-whom {
+        margin-bottom: 18px;
+        padding-top: 18px;
+        padding-bottom: 22px;
+    }
+
+    .for-whom__headline {
+        margin-bottom: 28px;
+    }
+}
+
+@media (max-width: 599px) {
+    .market-product .chart {
+        width: 100%;
+        margin-bottom: 26px;
+    }
+
+    .market-product .middle {
+        width: 100%;
+    }
+
+    .market .shop-logo {
+        max-width: 40%;
+    }
+
+    .market .shop-logo > img {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 500px) {
+    .market .slick-initialized .slick-slide {
+        margin-right: 0;
+    }
+}
+
+@media (max-width: 499px) {
+    .market-products ul {
+        -ms-flex-pack: distribute;
+            justify-content: space-around;
+    }
+
+    .market-products ul li {
+        width: 100%;
+        max-width: 320px;
+    }
+
+    .market .sort,
+    .market .dropdown,
+    .market .limit {
+        float: none;
+    }
+
+    .market .dropdown {
+        margin-bottom: 5px;
+    }
+
+    .market .shop-logo {
+        float: none;
+        width: 100%;
+        max-width: 100%;
+        margin-right: 0;
+        text-align: center;
+    }
+
+    .market .shop-descr {
+        margin-top: 22px;
+    }
+
+    .market .shop-logo > img {
+        max-width: 220px;
+    }
+
+    .market .total {
+        position: static;
+        margin-top: -18px;
+        margin-bottom: 32px;
+        font-weight: normal;
+        color: #999999;
+    }
+
+    .market-product .preview {
+        margin-top: 0;
+    }
+
+    .market-product .preview > img {
+        margin-bottom: 0;
+    }
+
+    .market.product.single-post h1 {
+        padding-top: 0;
+    }
+
+    .for-whom {
+        background-image: url("http://kto-chto-gde.ru/wp-content/themes/theme/img/for-whom-bg-xs.png");
+        background-size: 1100px auto;
+    }
+
+    .for-whom__list {
+        -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+        -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+        padding-left: 25px;
+    }
+
+    .for-whom__item {
+        width: 48%;
+        min-width: 170px;
+        margin-bottom: 20px;
+        border: 0;
+    }
+
+    .for-whom__item > a {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+            -ms-flex-align: center;
+                align-items: center;
+    }
+
+    .for-whom__icon {
+        margin-right: 16px;
+    }
+
+    .partners {
+        padding-top: 36px;
+        padding-bottom: 60px;
+    }
+
+    .partners__headline {
+        margin-bottom: 40px;
+    }
+
+    .partners__item {
+        width: 100%;
+        border-right: 0;
+        border-bottom: 1px solid #eeeeee;
+    }
+
+    .partners__item:last-of-type {
+        border-bottom: 0;
+    }
+
+    .market-filter {
+        margin-top: 30px;
+    }
+
+    .market-filter__colours {
+        width: auto;
+    }
+
+    .market-products ul li.slick-slide {
+        max-width: 100%;
+    }
+
+    .market_tag .main-article h1 {
+        padding-right: 0;
+    }
+
+    .market .subpage-aside__cont .aside-search {
+        top: 30px;
+    }
+
+    .market_tag .subpage-aside__cont .aside-search {
+        top: 0;
+    }
+
+    .category-list__item {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    .category-list__link {
+        display: flex;
+        align-items: center;
+    }
+
+    .category-list__icon {
+        margin-right: 28px;
+        margin-bottom: 0;
+    }
+
+    .category-list__item:nth-child(1) .category-list__icon {
+        margin-right: 35px;
+        margin-left: 10px;
+    }
+
+    .category-list__item:nth-child(2) .category-list__icon {
+        margin-right: 29px;
+        margin-left: 2px;
+    }
+
+    .main-page .market-products-inline h3 {
+        max-width: 240px;
+    }
+
+    .main-page .market-products-inline .slick-arrow {
+        top: -135px;
+    }
+}
+
+@media (max-width: 420px) {
+    .for-whom__list {
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+                flex-direction: column;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    }
+
+    .for-whom__item {
+        width: 220px;
+    }
+
+    .for-whom__headline {
+        text-align: center;
+    }
+}
