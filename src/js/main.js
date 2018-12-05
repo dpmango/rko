@@ -1007,10 +1007,14 @@ $(document).ready(function(){
 
   // mainsite css will be disable on all pages/sections except home
   function removePoisonedCss(){
-    var $css = $('#poisoned-css').get(0)
+    var $css1 = $('#mainsite-css').get(0)
+    var $css2 = $('#market-css').get(0)
+    var $css3 = $('#mirkrasoti-css').get(0)
     var isHomepage = $('.home').length > 0
 
-    $css.disabled = !isHomepage
+    $css1.disabled = !isHomepage
+    $css2.disabled = !isHomepage
+    $css3.disabled = !isHomepage
   }
 
   ////////////
