@@ -35,13 +35,15 @@
       transform: scale(1.15)
 
   &__title
+    &--orlan
+      padding-right: 5%
 
   &__paragraph
     // bugfix to keep tooltips on top of the image
     position: relative
     z-index: 2
     &--pr
-      padding-right: 10%
+      padding-right: 8%
 
   &__cta
     max-width: 370px
@@ -80,13 +82,16 @@
     &__cta-title
       font-size: 16px
       margin-bottom: 15px
-
+    &__title
+      &--orlan
+        padding-right: 0
 
 +r($md)
   .article
     &__navigation
       padding-left: 25px
       padding-right: 25px
+      position: absolute
     &__cta
       margin-top: 45px
       // max-width: 270px
@@ -107,6 +112,10 @@
         img
           max-width: 380px
 
+    &__paragraph
+      &--pr
+        padding-right: 0
+
 +r($sm)
   .article
     &__image
@@ -121,7 +130,7 @@
       &--parallax
         img
           max-width: 100%
-          
+
 .scroll-box
   position: relative
   background: white

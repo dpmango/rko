@@ -2,6 +2,12 @@ window.onbeforeunload = function(){
   window.scrollTo(0,0)
 }
 
+$(window).on("load", function(){
+  $.ready.then(function(){
+    window.onLoadTrigger()
+  });
+})
+
 // READY function
 $(document).ready(function(){
 
@@ -76,10 +82,8 @@ $(document).ready(function(){
     }
   }
 
-  // TODO - not always triggered
-  window.addEventListener("load", onLoad)
 
-  function onLoad(){
+  window.onLoadTrigger = function onLoad(){
     getParallaxSections();
     getScrollX();
     transformScrollX();
@@ -441,7 +445,7 @@ $(document).ready(function(){
   function getScrollX(){
     var $magicX = $('[js-scrollmagic-x]');
 
-    if ( $magicX.length > 0 ){
+    if ( ($magicX.length > 0) && isMoreThanMd()){
       var $parent = $magicX.closest('[js-scrollmagic-container]');
       // TODO - test on width (container 1400 diff with _window.width() )
       var containerWidth = _window.outerWidth() * -1 // all contents minus window width
@@ -498,7 +502,9 @@ $(document).ready(function(){
         scrollRequest: 0,
         requestId: null
       }
-
+      $('.page').css({
+        'height': 'auto'
+      })
     }
   }
 
@@ -517,7 +523,7 @@ $(document).ready(function(){
     var scrollY = window.pageYOffset || html.scrollTop || body.scrollTop || 0
     // var scrollY = wScroll
 
-    if ( scrollY > scrollX.startPoint ){
+    if ( (scrollY > scrollX.startPoint) && isMoreThanMd() ){
 
       // when scrolled past end of the container
       if ( scrollY > scrollX.endPoint ){

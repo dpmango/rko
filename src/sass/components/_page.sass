@@ -46,7 +46,9 @@
     transform-origin: right top
   &--origin--lt
     transform-origin: left top
-
+  &--align-bottom
+    img
+      object-position: center bottom
 
 .section-fixed
   position: fixed
@@ -82,22 +84,31 @@
     position: relative
     z-index: 2
     padding: 90px 0 50px
+    &--no-pt
+      padding-top: 0 !important
 
   &__image
     font-size: 0
     img
       width: 100%
 
+  &--mfix
+    margin-top: -20px
+
 .content-spacer
   padding: 150px 0 140px
 
+.content-bottom-250
+  padding-bottom: 250px
 
 // magic section
 .magic-section
   position: relative
   &__holder
-    padding: 260px 0 90px
-    background-image: linear-gradient(-180deg, #162333 0%, #000000 100%)
+    position: relative
+    z-index: 2
+    padding: 260px 0 240px
+    // background-image: linear-gradient(-180deg, #162333 0%, #000000 100%)
   &__scrollable
     display: flex
     // will-change: transform
@@ -131,6 +142,9 @@
   .h100-section
     &__content
       padding: 80px 0 55px
+      &--mobile-0
+        padding-top: 0
+        padding-bottom: 0
 
     &__content-wrapper
       margin-top: 0
@@ -141,6 +155,9 @@
   .section
     &__content
       padding: 80px 0 55px
+      &--mobile-0
+        padding-top: 0
+        padding-bottom: 0
 
   .h100-bg
     &--mobile-align-top
@@ -150,6 +167,9 @@
 
   .section-fixed
     position: relative
+    top: auto
+    bottom: auto
+    overflow: hidden
 
   .section-scrollable
     margin-top: 0 !important
@@ -162,6 +182,12 @@
     &--not-mobile
       padding-top: 20px
       padding-bottom: 20px
+
+  .magic-section
+    &__holder
+      padding: 60px 0 1em
+    &__scrollable
+      display: block
 
   .bg-mobile
     // .h100-bg overwrites

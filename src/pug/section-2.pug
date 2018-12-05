@@ -9,40 +9,42 @@ block content
 
   // ARTICLE
   .article
-    .article__navigation(data-animation="fade" data-delay="3300")
+    .article__navigation(data-animation="fade" data-delay="3000" data-duration="600")
       a(href="section-1.html" js-nav-back).article__back
         +svgMono('back')
       a(href="homepage.html" js-nav-close).article__close
         +svgMono('close')
     
     .section-fixed(js-set-section-height)
-      .h100-section
+      .h100-section.h100-section--not-mobile
         // background
-        .h100-bg(data-animation="scale" data-duration="3000" data-easing="ease-both")
+        .h100-bg(data-animation="fade" data-duration="1000" data-easing="ease-both" data-delay="1400")
           img(src='img/background_4-2.jpg' srcset='img/background_4-2@2x.jpg 2x')
         
-        .h100-bg.h100-bg--origin-lb(js-parallax-fixed-bg data-animation="scale" data-duration="3000" data-easing="ease-both")
+        .h100-bg.h100-bg--origin-lb.h100-bg--hide-mobile(js-parallax-fixed-bg data-animation="scale" data-scale="1.1" data-duration="2500" data-easing="ease-out")
           img(src='img/background_4-1.png' srcset='img/background_4-1@2x.png 2x')
         
         // content
         .h100-section__content.content-spacer
           .container
-            .h100-section__content-wrapper.h100-section__content-wrapper--top
-              .col-5.col-right.article__title.h2-title(data-animation="fade-up" data-duration="1000" data-delay="2000") Новый скафандр «Орлан-МКС» — что изменилось спустя более полувека после выхода человека в открытый космос?
-              .col-5.col-right.article__paragraph.p-main(data-animation="fade-up" data-duration="1000" data-delay="2000") 
-                .col-4
-                  p 18 марта 1965 года человек впервые вышел в открытый космос, ознаменовав начало нового этапа в истории космонавтики. Алексей Архипович Леонов покинул корабль «Восток-2» и через 23 минуты 41 секунду вернулся обратно, став первопроходцем, благодаря которому  удалось сделать выводы о том, какие работы способен выполнять человек в открытом космосе.
+            .col-5.col-right.article__title.article__title--orlan.h3-title(data-animation="fade-up" data-duration="1000" data-delay="1400") Новый скафандр «Орлан-МКС» — что изменилось спустя более полувека после выхода человека в открытый космос?
+            .col-5.col-right.article__paragraph.p-main(data-animation="fade-up" data-duration="1000" data-delay="1400") 
+              .col-8
+                p 18 марта 1965 года человек впервые вышел в открытый космос, ознаменовав начало нового этапа в истории космонавтики. Алексей Архипович Леонов покинул корабль «Восток-2» и через 23 минуты 41 секунду вернулся обратно, став первопроходцем, благодаря которому  удалось сделать выводы о том, какие работы способен выполнять человек в открытом космосе.
+            
+          .article__image.article__image--mobile-fill(data-animation="fade-up" data-duration="1000" data-delay="2000") 
+            img(src='img/image_4-3-mobile.png' srcset='img/image_4-3-mobile@2x.png 2x')
 
 
     // scrollable content
     .section-scrollable(js-set-scroll-padding js-scrollmagic-container)
       // section
-      .h100-section
-        .h100-bg
-          img(src='img/background_3-2.jpg' srcset='img/background_3-2@2x.jpg 2x')
+      .h100-section.h100-section--not-mobile
+        .h100-bg.h100-bg--align-bottom
+          img(src='img/background_4-4.jpg' srcset='img/background_4-4@2x.jpg 2x')
         
         // content
-        .h100-section__content
+        .h100-section__content.content-bottom-250.h100-section__content--mobile-0
           .container
             .h100-section__content-wrapper
               .row
@@ -61,8 +63,8 @@ block content
         .section__content
           .container
             .col-6.col-center
-              .article__title.h2-title Борьба с синдромом Кесслера — что предлагают отечественные специалисты?
-              .article__paragraph.p-main
+              .article__title.h2-title(js-onscroll data-animation="fade-up" data-duration="1000") Борьба с синдромом Кесслера — что предлагают отечественные специалисты?
+              .article__paragraph.p-main(js-onscroll data-animation="fade-up" data-duration="1000")
                 p Эксперты полагают, что в скором времени Земля станет похожа на Юпитер или Сатурн, обзаведясь кольцами. Но если у других планет они состоят из льда и пыли, в нашем случае речь идет о кольцах из мусора.
         
         .section__image
@@ -71,6 +73,9 @@ block content
       
       // magic section (scroll as X)
       .magic-section
+        .h100-bg.h100-bg--align-bottom
+          img(src='img/background_4-5.jpg' srcset='img/background_4-5@2x.jpg 2x')
+          
         .magic-section__holder
           .container
             .magic-section__scrollable(js-scrollmagic-x)
@@ -85,17 +90,17 @@ block content
                   p Неконтролируемый рост мусора получил название в честь консультанта NASA, первым описавшим его - Дональда Кесслера. И у российских ученых есть свои идеи насчет того, как бороться с загрязнением. В 2017 году специалисты из НИИ ядерной физики МГУ разработали ультрафиолетовый радар, который поможет обнаружить космический мусор с борта МКС. В ближайшие несколько лет его планируют установить на российском модуле «Звезда».
       
       // section
-      .section
-        .h100-bg
-          img(src='img/background_3-2.jpg' srcset='img/background_3-2@2x.jpg 2x')
+      .section.section--mfix
+        .h100-bg.h100-bg--align-bottom
+          img(src='img/background_4-6.jpg' srcset='img/background_4-6@2x.jpg 2x')
         
         // content
-        .section__content
+        .section__content.section__content--no-pt
           .container
-            .col-6.col-center.ta-left
+            .col-6.col-center.ta-left(js-onscroll data-animation="fade-up" data-duration="1000")
               .article__paragraph.article__paragraph--pr.p-main
                 p Еще один уникальный проект, вновь рожденный в стенах МГУ, предполагает создание робота-мусорщика, автоматически собирающего обломки и осколки. Он будет состоять из крупного спутника и двух небольших, соединенных с ним при помощи тросов. В идеале «мусорщик» сможет ловить объекты и скидывать их в плотные слои атмосферы, где они сгорят. При этом система будет полностью автономной — контроль с Земли не потребуется. Ученые уже представили математическое моделирование с учетом самых разнообразных факторов космического полета. Теперь дело за реализацией.
-              
+            .col-8.col-center.ta-left(js-onscroll data-animation="fade" data-duration="1000")
               .home__cta
                 .home__cta-title.home__cta-title--white Перетащите, чтобы продолжить
                 .home__cta-drag
