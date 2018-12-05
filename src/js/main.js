@@ -69,6 +69,7 @@ $(document).ready(function(){
     getFlowSections();
     runAnimations();
     initScrollMonitor();
+    removePoisonedCss();
     if(fromPjax){
       getParallaxSections();
       getScrollX();
@@ -1002,6 +1003,14 @@ $(document).ready(function(){
       return false;
     });
 
+  }
+
+  // mainsite css will be disable on all pages/sections except home
+  function removePoisonedCss(){
+    var $css = $('#poisoned-css').get(0)
+    var isHomepage = $('.home').length > 0
+
+    $css.disabled = !isHomepage
   }
 
   ////////////

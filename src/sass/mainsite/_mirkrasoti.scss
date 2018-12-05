@@ -1,3 +1,54 @@
+@charset "UTF-8";
+/*задаём иконки с спрайта  .icon-home{ @include sprite($calendar); } */
+/* reset */
+/* main variables */
+body { margin: 0px; padding: 0px; font-family: "PT Sans", sans-serif; background-color: #f4f0df; height: 100%; line-height: 1; position: relative; font-size: 16px !important; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+
+/*MAIN*/
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video { margin: 0; padding: 0; border: 0; font-size: 100%; }
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section, main { display: block; }
+
+blockquote, q { quotes: none; }
+
+blockquote:before, blockquote:after, q:before, q:after { content: ''; content: none; }
+
+table { border-collapse: collapse; border-width: 0px; padding: 0px; margin: 0px; }
+
+html { height: 100%; -webkit-text-size-adjust: none; -ms-text-size-adjust: none; }
+
+input, textarea { color: #333; font-family: "PT Sans", sans-serif; outline: none; border-radius: 0; -moz-border-radius: 0; -webkit-border-radius: 0; -webkit-appearance: none; }
+
+input[type="button"], input[type="submit"], button { cursor: pointer; }
+
+td { margin: 0px; padding: 0px; }
+
+form { padding: 0px; margin: 0px; }
+
+a { color: #0a64b0; -webkit-transition: all 0.2s linear; transition: all 0.2s linear; text-decoration: none; outline: none; -webkit-tap-highlight-color: transparent; }
+
+a, span, div, button { outline: none !important; }
+
+input[type=submit], input[type=button], button { -webkit-appearance: none; outline: none; }
+
+* { box-sizing: border-box; }
+
+*:before, *:after { box-sizing: border-box; }
+
+.clearfix:after, .wrapper:after, .row:after { content: "."; display: block; height: 0; clear: both; visibility: hidden; }
+
+@font-face { font-family: 'PT Sans'; src: url("http://kto-chto-gde.ru/wp-content/themes/theme/templates/special-projects/mirkrasoti/fonts/PT Sans.eot?ver1.0"); src: url("http://kto-chto-gde.ru/wp-content/themes/theme/templates/special-projects/mirkrasoti/fonts/PT Sans.eot?#iefix") format("embedded-opentype"), url("http://kto-chto-gde.ru/wp-content/themes/theme/templates/special-projects/mirkrasoti/fonts/PT Sans.woff?ver1.0") format("woff"), url("http://kto-chto-gde.ru/wp-content/themes/theme/templates/special-projects/mirkrasoti/fonts/PT Sans.ttf?ver1.0") format("truetype"), url("http://kto-chto-gde.ru/wp-content/themes/theme/templates/special-projects/mirkrasoti/fonts/PT Sans.svg?ver1.0#PT Sans") format("svg"); font-weight: 400; font-style: normal; font-stretch: normal; unicode-range: U+0020-F6D4; }
+
+@font-face { font-family: 'PT Sans'; src: url("http://kto-chto-gde.ru/wp-content/themes/theme/templates/special-projects/mirkrasoti/fonts/PT Sans Bold.eot?ver1.0"); src: url("http://kto-chto-gde.ru/wp-content/themes/theme/templates/special-projects/mirkrasoti/fonts/PT Sans Bold.eot?#iefix") format("embedded-opentype"), url("http://kto-chto-gde.ru/wp-content/themes/theme/templates/special-projects/mirkrasoti/fonts/PT Sans Bold.woff?ver1.0") format("woff"), url("http://kto-chto-gde.ru/wp-content/themes/theme/templates/special-projects/mirkrasoti/fonts/PT Sans Bold.ttf?ver1.0") format("truetype"), url("http://kto-chto-gde.ru/wp-content/themes/theme/templates/special-projects/mirkrasoti/fonts/PT Sans Bold.svg?ver1.0#PT Sans Bold") format("svg"); font-weight: 700; font-style: normal; font-stretch: normal; unicode-range: U+0020-F6D4; }
+
+@font-face { font-family: 'PT Serif'; src: url("http://kto-chto-gde.ru/wp-content/themes/theme/templates/special-projects/mirkrasoti/fonts/PT Serif.eot?ver1.0"); src: url("http://kto-chto-gde.ru/wp-content/themes/theme/templates/special-projects/mirkrasoti/fonts/PT Serif.eot?#iefix") format("embedded-opentype"), url("http://kto-chto-gde.ru/wp-content/themes/theme/templates/special-projects/mirkrasoti/fonts/PT Serif.woff?ver1.0") format("woff"), url("http://kto-chto-gde.ru/wp-content/themes/theme/templates/special-projects/mirkrasoti/fonts/PT Serif.ttf?ver1.0") format("truetype"), url("http://kto-chto-gde.ru/wp-content/themes/theme/templates/special-projects/mirkrasoti/fonts/PT Serif.svg?ver1.0#PT Serif") format("svg"); font-weight: 400; font-style: normal; font-stretch: normal; unicode-range: U+0020-F6D4; }
+
+@font-face { font-family: 'PT Serif'; src: url("http://kto-chto-gde.ru/wp-content/themes/theme/templates/special-projects/mirkrasoti/fonts/PT Serif Bold.eot?ver1.0"); src: url("http://kto-chto-gde.ru/wp-content/themes/theme/templates/special-projects/mirkrasoti/fonts/PT Serif Bold.eot?#iefix") format("embedded-opentype"), url("http://kto-chto-gde.ru/wp-content/themes/theme/templates/special-projects/mirkrasoti/fonts/PT Serif Bold.woff?ver1.0") format("woff"), url("http://kto-chto-gde.ru/wp-content/themes/theme/templates/special-projects/mirkrasoti/fonts/PT Serif Bold.ttf?ver1.0") format("truetype"), url("http://kto-chto-gde.ru/wp-content/themes/theme/templates/special-projects/mirkrasoti/fonts/PT Serif Bold.svg?ver1.0#PT Serif Bold") format("svg"); font-weight: 700; font-style: normal; font-stretch: normal; unicode-range: U+0020-F6D4; }
+
+@font-face { font-family: 'Intro'; src: url("http://kto-chto-gde.ru/wp-content/themes/theme/templates/special-projects/mirkrasoti/fonts/Intro.eot?ver1.0"); src: url("http://kto-chto-gde.ru/wp-content/themes/theme/templates/special-projects/mirkrasoti/fonts/Intro.eot?#iefix") format("embedded-opentype"), url("http://kto-chto-gde.ru/wp-content/themes/theme/templates/special-projects/mirkrasoti/fonts/Intro.woff?ver1.0") format("woff"), url("http://kto-chto-gde.ru/wp-content/themes/theme/templates/special-projects/mirkrasoti/fonts/Intro.ttf?ver1.0") format("truetype"), url("http://kto-chto-gde.ru/wp-content/themes/theme/templates/special-projects/mirkrasoti/fonts/Intro.svg?ver1.0#Intro") format("svg"); font-weight: 400; font-style: normal; font-stretch: normal; unicode-range: U+0020-0491; }
+
+@font-face { font-family: 'icomoon'; src: url("http://kto-chto-gde.ru/wp-content/themes/theme/templates/special-projects/mirkrasoti/fonts/icomoon.eot?j2sb80"); src: url("http://kto-chto-gde.ru/wp-content/themes/theme/templates/special-projects/mirkrasoti/fonts/icomoon.eot?j2sb80#iefix") format("embedded-opentype"), url("http://kto-chto-gde.ru/wp-content/themes/theme/templates/special-projects/mirkrasoti/fonts/icomoon.ttf?j2sb80") format("truetype"), url("http://kto-chto-gde.ru/wp-content/themes/theme/templates/special-projects/mirkrasoti/fonts/icomoon.woff?j2sb80") format("woff"), url("http://kto-chto-gde.ru/wp-content/themes/theme/templates/special-projects/mirkrasoti/fonts/icomoon.svg?j2sb80#icomoon") format("svg"); font-weight: normal; font-style: normal; }
 
 [class^="icon-"], [class*=" icon-"] { /* use !important to prevent issues with browser extensions that change fonts */ font-family: 'icomoon' !important; speak: none; font-style: normal; font-weight: normal; font-variant: normal; text-transform: none; line-height: 1; /* Better Font Rendering =========== */ -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
 
