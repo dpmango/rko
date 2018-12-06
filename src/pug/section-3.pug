@@ -8,7 +8,7 @@ block content
 
   // ARTICLE
   .article
-    .article__navigation.article__navigation--absolute(data-animation="fade" data-delay="3300")
+    .article__navigation.article__navigation--absolute(data-animation="fade" data-delay="2000" data-duration="1000")
       a(href="section-2.html" js-nav-back).article__back
         +svgMono('back')
       a(href="homepage.html" js-nav-close).article__close
@@ -19,18 +19,18 @@ block content
       .section__content.content-spacer
         .container
           .col-6.col-center
-            .article__title.h2-title Российские ученые изобрели самый крупный космический радиотелескоп в мире
-            .article__paragraph.p-main
+            .article__title.h2-title(data-animation="fade-up" data-duration="1600" data-easing="ease-both") Российские ученые изобрели самый крупный космический радиотелескоп в мире
+            .article__paragraph.p-main(data-animation="fade-up" data-duration="1600" data-easing="ease-both")
               p В 2011 году на орбиту Земли были запущена космическая обсерватория «РадиоАстрон», позволившая сделать ряд уникальных открытий и поставить под сомнение некоторые существующие теории. Разрешение радиотелескопа — самого крупного из тех, что есть сегодня в мире — в 1 000 раз превосходит «Хаббл». Он позволяет астрономам получить самую точную картину об источниках электромагнитного излучения, разбросанных по Вселенной.
               
-      .section__image
+      .section__image(data-animation="fade-up" data-offset="100" data-duration="2000" data-easing="ease-both")
         img(src='img/image_5.jpg' srcset='img/image_5@2x.jpg 2x')
     
     // section
     .section
       // background
       .h100-bg
-        img(src='img/background_4-2.jpg' srcset='img/background_4-2@2x.jpg 2x')
+        img(src='img/background_5.jpg' srcset='img/background_5@2x.jpg 2x')
       
       // content
       .section__content.content-spacer
