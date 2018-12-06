@@ -9,7 +9,7 @@ block content
 
   // ARTICLE
   .article
-    .article__navigation(data-animation="fade" data-delay="3300")
+    .article__navigation(data-animation="fade" data-delay="2000" data-duration="1000")
       a(href="section-4.html" js-nav-back).article__back
         +svgMono('back')
       a(href="homepage.html" js-nav-close).article__close
@@ -17,17 +17,29 @@ block content
     
     // fixed section
     .section-fixed(js-set-section-height)
-      .h100-section.h100-section--not-mobile
+      .h100-section
         // background
-        .h100-bg(data-animation="scale" data-duration="3000" data-easing="ease-both")
-          img(src='img/background_7.jpg' srcset='img/background_7@2x.jpg 2x')
-        
+        .h100-bg(js-parallax-fixed-bg data-animation="scale" data-scale="1.4" data-duration="2000")
+          picture(
+          alt=""
+          aria-label="Image description")
+            // 768 and above
+            source(
+            media="(min-width: 768px)" 
+            srcset="img/background_7.jpg 1x, img/background_7@2x.jpg 2x")
+            // less 768px
+            source(
+            media="(min-width: 0px)" 
+            srcset="img/background_7_mobile.jpg 1x, img/background_7_mobile@2x.jpg 2x")
+            // fallback
+            img(src='img/background_7.jpg')
+            
         // content
         .h100-section__content.content-spacer
           .container
             .h100-section__content-wrapper.h100-section__content-wrapper--top
-              .col-4.col-right.article__title.h2-title(data-animation="fade-up" data-duration="1000" data-delay="2000") «Экзомарс»: когда на Марсе зацветут яблони?
-              .col-4.col-right.article__paragraph.p-main(data-animation="fade-up" data-duration="1000" data-delay="2000") 
+              .col-4.col-right.article__title.h2-title(data-animation="fade-up" data-duration="1000" data-delay="1200") «Экзомарс»: когда на Марсе зацветут яблони?
+              .col-4.col-right.article__paragraph.p-main(data-animation="fade-up" data-duration="1000" data-delay="1200" js-teleport data-teleport-condition="<768" data-teleport-to="mobile-text") 
                 p Марс был главной мечтой Сергея Павловича Королева — мечтой, которую так до конца и не удалось осуществить при его жизни. Гениальный ученый верил, что однажды на Красной планете и впрямь зацветут яблони, потому изучение Марса стартовало еще в 1960 году. В его рамках к Красной планете первыми отправились советские марсоходы, при помощи которых землянам удалось получить снимки с поверхности Марса и сведения о составе его грунта.
 
     
@@ -40,20 +52,21 @@ block content
         //-   img(src='img/background_4-2.jpg' srcset='img/background_4-2@2x.jpg 2x')
         
         // content
-        .section__content.content-spacer
+        .section__content.section__content--mobile-t40.content-spacer
           .container
             .col-6.col-center
+              .article__paragraph.p-main.ta-left(data-teleport-target="mobile-text")
               .article__paragraph.p-main.ta-left
                 p С тех пор прошло немало лет, на Красной планете нашли воду и метан, а у человека наконец появился шанс ступить на марсианскую поверхность. Разработкой пилотируемых полетов занято несколько стран. Одна из главных программ по изучению Марса — «Экзомарс», проводимая совместно Европейским космическим агентством и Роскосмосом. Проект, направленный на поиски жизни и возможностей для нее, состоит из двух этапов. Первый, включавший отправку к Марсу посадочного модуля «Скиапарелли» и орбитального аппарата TGO, уже реализован, и, хотя модуль потерпел крушение, аппарат успешно вышел на орбиту, начав передачу данных. Реализация нового этапа запланирована на 2020 год: к Красной планете полетят посадочная платформа и тяжелый марсоход, оснащенный комплексом аппаратуры для изучения поверхности и атмосферы Марса. 
                 p В Роскосмосе не собираются ограничиваться роботами: первая экспедиция к Марсу может состояться уже в 2035 году. Для ее реализации нужно собрать больше данных о климате Красной планеты, а также разработать и построить совершенно новый космический корабль, работающий — с большой долей вероятности — на атомном двигателе.
         
         // image
-        .section__image
-          .container
+        .section__image.section__image--fit-mobile
+          .container(js-onscroll data-animation="fade-up" data-duration="1000")
             img(src='img/image_7.jpg' srcset='img/image_7@2x.jpg 2x')
 
         // content
-        .section__content.content-spacer
+        .section__content.section__content--mobile-t40.content-spacer
           .container
             .col-6.col-center.ta-left
               .article__paragraph.p-main
