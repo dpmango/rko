@@ -1,8 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <svg width="170px" height="25px" viewBox="0 0 170 25" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <defs>
-        <polygon id="path-1" points="0 24.1666667 169.565 24.1666667 169.565 0.805 0 0.805"></polygon>
-    </defs>
     <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
         <g id="Artboard-Copy-3" transform="translate(-580.000000, -415.000000)">
             <g id="logo" transform="translate(580.000000, 415.000000)">
@@ -20,7 +16,7 @@
                     <path d="M110.327417,11.1393333 C110.327417,12.1768333 109.48575,13.0176667 108.449083,13.0176667 C107.41325,13.0176667 106.571583,12.1768333 106.571583,11.1393333 C106.571583,10.1018333 107.41325,9.26183333 108.449083,9.26183333 C109.48575,9.26183333 110.327417,10.1018333 110.327417,11.1393333" id="Fill-14" fill="#FFFFFF"></path>
                     <polygon id="Fill-16" fill="#FFFFFF" points="125.751417 19.5906667 125.751417 2.669 135.558083 2.669 135.558083 5.1515 128.233917 5.1515 128.233917 19.5906667"></polygon>
                     <mask id="mask-2" fill="white">
-                        <use xlink:href="#path-1"></use>
+                        <polygon points="0 24.1666667 169.565 24.1666667 169.565 0.805 0 0.805"></polygon>
                     </mask>
                     <g id="Clip-19"></g>
                     <polygon id="Fill-18" fill="#FFFFFF" mask="url(#mask-2)" points="120.969167 19.5875 123.4725 19.5875 123.4725 2.76 120.969167 2.76"></polygon>

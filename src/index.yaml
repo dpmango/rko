@@ -2,18 +2,18 @@ ProjectTitle: RKO
 
 PageList:
 - file: homepage.html
-  ready: 80
+  ready: 90
 - file: about.html
-  ready: 80
+  ready: 90
 - file: section-1.html
-  ready: 80
+  ready: 90
 - file: section-2.html
-  ready: 80
+  ready: 90
 - file: section-3.html
-  ready: 80
+  ready: 90
 - file: section-4.html
-  ready: 80
+  ready: 90
 - file: section-5.html
-  ready: 80
+  ready: 90
 - file: section-6.html
-  ready: 80
+  ready: 90

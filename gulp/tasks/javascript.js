@@ -9,6 +9,7 @@ var config      = require('../config');
 gulp.task('javascript:vendor', function() {
   return gulp.src([
       path.resolve('bower_components', 'jquery/dist/jquery.min.js'),
+      path.resolve('node_modules', '@babel/polyfill/dist/polyfill.min.js'),
       path.resolve('bower_components', 'svg4everybody/dist/svg4everybody.min.js'),
       path.resolve('bower_components', 'viewport-units-buggyfill/viewport-units-buggyfill.js'),
       path.resolve('bower_components', 'scrollMonitor/scrollMonitor.js'),

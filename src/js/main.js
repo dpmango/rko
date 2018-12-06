@@ -58,6 +58,7 @@ $(document).ready(function(){
 
   // some functions should be called once only
   legacySupport();
+  disableScroll() // disable when preloading - it will reset when animations are ready
 
   // triggered when PJAX DONE
   // The new container has been loaded and injected in the wrapper.
@@ -79,6 +80,10 @@ $(document).ready(function(){
     if(fromPjax){
       getParallaxSections();
       getScrollX();
+      if ( msieversion() ){
+        // reinit fitie plugin for object-fit
+        window.fitie.init()
+      }
     }
   }
 
@@ -184,7 +189,6 @@ $(document).ready(function(){
     $('body').addClass('web');
   }
 
-
   // disable / enable scroll by setting negative margin to page-content eq. to prev. scroll
   // this methods helps to prevent page-jumping on setting body height to 100%
   function disableScroll() {
@@ -193,14 +197,14 @@ $(document).ready(function(){
       'margin-top': '-' + lastScroll + 'px'
     });
     scrollEnabled = false
-    $('body').addClass('body-lock');
+    $('html').addClass('body-lock');
   }
 
   function enableScroll() {
     $('.page').css({
       'margin-top': '-' + 0 + 'px'
     });
-    $('body').removeClass('body-lock');
+    $('html').removeClass('body-lock');
     _window.scrollTop(lastScroll)
     scrollEnabled = true
     lastScroll = 0;
@@ -222,6 +226,7 @@ $(document).ready(function(){
   function animatePageIn(cb){
     var animations = $('.page').find('[data-animation]:not([js-onscroll])')
     animations.attr('data-animated', '');
+
     disablePageInteractions();
 
     if (cb !== undefined) {
@@ -274,6 +279,7 @@ $(document).ready(function(){
   function enablePageInteractions(){
     $('body').removeClass('page-is-changing');
     enableScroll();
+    // disableScroll();
   }
 
 
@@ -1139,7 +1145,7 @@ $(document).ready(function(){
   Barba.Pjax.getTransition = function() {
     if ( transitionInitElement.attr('data-barba-transition') ){
       var transition = transitionInitElement.data('barba-transition');
-      console.log(transition)
+      // console.log(transition)
       if ( transition === "fade-screen" ){
         return FadeScreenTransition
       }
