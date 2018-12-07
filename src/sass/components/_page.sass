@@ -146,7 +146,8 @@
       margin-top: 0
 
     &--not-mobile
-      min-height: 1px
+      // viewportUnitsBuggyfill fix
+      min-height: 1px !important
 
   .section
     &__content
