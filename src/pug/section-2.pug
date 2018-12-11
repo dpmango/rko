@@ -97,11 +97,13 @@ block content
         // content
         .section__content.section__content--no-pt
           .container
-            .col-6.col-center.ta-left(js-onscroll data-animation="fade-up" data-duration="1000")
+            .col-6.col-center.ta-left
+              // (js-onscroll data-animation="fade-up" data-duration="1000")
               .article__paragraph.article__paragraph--pr.p-main
                 p Еще один уникальный проект, вновь рожденный в стенах МГУ, предполагает создание робота-мусорщика, автоматически собирающего обломки и осколки. Он будет состоять из крупного спутника и двух небольших, соединенных с ним при помощи тросов. В идеале «мусорщик» сможет ловить объекты и скидывать их в плотные слои атмосферы, где они сгорят. При этом система будет полностью автономной — контроль с Земли не потребуется. Ученые уже представили математическое моделирование с учетом самых разнообразных факторов космического полета. Теперь дело за реализацией.
-            .col-8.col-center.ta-left(js-onscroll data-animation="fade" data-duration="1000")
+            .col-8.col-center.ta-left
+              // (js-onscroll data-animation="fade" data-duration="1000")
               .home__cta
                 .home__cta-title.home__cta-title--white Перетащите, чтобы продолжить
                 .home__cta-drag
-                  +pillswitch("section-5.html", "fade-screen")
+                  +pillswitch("section-3.html", "fade-screen")

@@ -73,6 +73,7 @@ $(document).ready(function(){
 
   // The transition has just finished and the old Container has been removed from the DOM.
   function pageCompleated(fromPjax){
+    // homepageBlockScroller();
     getFlowSections();
     runAnimations();
     initScrollMonitor();
@@ -104,6 +105,7 @@ $(document).ready(function(){
   _window.on('scroll', throttle(hideFixedSection, 50));
   _window.on('scroll', scrollParallax);
   // _window.on('scroll', scrollScrollX);
+  // _window.on('resize', debounce(homepageBlockScroller, 100));
   _window.on('resize', debounce(setTooltipPositions, 100))
   _window.on('resize', debounce(getFlowSections, 100));
   _window.on('resize', debounce(getParallaxSections, 100));
@@ -125,11 +127,11 @@ $(document).ready(function(){
     svg4everybody();
 
     // Viewport units buggyfill
-    window.viewportUnitsBuggyfill.init({
-      force: false,
-      refreshDebounceWait: 150,
-      appendToBody: true
-    });
+    // window.viewportUnitsBuggyfill.init({
+    //   force: false,
+    //   refreshDebounceWait: 150,
+    //   appendToBody: true
+    // });
   }
 
 
@@ -278,10 +280,26 @@ $(document).ready(function(){
 
   function enablePageInteractions(){
     $('body').removeClass('page-is-changing');
+    // homepageBlockScroller();
     enableScroll();
     // disableScroll();
   }
 
+
+  // homepage block scroller
+  // function homepageBlockScroller(){
+  //   var isHomepage = $('.home').length > 0
+  //
+  //   if ( isMobile() && isHomepage ){
+  //     if ( _window.height() > 530 ){
+  //       disableScroll()
+  //     } else{
+  //       enableScroll();
+  //     }
+  //   } else {
+  //     enableScroll()
+  //   }
+  // }
 
   // hold button to go next page
   var timeout_id = 0,
@@ -716,15 +734,39 @@ $(document).ready(function(){
       };
     });
 
+    draggable.on('mirror:create', function (evt) {
+      // console.log(evt)
+    });
+
     draggable.on('mirror:created', function (evt) {
+      $(evt.mirror).css({'opacity': 0}) // prevent flashing in browser top
       containerRect = evt.sourceContainer.getBoundingClientRect();
       dragRect = evt.source.getBoundingClientRect();
 
+      console.log(containerRect)
+
       var containerRectQuarter = containerRect.width / 2; // should move at least half of the way
       dragThreshold = isToggled ? containerRectQuarter * -1 : containerRectQuarter;
+
+      // offset is an move diff
+      var offsetX = calcOffset(evt.sensorEvent.clientX - initialMousePosition.x);
+      var offsetY = calcOffset(initialMousePosition.y - evt.sensorEvent.clientY);
+      // var offsetValue = offsetX > offsetY ? offsetX : offsetY;
+      var offsetValue = offsetX
+      var mirrorCoords = {
+        top: dragRect.top - offsetValue,
+        left: dragRect.left + offsetValue
+      };
+
+      translateMirrorX(evt.mirror, mirrorCoords, containerRect);
+      setTimeout(function(){
+        $(evt.mirror).css({'opacity': 1})
+      },50)
+
     });
 
     draggable.on('mirror:move', function (evt) {
+      console.log('move')
       evt.cancel();
 
       // offset is an move diff
@@ -1208,9 +1250,16 @@ function translateMirrorX(mirror, mirrorCoords, containerRect) {
     return;
   }
 
+  var calcedY = containerRect.top
+
+  // if ( $('.section-scrollable').length > 0 ){
+  //   var scrolled = parseInt( $('.section-scrollable').css('margin-top') )
+  //   calcedY = calcedY + scrolled
+  // }
+
   requestAnimationFrame(function () {
     // for the Y - only containerRect is used as it's single directional
-    mirror.style.transform = "translate3d(" + mirrorCoords.left + "px, " + containerRect.top + "px, 0)";
+    mirror.style.transform = "translate3d(" + mirrorCoords.left + "px, " + calcedY + "px, 0)";
   });
 }
 

@@ -28,6 +28,10 @@
     &--top
       margin-top: 0
 
+.is-ie
+  .h100-section
+    &__content
+      min-height: inherit
 
 .h100-bg
   position: absolute 0
@@ -68,7 +72,8 @@
   background: #191919
   // will-change: transform
   backface-visibility: hidden
-  transform-style: preserve-3d
+  // TODO - pillswith wrong position
+  // transform-style: preserve-3d
   // perspective: 1000
   // transition: transform .1s linear
 
