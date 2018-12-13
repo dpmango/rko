@@ -16,8 +16,21 @@ block content
     .h100-section
       // background
       .h100-bg.h100-bg--ml20-mobile(data-animation="scale" data-duration="1600" data-easing="ease-out")
-        img(src='img/background_1.jpg' srcset='img/background_1@2x.jpg 2x')
-      
+        //- img(src='img/background_1.jpg' srcset='img/background_1@2x.jpg 2x')
+        picture(
+        alt=""
+        aria-label="Image description")
+          // 768 and above
+          source(
+          media="(min-width: 768px)" 
+          srcset="img/background_1.jpg 1x, img/background_1@2x.jpg 2x")
+          // less 768px
+          source(
+          media="(min-width: 0px)" 
+          srcset="img/background_1_mobile.jpg 1x, img/background_1_mobile@2x.jpg 2x")
+          // fallback
+          img(src='img/background_1.jpg')
+            
       // content
       .h100-section__content
         .container
