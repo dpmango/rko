@@ -43,6 +43,7 @@ $(document).ready(function(){
     container: undefined, // jquery $ obj
     containerWidth: undefined, // how much should be scrolled
     parent: undefined, // jquery $ obj
+    lastSection: undefined, // jquery $ obj
     startPoint: undefined, // when scrollX should start
     endPoint: undefined, // when scrollX should end
     containerOffset: 0, // stored var on animation
@@ -175,10 +176,10 @@ $(document).ready(function(){
   };
 
   function isMoreThanMd(){
-    return _window.width() > 768
+    return getWindowWidth() > 768
   }
   function isLessThanMd(){
-    return _window.width() <= 768
+    return getWindowWidth() <= 768
   }
 
   if ( msieversion() ){
@@ -471,8 +472,9 @@ $(document).ready(function(){
 
     if ( ($magicX.length > 0) && isMoreThanMd()){
       var $parent = $magicX.closest('[js-scrollmagic-container]');
+      var $lastSection = $parent.find('.section--mfix');
       // TODO - test on width (container 1400 diff with _window.width() )
-      var containerWidth = _window.outerWidth() * -1 // all contents minus window width
+      var containerWidth = getWindowWidth() * -1 // all contents minus window width
       $magicX.find('.col-6').each(function(i, col){
         containerWidth += $(col).outerWidth(true);
       })
@@ -484,6 +486,7 @@ $(document).ready(function(){
         container: $magicX,
         containerWidth: containerWidth,
         parent: $parent,
+        lastSection: $lastSection,
         startPoint: startPoint,
         endPoint: endPoint,
         containerOffset: scrollX.containerOffset,
@@ -509,15 +512,19 @@ $(document).ready(function(){
       })
 
       // create space for native scrolling
+      var pageHeight = sectionsHeights + containerWidth - scrollX.parallaxEffect - 20
       $parent.closest('.page').css({
-        'height': sectionsHeights + containerWidth - scrollX.parallaxEffect
+        'height': pageHeight
       })
+
+      scrollX.pageHeight = pageHeight
 
     } else {
       scrollX = {
         container: undefined,
         containerWidth: undefined,
         parent: undefined,
+        lastSection: undefined,
         startPoint: undefined,
         endPoint: undefined,
         containerOffset: 0,
@@ -552,6 +559,24 @@ $(document).ready(function(){
       // when scrolled past end of the container
       if ( scrollY > scrollX.endPoint ){
         scrollX.scrollRequest = 0;
+
+        // scroll slip past end fix
+        // finding the transformed end of the page
+        if ( (scrollY + _window.height()) > _document.height() ) {
+        // if ( (scrollY + _window.height()) > (scrollX.pageHeight - scrollX.lastSection.outerHeight()) ){
+          // parentOffset = _document.height() - scrollX.lastSection.outerHeight() - scrollX.endPoint
+          var topEndScroll = _document.height() - _window.height()
+          var parentOffset = scrollX.endPoint - scrollX.startPoint - scrollX.parallaxEffect
+          console.log(topEndScroll, scrollX.parallaxEffect, scrollX.startPoint, scrollX.endPoint, scrollX.lastSection.outerHeight())
+
+          scrollX.parentOffset = parentOffset
+
+          TweenLite.set(scrollX.parent, {
+            y: parentOffset
+          });
+
+        }
+
         // return
       } else {
         var containerOffset = scrollY - scrollX.startPoint
@@ -681,9 +706,9 @@ $(document).ready(function(){
           var condition;
 
           if (conditionPosition === "<") {
-            condition = _window.width() < conditionMedia;
+            condition = getWindowWidth() < conditionMedia;
           } else if (conditionPosition === ">") {
-            condition = _window.width() > conditionMedia;
+            condition = getWindowWidth() > conditionMedia;
           }
 
           if (condition) {
@@ -1221,7 +1246,7 @@ $(document).ready(function(){
     var wHost = window.location.host.toLowerCase()
     var displayCondition = wHost.indexOf("localhost") >= 0 || wHost.indexOf("surge") >= 0
     if (displayCondition){
-      var wWidth = _window.width();
+      var wWidth = getWindowWidth();
       var wHeight = _window.height();
 
       var content = "<div class='dev-bp-debug'>"+wWidth+" x "+ wHeight +"</div>";
@@ -1278,4 +1303,9 @@ function normalize(value, fromMin, fromMax, toMin, toMax) {
   if (normalized > toMax) return toMax;
   if (normalized < toMin) return toMin;
   return normalized;
+}
+
+// get window width (ie, win, scrollbars, etc)
+function getWindowWidth(){
+  return window.innerWidth
 }
