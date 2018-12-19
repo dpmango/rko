@@ -38,6 +38,10 @@
   z-index: 1
   font-size: 0
   transform-origin: center center
+  // for ie - image changed to bg
+  background-position: center center
+  background-repeat: no-repeat
+  background-size: cover
   img
     object-fit: cover
     width: 100%
@@ -51,8 +55,18 @@
   &--origin--lt
     transform-origin: left top
   &--align-bottom
+    background-position: center bottom
     img
       object-position: center bottom
+
+// .is-ie
+//   .h100-bg
+//     // image changed to bg
+//     background-position: center center
+//     background-repeat: no-repeat
+//     background-size: cover
+//     &--align-bottom
+//       background-position: center bottom
 
 .section-fixed
   position: fixed
@@ -177,6 +191,7 @@
 
   .h100-bg
     &--mobile-align-top
+      background-position: left top
       img
         // object-fit: scale-down
         object-position: left top
@@ -213,6 +228,7 @@
   .bg-mobile
     // .h100-bg overwrites
     bottom: auto
+    // background-size: fill
     img
       object-fit: fill
       // object-fit: contain

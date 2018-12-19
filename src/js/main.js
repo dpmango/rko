@@ -79,12 +79,13 @@ $(document).ready(function(){
     runAnimations();
     initScrollMonitor();
     removePoisonedCss();
+    ieFixImages();
     if(fromPjax){
       getParallaxSections();
       getScrollX();
       if ( msieversion() ){
         // reinit fitie plugin for object-fit
-        window.fitie.init()
+        // window.fitie.init()
       }
     }
   }
@@ -1100,6 +1101,31 @@ $(document).ready(function(){
     $css3.disabled = !isHomepage
   }
 
+
+  // fix ie images with object fit
+  function ieFixImages(){
+    if ( !msieversion() ) return
+    var $images = $('.h100-bg img')
+    if ( $images.length === 0 ) return
+
+    $images.each(function(i, img){
+      var $img = $(img);
+      var $parent = $img.closest('.h100-bg');
+      var bg = $img.attr('src');
+
+      // find smaller picture
+      if ( ($img.closest('picture').length > 0) && (getWindowWidth() <= 768) ){
+        var $picture = $img.closest('picture')
+        var pictureMedia = $picture.find('source').last().attr('srcset').split(" ")[0]
+        bg = pictureMedia
+      }
+      $parent.css({
+        'background-image': 'url(' + bg + ')'
+      })
+
+      $img.css({'visibility': 'hidden'})
+    })
+  }
   ////////////
   // SCROLLMONITOR
   ////////////
