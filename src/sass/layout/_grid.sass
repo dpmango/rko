@@ -58,8 +58,7 @@
   // width: calc(60vw - 120px)
   &.col-keep-width
     width: 100%
-    +r($xl)
-      max-width: 700px
+
 .col-7
   max-width: 890px
   width: 70%
@@ -76,6 +75,14 @@
   max-width: 1280px
   width: 100%
   // width: calc(100vw - 120px)
+
+@media screen and (max-width: 1200px), screen and (max-height: 800px)
+  .col-6.col-keep-width
+    max-width: 700px
+
++r($xl)
+  // .col-6.col-keep-width
+  //   max-width: 700px
 
 .row
   display: flex
