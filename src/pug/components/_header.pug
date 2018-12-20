@@ -16,7 +16,7 @@ header.header-fixed
           | познавательный
           br
           |  журнал
-    .header-button
+    .header-button(style="opacity: 0; pointer-events: none")
       a.header-button__link.header-button__link-nav(href="#")
         span.close-subnav
           span.button-nav.active
@@ -27,17 +27,17 @@ header.header-fixed
           span
           span
           span
-    .header-button.header-button_search
+    .header-button.header-button_search(style="opacity: 0; pointer-events: none")
       a.header-button__link.js-search(href="#")
         img(src="/img/search_white.svg?ver1.0" alt="")
-    .box-search
+    .box-search(style="opacity: 0; pointer-events: none")
       form(action="/")
         input.box-search__field(type="text" name="s" placeholder="Поиск на сайте" required="")
         input(type="submit" style="display:none")
       a.close-search.js-close-search(href="#")
         span
         span
-    .box-favorite
+    .box-favorite(style="opacity: 0; pointer-events: none")
       a.market-favorites(href="http://1marketplace.ru/favorites/" target="_blank")
         span
     nav.main-nav.hide-mob
